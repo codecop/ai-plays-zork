@@ -192,3 +192,28 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# operating system-related files
+*.DS_Store
+Thumbs.db
+
+# PyCharm
+.idea
+*.iml
+*.iwr
+*.iws
+*.ipr
+
+# Eclipse
+.project
+.pydevproject
+.settings
+
+# VS Code
+.vscode/*
+
+# VirtualEnv Peter
+.virtual/
+.virtual3/
+env3.bat
+.mistralai_apikey

@@ -216,4 +216,5 @@ Thumbs.db
 .virtual/
 .virtual3/
 env3.bat
+clean.bat
 .mistralai_apikey

@@ -12,21 +12,6 @@ def compile_and_install_software():
     elif not os.path.exists(dest_path):
         os.mkdir(dest_path)
 
-    print("Fetching Frotz")
-    # Git clone
-    frotz_repo = 'https://gitlab.com/DavidGriffith/frotz.git'
-    src_path = '/tmp/frotz'
-    subprocess.check_call('git clone {} {}'.format(frotz_repo, src_path),
-                          shell=True)
-
-    print("Building Frotz")
-    # compile the software
-    subprocess.check_call("make dumb", cwd=src_path, shell=True)
-
-    # install the binary
-    cmd = 'cp {}/dfrotz {}'.format(src_path, dest_path)
-    subprocess.check_call(cmd, cwd=src_path, shell=True)
-
 
 class CustomInstall(install):
     """Custom handler for the 'install' command."""

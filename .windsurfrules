@@ -76,6 +76,11 @@
 
 ## Code Organization and Class Design
 
+### Project Structure
+- standard Python project layout 
+- `src/` for source code
+- `test/` for test files
+
 ### Separation of Concerns
 - Separate argument parsing, configuration, and dependency injection
 - Dedicated classes for specific responsibilities

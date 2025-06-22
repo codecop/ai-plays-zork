@@ -1,5 +1,6 @@
 # Project dependencies
 pyFrotz==0.1.5
+mistralai==1.8.2
 
 # Test dependencies
 pytest==8.4.0

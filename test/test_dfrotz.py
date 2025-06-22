@@ -1,11 +1,13 @@
+import os
 import subprocess
 
 
 # Write a Python program to interact with Frotz. (curtesy Peter Fichtner)
 def test_dfrotz_subprocess():
 
+    frotz_path = os.path.expanduser('~/.pyfrotz/dfrotz')
     process = subprocess.Popen(
-        ["frotz/dfrotz", "-p", "data/zork1.z3"],
+        [frotz_path, "-p", "data/zork1.z3"],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,

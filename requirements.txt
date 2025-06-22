@@ -1,6 +1,5 @@
+# Project dependencies
 pyFrotz==0.1.5
-# Testing
+
+# Test dependencies
 pytest==8.4.0
-# Development
-# Dependencies
-setuptools==80.9.0

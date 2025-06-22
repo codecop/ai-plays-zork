@@ -1,0 +1,92 @@
+# Development Workflow
+
+## AI Working Process
+
+1. Git Hygiene
+   - Check for uncommitted changes before starting
+   - Prompt user to commit or stash changes if working directory is not clean
+   - Offer to stage/commit changes if requested
+
+2. Planning Phase
+   - Present complete implementation plan
+   - Get explicit approval before proceeding
+
+3. Execution Phase
+   - Implement one step at a time
+   - Present changes for review after each step
+   - Get approval before proceeding to next step
+   - Make one logical change at a time
+   - Keep changes focused and atomic
+   - Run tests after each small change
+   - Ensure each commit leaves the system in a working state
+   - Break down complex tasks into smaller, testable units
+   - Avoid mixing refactoring with feature changes
+
+4. Code Changes
+   - Break large changes into smaller, reviewable chunks
+   - Present each file change individually
+   - Get approval for each change set
+   - If there are tests, run them
+   - Review changes before committing
+   - Commit after each step
+   - Prefix all commit messages with "(ai)"
+
+## Environment
+- OS: Windows
+- Shell: CMD.exe
+- Capabilities: Basic batch commands only
+- Line Endings: CRLF
+
+# Python Coding and Design Conventions for Project
+
+## Infrastructure
+- Python version: 3.9
+
+## Code Style
+- Indentation: 4 spaces
+- Max line length: 120
+- Charset: ISO-8859-1
+
+## Naming Conventions
+- Class naming: PascalCase
+- Method naming: camelCase (use verbs)
+- Variable naming: camelCase
+- Constant naming: UPPER_SNAKE_CASE
+- Module (file) naming: lowercase with underscore
+- Collection naming: Use plural or descriptive names
+
+## Testing
+
+### Test Structure
+- Framework: Pytest
+- Test modules: Same name as module under test prefixed with `test_`
+- Test methods: StateUnderTest_Act_ExpectedBehavior
+
+## Dependencies
+- Prefer dependency injection
+- Never use static methods or Singletons
+
+## Error Handling
+- Null handling: Use Optional or null objects where appropriate
+- Exception types: Use specific exception types
+- Error messages: Include context
+
+## Method Design
+- Single responsibility principle
+
+## Code Organization and Class Design
+
+### Separation of Concerns
+- Separate argument parsing, configuration, and dependency injection
+- Dedicated classes for specific responsibilities
+- Separate file system operations and business logic
+
+## Design Patterns
+Preferred patterns:
+- Dependency Injection
+- Command Pattern
+- Builder Pattern
+- Factory Pattern
+- Strategy Pattern
+- First Class Collection
+- Value Object

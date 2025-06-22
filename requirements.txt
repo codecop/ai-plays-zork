@@ -2,5 +2,8 @@
 pyFrotz==0.1.5
 mistralai==1.8.2
 
+# latest dependency for Mistral without warning
+pydantic==2.10.6
+
 # Test dependencies
 pytest==8.4.0

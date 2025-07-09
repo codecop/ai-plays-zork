@@ -21,6 +21,7 @@ cd claude-run-11223
 # copied context project file like project and gameplay into folder
 
 # LOOP
+# Python writes frotz answers formatted to console (in colour)
 # Python created context.md with current room using frotz
 # Python delete old output
 
@@ -30,5 +31,16 @@ echo "tell player 'read context.md again'"
 
 # wait for output to appear (with timeout)
 # Python read output.txt to
+# Python writes Claude answer to console (different colour) -- goal is to see the flow of trhe game
+  (this writing is also the log of what is going on)
 # Python: pass it to frotz
 # LOOP end
+# when do we end?
+
+# Files in the current run (claude-run-<ID>)
+copy of project
+context.md
+output.txt
+copy of Zork Gameplay Notes.txt
+maybe some log how things went
+maybe some json with statistics

@@ -218,3 +218,5 @@ Thumbs.db
 env3.bat
 clean.bat
 .mistralai_apikey
+
+/claude-run-*/

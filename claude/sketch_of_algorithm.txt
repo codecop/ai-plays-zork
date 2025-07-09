@@ -1,0 +1,34 @@
+from pyfrotz import Frotz
+
+claude.send("gameplay notes")
+
+game = Frotz("data/zork1.z3")
+game_intro = game.get_intro()
+
+command = claude.send(game_intro)
+
+room, description = game.do_command("look")
+print(room.rstrip())
+
+game.do_command("quit")
+game.do_command("Y")
+
+md claude-run-11223
+cd claude-run-11223
+
+# manually claude --dangeroulsy-skip-permissions in this folder
+
+# copied context project file like project and gameplay into folder
+
+# LOOP
+# Python created context.md with current room using frotz
+# Python delete old output
+
+echo "read context.md." | claude -p --dangeroulsy-skip-permissions
+-- options how to run it a) start clean or b)
+echo "tell player 'read context.md again'"
+
+# wait for output to appear (with timeout)
+# Python read output.txt to
+# Python: pass it to frotz
+# LOOP end

@@ -10,5 +10,13 @@ def test_pyfrotz():
     room, description = game.do_command("look")
     assert room.rstrip() == "West of House"
 
+    # while not game.game_ended():
+    #     pass
+
     game.do_command("quit")
     game.do_command("y")
+
+    # close all resources
+    game.frotz.stdin.close()
+    game.frotz.stdout.close()
+    game.frotz.wait()

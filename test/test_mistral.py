@@ -1,7 +1,13 @@
 import os
+import pytest
 from mistralai import Mistral
 
-api_key = os.environ["MISTRAL_API_KEY"]
+# Skip all tests if API key is not set
+key_name = "MISTRAL_API_KEY"
+if key_name not in os.environ:
+    pytest.skip(key_name + " variable not set", allow_module_level=True)
+
+api_key = os.environ[key_name]
 model = "mistral-small-latest"  # free
 
 
@@ -44,7 +50,6 @@ def test_mistral_agent():
     print(response.outputs[0].content)
 
     response = client.beta.conversations.append(
-        conversation_id=response.conversation_id,
-        inputs="Give another sentence."
+        conversation_id=response.conversation_id, inputs="Give another sentence."
     )
     print(response.outputs[0].content)

@@ -14,7 +14,7 @@ def test_log_creation(log_file):
     assert path.exists()
 
     content = path.read_text(encoding="utf-8")
-    assert content.startswith("[START]")
+    assert content.startswith("START ")
     assert "GAME" not in content
     assert "CMD" not in content
 

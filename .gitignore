@@ -220,3 +220,4 @@ clean.bat
 .mistralai_apikey
 
 /claude-run-*/
+/mistralai-run-*/

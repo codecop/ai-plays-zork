@@ -15,7 +15,7 @@ def cleanup_test_data(data_dir):
 @pytest.fixture
 def data_dir():
     """Fixture to create and clean up test directory"""
-    data_dir = Path("test/data/file_utils/tmp")
+    data_dir = Path("test/data/tmp")
     data_dir.mkdir(exist_ok=True)
     yield data_dir
     cleanup_test_data(data_dir)

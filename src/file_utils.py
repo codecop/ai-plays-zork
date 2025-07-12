@@ -28,3 +28,7 @@ def getNextFolderName(basePath: str, pattern: str) -> str:
 
     nextNum = maxNum + 1
     return f"{pattern}-{nextNum:03d}"
+
+
+def readGamePlayNotes() -> str:
+    return readFile("data/Zork Gameplay Notes.txt")

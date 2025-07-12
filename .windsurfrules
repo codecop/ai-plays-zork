@@ -32,6 +32,7 @@
    - Prefix all commit messages with "(ai)"
 
 ## Environment
+
 - OS: Windows
 - Shell: CMD.exe
 - Capabilities: Basic batch commands only
@@ -40,14 +41,17 @@
 # Python Coding and Design Conventions for Project
 
 ## Infrastructure
+
 - Python version: 3.9
 
 ## Code Style
+
 - Indentation: 4 spaces
 - Max line length: 120
 - Charset: ISO-8859-1
 
 ## Naming Conventions
+
 - Class naming: PascalCase
 - Method naming: camelCase (use verbs)
 - Variable naming: camelCase
@@ -55,39 +59,52 @@
 - Module (file) naming: lowercase with underscore
 - Collection naming: Use plural or descriptive names
 
+## Comments
+
+- Omit inferred API comments
+- Keep single line comments to a minimum
+
 ## Testing
 
 ### Test Structure
+
 - Framework: Pytest
 - Test modules: Same name as module under test prefixed with `test_`
-- Test methods: StateUnderTest_Act_ExpectedBehavior
+- Test methods: `test_StateUnderTest_Act_ExpectedBehavior`
 
 ## Dependencies
+
 - Prefer dependency injection
 - Never use static methods or Singletons
 
 ## Error Handling
+
 - Null handling: Use Optional or null objects where appropriate
 - Exception types: Use specific exception types
 - Error messages: Include context
 
 ## Method Design
+
 - Single responsibility principle
 
 ## Code Organization and Class Design
 
 ### Project Structure
-- standard Python project layout 
+
+- standard Python project layout
 - `src/` for source code
 - `test/` for test files
 
 ### Separation of Concerns
+
 - Separate argument parsing, configuration, and dependency injection
 - Dedicated classes for specific responsibilities
 - Separate file system operations and business logic
 
 ## Design Patterns
+
 Preferred patterns:
+
 - Dependency Injection
 - Command Pattern
 - Builder Pattern

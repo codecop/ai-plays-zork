@@ -40,6 +40,7 @@ def test_writeFile(data_dir):
 def test_getNextFolderName_new(data_dir):
     next_name = getNextFolderName(str(data_dir), "test")
     assert next_name == "test-001"
+    assert (data_dir / next_name).exists()
 
 
 def test_getNextFolderName_existing(data_dir):

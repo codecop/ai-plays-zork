@@ -27,7 +27,11 @@ def getNextFolderName(basePath: str, pattern: str) -> str:
                     maxNum = num
 
     nextNum = maxNum + 1
-    return f"{pattern}-{nextNum:03d}"
+    nextName = f"{pattern}-{nextNum:03d}"
+
+    (path / nextName).mkdir(exist_ok=True)
+
+    return nextName
 
 
 def readGamePlayNotes() -> str:

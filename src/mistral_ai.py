@@ -28,9 +28,10 @@ class MistralAi(AiInterface):
 
         self.agent = None
         self.conversation_id = None
+        self.calls = 0
 
     def start(self, game_notes: str, game_intro: str) -> None:
-        system_prompt = self.load_resource("system_prompt.md").format(
+        self.system_prompt = self.load_resource("system_prompt.md").format(
             game_notes=game_notes, game_intro=game_intro
         )
 
@@ -38,7 +39,7 @@ class MistralAi(AiInterface):
             model=self.model,
             description="AI adventurer playing Zork.",
             name="Zork Agent",
-            instructions=system_prompt,
+            instructions=self.system_prompt,
         )
 
         self.log.ai(
@@ -47,7 +48,7 @@ class MistralAi(AiInterface):
             + f"model: {self.model}\n"
             + f"agent id: {self.agent.id}"
         )
-        self.write_run_resource("system_prompt.md", system_prompt)
+        self.write_run_resource("system_prompt.md", self.system_prompt)
 
     def get_next_command(self, context: str) -> str:
         if not self.conversation_id:
@@ -59,9 +60,13 @@ class MistralAi(AiInterface):
         else:
             response = self.client.beta.conversations.append(
                 conversation_id=self.conversation_id,
-                inputs=[{"role": "user", "content": context}],
+                inputs=[
+                    # {"role": "system", "content": self.system_prompt},
+                    {"role": "user", "content": context}
+                ],
             )
 
+        self.calls += 1
         if response.outputs and len(response.outputs) > 0:
             return response.outputs[0].content
         return "NO RESPONSE"

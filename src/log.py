@@ -1,5 +1,6 @@
 from pathlib import Path
 from datetime import datetime
+from src.file_utils import encoding
 
 
 class AnsiColors:
@@ -11,23 +12,25 @@ class AnsiColors:
 
 
 class Log:
-    def __init__(self, path: str):
-        self.path = Path(path + "/log.txt")
+    """Record the output of the game and the AI to console and a log file."""
+
+    def __init__(self, path: Path):
+        self.path = path / "log.txt"
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self._write_start_time()
 
     def _write_start_time(self) -> None:
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self._write("START", timestamp, AnsiColors.CYAN)
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self._write("START", now, AnsiColors.CYAN)
 
-    def room(self, text: str) -> None:
-        self._write("ROOM", text, AnsiColors.RED)
+    def ai(self, text: str) -> None:
+        self._write("AI", text, AnsiColors.YELLOW)
 
-    def gameText(self, text: str) -> None:
-        self._write("GAME", text, AnsiColors.GREEN)
+    def game(self, text: str) -> None:
+        self._write("GAME", text, AnsiColors.RED)
 
     def command(self, command: str) -> None:
-        self._write("CMD", command, AnsiColors.YELLOW)
+        self._write("CMD", command, AnsiColors.GREEN)
 
     def _write(self, prefix: str, message: str, color: str = "") -> None:
         log_message = f"{prefix} {message}"
@@ -35,5 +38,5 @@ class Log:
         print(f"{color}{log_message}{AnsiColors.RESET}")
 
     def _log(self, message: str) -> None:
-        with open(self.path, "a", encoding="utf-8") as f:
+        with open(self.path, "a", encoding=encoding) as f:
             f.write(f"{message}\n")

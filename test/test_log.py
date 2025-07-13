@@ -1,15 +1,17 @@
 import pytest
+from pathlib import Path
 from src.log import Log
 from test.test_file_utils import data_dir
 
 
 @pytest.fixture
-def log_file(data_dir):
+def log_file(data_dir: Path) -> (Log, Path):
     log_path = data_dir
-    return Log(str(log_path)), log_path / "log.txt"
+    log = Log(log_path)
+    return log, log.path
 
 
-def test_log_creation(log_file):
+def test_log_creation(log_file) -> None:
     _, path = log_file
     assert path.exists()
 
@@ -19,11 +21,11 @@ def test_log_creation(log_file):
     assert "CMD" not in content
 
 
-def test_log_commands(log_file):
+def test_log_commands(log_file) -> None:
     log, path = log_file
 
     game_text = "You are in a dark forest."
-    log.gameText(game_text)
+    log.game(game_text)
 
     command = "look"
     log.command(command)

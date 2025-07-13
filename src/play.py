@@ -22,8 +22,8 @@ command = "look"
 while True:
     room, description = game.do_command(command)
     # TODO remove whitespace etc.
-    log.room(room)
-    log.gameText(description)
+    log.game(room)
+    log.game(description)
 
     # scan answer for "you are dead"
 

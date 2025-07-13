@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.10", "3.12"]
+        python-version: ["3.9", "3.11", "3.13"]
 
     steps:
       - name: Checkout Repository
@@ -23,6 +23,16 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Find dfrotz binary
+        run: |
+          ls -la ~/.pyfrotz
+          python -m site
+          target_folder=$LD_LIBRARY_PATH/python${{ matrix.python-version }}/site-packages/frotz
+          echo $target_folder
+          mkdir -p $target_folder
+          cp ~/.pyfrotz/dfrotz $target_folder
+          ls -la $target_folder
 
       - name: Test
         run: pytest

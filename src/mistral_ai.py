@@ -1,15 +1,19 @@
 from mistralai import Mistral
 from mistralai.utils import BackoffStrategy, RetryConfig
+from ai_interface import AiInterface
 import os
+
 
 api_key = os.environ.get("MISTRAL_API_KEY")
 model = "mistral-small-latest"
 
 
-class MistralAi:
+class MistralAi(AiInterface):
+
     def __init__(self):
         self.api_key = api_key
         self.model = model
+
         self.retry_config = RetryConfig(
             "backoff", BackoffStrategy(1, 50, 1.1, 100), True
         )
@@ -17,13 +21,14 @@ class MistralAi:
             api_key=self.api_key,
             retry_config=self.retry_config,
         )
+
         self.agent = None
         self.conversation = None
 
     def name(self) -> str:
         return "mistralai"
 
-    def init(self, game_notes: str, game_intro: str):
+    def start(self, game_notes: str, game_intro: str):
         self.agent = self.client.beta.agents.create(
             model=self.model,
             description="AI adventurer playing Zork.",

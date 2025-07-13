@@ -16,7 +16,7 @@ game_intro = game.get_intro()
 game_notes = readGamePlayNotes()
 
 # init AI
-ai.init(game_notes, game_intro)
+ai.start(game_notes, game_intro)
 
 # run loop
 command = "look"

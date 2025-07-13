@@ -6,12 +6,12 @@ import re
 encoding = "utf-8"
 
 
-def readFile(path: Path | str) -> str:
+def readFile(path) -> str:
     with open(path, "r", encoding=encoding) as file:
         return file.read()
 
 
-def writeFile(path: Path | str, content: str) -> None:
+def writeFile(path, content: str) -> None:
     with open(path, "w", encoding=encoding) as file:
         file.write(content)
 

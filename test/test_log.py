@@ -5,8 +5,8 @@ from test.test_file_utils import data_dir
 
 @pytest.fixture
 def log_file(data_dir):
-    log_path = data_dir / "test.log"
-    return Log(str(log_path)), log_path
+    log_path = data_dir
+    return Log(str(log_path)), log_path / "log.txt"
 
 
 def test_log_creation(log_file):

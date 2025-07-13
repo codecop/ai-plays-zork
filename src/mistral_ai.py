@@ -23,35 +23,35 @@ class MistralAi(AiInterface):
         )
 
         self.agent = None
-        self.conversation = None
+        self.conversation_id = None
 
     def name(self) -> str:
         return "mistralai"
 
     def start(self, game_notes: str, game_intro: str):
+        system_prompt = self.load_resource("system_prompt.md").format(
+            game_notes=game_notes, game_intro=game_intro
+        )
+
         self.agent = self.client.beta.agents.create(
             model=self.model,
             description="AI adventurer playing Zork.",
             name="Zork Agent",
-        )
-
-        # Start conversation with initial prompt
-        system_prompt = self.load_resource("system_prompt.md").format(
-            game_notes=game_notes, game_intro=game_intro
-        )
-        self.conversation = self.client.beta.conversations.start(
-            agent_id=self.agent.id,
-            inputs=[{"role": "user", "content": system_prompt}],
+            instructions=system_prompt,
         )
 
     def get_next_command(self, context: str) -> str:
-        if not self.conversation:
-            raise ValueError("No active conversation. Call init() first.")
-
-        response = self.client.beta.conversations.append(
-            conversation_id=self.conversation.conversation_id,
-            inputs=[{"role": "user", "content": context}],
-        )
+        if not self.conversation_id:
+            response = self.client.beta.conversations.start(
+                agent_id=self.agent.id,
+                inputs=[{"role": "user", "content": context}],
+            )
+            self.conversation_id = response.conversation_id
+        else:
+            response = self.client.beta.conversations.append(
+                conversation_id=self.conversation_id,
+                inputs=[{"role": "user", "content": context}],
+            )
 
         if response.outputs and len(response.outputs) > 0:
             return response.outputs[0].content

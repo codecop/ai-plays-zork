@@ -1,10 +1,12 @@
 from pyfrotz import Frotz
 from file_utils import readFile
+import re
 
 
 class Game:
     def __init__(self, game_file: str = "data/zork1.z3"):
         self.wrapper = Frotz(game_file)
+        self.has_quit = False
 
     def get_game_play_notes(self) -> str:
         return readFile("data/Zork Gameplay Notes.txt")
@@ -13,16 +15,23 @@ class Game:
         return self.wrapper.get_intro()
 
     def do_command(self, command: str) -> str:
-        room, description = self.wrapper.do_command(command)
-        # TODO remove whitespace etc.
-        return f"{room}\n{description}"
+        answer = self.wrapper.do_command(command)
+        room, description = answer
+        first = room.strip()
+        second = re.sub(r"\s+", " ", description).strip()
+        return f"{first}\n{second}"
 
     def game_ended(self) -> bool:
         return self.wrapper.game_ended()
 
+    def quit(self) -> None:
+        self.has_quit = True
+        self.wrapper.do_command("quit")
+        self.wrapper.do_command("y")
+
     def close(self) -> None:
-        # self.do_command("quit")
-        # self.do_command("y")
+        if not self.has_quit:
+            self.quit()
 
         if self.wrapper:
             self.wrapper.frotz.stdin.close()

@@ -24,13 +24,13 @@ class Log:
         self._write("START", now, AnsiColors.CYAN)
 
     def ai(self, text: str) -> None:
-        self._write("AI", text, AnsiColors.YELLOW)
+        self._write("AI   ", text, AnsiColors.YELLOW)
 
     def game(self, text: str) -> None:
-        self._write("GAME", text, AnsiColors.RED)
+        self._write("GAME ", text, AnsiColors.RED)
 
     def command(self, command: str) -> None:
-        self._write("CMD", command, AnsiColors.GREEN)
+        self._write("CMD  ", command, AnsiColors.GREEN)
 
     def _write(self, prefix: str, message: str, color: str = "") -> None:
         lines = message.split("\n")

@@ -17,9 +17,14 @@ class Game:
     def do_command(self, command: str) -> str:
         answer = self.wrapper.do_command(command)
         room, description = answer
-        first = room.strip()
-        second = re.sub(r"\s+", " ", description).strip()
-        return f"{first}\n{second}"
+        first = self.strip_whitespaces(room)
+        second = self.strip_whitespaces(description)
+        if second:
+            return f"{first}\n{second}"
+        return first
+
+    def strip_whitespaces(self, text: str) -> str:
+        return re.sub(r"\s+", " ", text).strip()
 
     def game_ended(self) -> bool:
         return self.wrapper.game_ended()

@@ -36,12 +36,9 @@ class MistralAi(AiInterface):
         )
 
         # Start conversation with initial prompt
-        system_prompt = (
-            "You're an AI adventurer playing Zork. Zork is a text based turn based game.\n"
-            "We want you to play it.\nNotes how to play:\n"
-            f"{game_notes}\n{game_intro}"
+        system_prompt = self.load_resource("system_prompt.md").format(
+            game_notes=game_notes, game_intro=game_intro
         )
-
         self.conversation = self.client.beta.conversations.start(
             agent_id=self.agent.id,
             inputs=[{"role": "user", "content": system_prompt}],
@@ -58,7 +55,7 @@ class MistralAi(AiInterface):
 
         if response.outputs and len(response.outputs) > 0:
             return response.outputs[0].content
-        return ""
+        return "NO RESPONSE"
 
     def close(self):
         # currently no explicit cleanup needed

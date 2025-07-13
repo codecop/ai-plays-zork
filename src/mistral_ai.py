@@ -1,6 +1,7 @@
 from mistralai import Mistral
 from mistralai.utils import BackoffStrategy, RetryConfig
 from ai_interface import AiInterface
+from log import Log
 import os
 
 
@@ -10,9 +11,11 @@ model = "mistral-small-latest"
 
 class MistralAi(AiInterface):
 
-    def __init__(self):
+    def __init__(self, baseFolder, log: Log):
         self.api_key = api_key
         self.model = model
+        self.baseFolder = baseFolder
+        self.log = log
 
         self.retry_config = RetryConfig(
             "backoff", BackoffStrategy(1, 50, 1.1, 100), True

@@ -3,12 +3,10 @@ from log import Log
 from pyfrotz import Frotz
 from mistral_ai import MistralAi
 
-ai = MistralAi()
-
 # create run
 baseName = f"{ai.name()}-run"
-folderName = getNextFolderName(".", baseName)
-log = Log(folderName)
+runFolder = getNextFolderName(".", baseName)
+log = Log(runFolder)
 
 # start game
 game = Frotz("data/zork1.z3")
@@ -16,6 +14,7 @@ game_intro = game.get_intro()
 game_notes = readGamePlayNotes()
 
 # init AI
+ai = MistralAi(runFolder, log)
 ai.start(game_notes, game_intro)
 
 # run loop

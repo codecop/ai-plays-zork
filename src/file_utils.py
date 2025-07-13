@@ -1,14 +1,16 @@
 from pathlib import Path
 import re
 
+encoding = "utf-8"
+
 
 def readFile(path: str) -> str:
-    with open(path, "r", encoding="utf-8") as file:
+    with open(path, "r", encoding=encoding) as file:
         return file.read()
 
 
 def writeFile(path: str, content: str) -> None:
-    with open(path, "w", encoding="utf-8") as file:
+    with open(path, "w", encoding=encoding) as file:
         file.write(content)
 
 

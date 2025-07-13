@@ -17,8 +17,10 @@ class Game:
     def do_command(self, command: str) -> str:
         answer = self.wrapper.do_command(command)
         room, description = answer
+
         first = self.strip_whitespaces(room)
         second = self.strip_whitespaces(description)
+        # TODO scan answer for "you are dead"
         if second:
             return f"{first}\n{second}"
         return first

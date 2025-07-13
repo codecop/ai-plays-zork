@@ -24,8 +24,6 @@ while True:
     game_output = game.do_command(command)
     log.game(game_output)
 
-    # scan answer for "you are dead"
-
     # Get AI's next move
     context = f"Game answers with {game_output}"
     command = ai.get_next_command(context)
@@ -35,7 +33,5 @@ while True:
         break
 
 ai.close()
-
 game.close()
-
 # maybe save statistics

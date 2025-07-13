@@ -1,14 +1,12 @@
-import os
 from file_utils import getNextFolderName, readGamePlayNotes
 from log import Log
 from pyfrotz import Frotz
-from mistralai import Mistral
-from mistralai.utils import BackoffStrategy, RetryConfig
+from mistral_ai import MistralAi
 
-ai = "mistralai"
+ai = MistralAi()
 
 # create run
-baseName = f"{ai}-run"
+baseName = f"{ai.name()}-run"
 folderName = getNextFolderName(".", baseName)
 log = Log(folderName)
 
@@ -17,60 +15,22 @@ game = Frotz("data/zork1.z3")
 game_intro = game.get_intro()
 game_notes = readGamePlayNotes()
 
-# init ai
-key_name = "MISTRAL_API_KEY"
-api_key = os.environ[key_name]
-model = "mistral-small-latest"  # free
-retry_config = RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), True)
-client = Mistral(
-    api_key=api_key,
-    retry_config=retry_config,
-)
-
-# https://github.com/mistralai/client-python?tab=readme-ov-file
-zork_agent = client.beta.agents.create(
-    model=model,
-    description="AI adventurer playing Zork.",
-    name="Zork Agent",
-    # instructions="You have the ability to perform web searches with `web_search` to find up-to-date information.",
-    # tools=[{"type": "web_search"}],
-)
-
-response = client.beta.conversations.start(
-    agent_id=zork_agent.id,
-    inputs=[
-        {
-            "role": "user",
-            "content": "You're an AI adventurer playing Zork. Zork is a text based turn based game.\nWe want you to play it.\nNotes how to play:\n"
-            + game_notes
-            + "\n"
-            + game_intro,
-        }
-    ],
-)
+# init AI
+ai.init(game_notes, game_intro)
 
 # run loop
 command = "look"
 while True:
     room, description = game.do_command(command)
+    # TODO remove whitespace etc.
     log.room(room)
     log.gameText(description)
 
     # scan answer for "you are dead"
 
-    # pass to ai
-    context = f"You are in {room}.\n {description}"
-    response = client.beta.conversations.append(
-        conversation_id=response.conversation_id,
-        inputs=[
-            {
-                "role": "user",
-                "content": context,
-            }
-        ],
-    )
-
-    command = response.outputs[0].content
+    # Get AI's next move
+    context = f"You are in {room}.\n{description}"
+    command = ai.get_next_command(context)
     log.command(command)
 
     if game.game_ended():
@@ -79,7 +39,7 @@ while True:
 # game.do_command("quit")
 # game.do_command("y")
 
-# close AI
+ai.close()
 
 # close game resources
 game.frotz.stdin.close()

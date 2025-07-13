@@ -3,13 +3,14 @@ from file_utils import getNextFolderName, readGamePlayNotes
 from log import Log
 from pyfrotz import Frotz
 from mistralai import Mistral
+from mistralai.models import UserMessage, SystemMessage
 
 ai = "mistralai"
 
 # create run
 baseName = f"{ai}-run"
 folderName = getNextFolderName(".", baseName)
-log = Log(folderName + "/log.txt")
+log = Log(folderName)
 
 # start game
 game = Frotz("data/zork1.z3")
@@ -33,13 +34,11 @@ zork_agent = client.beta.agents.create(
 response = client.beta.conversations.start(
     agent_id=zork_agent.id,
     inputs=[
-        {
-            "role": "system",
-            "content": "You're an AI adventurer playing Zork. Zork is a text based turn based game.\nWe want you to play it and figure out how you want to keep track of your progress and current state.",
-        },
-        {"role": "user", "content": game_notes},
+        SystemMessage(
+            "You're an AI adventurer playing Zork. Zork is a text based turn based game.\nWe want you to play it."
+        ),
+        UserMessage(game_notes),
     ],
-    # store=False
 )
 
 # run loop
@@ -49,16 +48,17 @@ while True:
     log.room(room)
     log.gameText(description)
 
+    # scan answer for "you are dead"
+
     # pass to ai
     context = f"You are in {room}.\n {description}"
     response = client.beta.conversations.append(
         conversation_id=response.conversation_id,
         inputs=[
-            {
-                "role": "system",
-                "content": "You're an AI adventurer playing Zork. Zork is a text based turn based game.\nWe want you to play it and figure out how you want to keep track of your progress and current state.",
-            },
-            {"role": "user", "content": context},
+            SystemMessage(
+                "You're an AI adventurer playing Zork. Zork is a text based turn based game.\nWe want you to play it."
+            ),
+            UserMessage(context),
         ],
     )
     command = response.outputs[0].content
@@ -77,4 +77,4 @@ game.frotz.stdin.close()
 game.frotz.stdout.close()
 game.frotz.wait()
 
-# TODO maybe save statistics
+# maybe save statistics

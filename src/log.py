@@ -33,7 +33,13 @@ class Log:
         self._write("CMD", command, AnsiColors.GREEN)
 
     def _write(self, prefix: str, message: str, color: str = "") -> None:
-        log_message = f"{prefix} {message}"
+        lines = message.split("\n")
+
+        log_message = f"{prefix} {lines[0]}"
+        spacer = " " * (len(prefix) + 1)
+        for line in lines[1:]:
+            log_message += f"\n{spacer}{line}"
+
         self._log(log_message)
         print(f"{color}{log_message}{AnsiColors.RESET}", flush=True)
 

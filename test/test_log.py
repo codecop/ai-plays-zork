@@ -35,3 +35,16 @@ def test_log_commands(log_file) -> None:
     assert len(lines) == 3  # START + game text + command
     assert lines[1] == f"GAME {game_text}"
     assert lines[2] == f"CMD {command}"
+
+
+def test_multiline_log(log_file) -> None:
+    log, path = log_file
+
+    multi_line_text = "You are in a dark forest.\nThere is a path to the east."
+    log.game(multi_line_text)
+
+    content = path.read_text(encoding="utf-8")
+
+    lines = content.strip().split("\n")
+    assert lines[1] == "GAME You are in a dark forest."
+    assert lines[2] == "     There is a path to the east."

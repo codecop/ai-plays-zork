@@ -22,3 +22,5 @@ Your answers will be directly piped into the game, so only answer with commands 
 Use `look` to get an overview of the current room. Especially if you are not sure what you can do.
 Use `inventory` to see your inventory.
 If you are going in circles between two or three rooms, look for different exits to go.
+
+**I repeat: Only answer with the commands for the game.**

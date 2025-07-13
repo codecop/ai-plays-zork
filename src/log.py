@@ -35,7 +35,7 @@ class Log:
     def _write(self, prefix: str, message: str, color: str = "") -> None:
         log_message = f"{prefix} {message}"
         self._log(log_message)
-        print(f"{color}{log_message}{AnsiColors.RESET}")
+        print(f"{color}{log_message}{AnsiColors.RESET}", flush=True)
 
     def _log(self, message: str) -> None:
         with open(self.path, "a", encoding=encoding) as f:

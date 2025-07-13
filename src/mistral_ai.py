@@ -12,8 +12,8 @@ model = "mistral-small-latest"
 
 class MistralAi(AiInterface):
 
-    def __init__(self, name:str, run_folder: Path, log: Log):
-        super().__init__(name, run_folder, log)
+    def __init__(self, configuration: str, run_folder: Path, log: Log):
+        super().__init__(configuration, run_folder, log)
 
         self.api_key = api_key
         self.model = model
@@ -41,6 +41,12 @@ class MistralAi(AiInterface):
             instructions=system_prompt,
         )
 
+        self.log.ai(
+            f"ai: {self.__class__}\n"
+            + f"configuration: {self.configuration}\n"
+            + f"model: {self.model}\n"
+            + f"agent id: {self.agent.id}"
+        )
         self.write_run_resource("system_prompt.md", system_prompt)
 
     def get_next_command(self, context: str) -> str:

@@ -7,13 +7,13 @@ from log import Log
 class AiInterface(ABC):
     """Base class defining the interface for AI implementations."""
 
-    def __init__(self, name: str, run_folder: Path, log: Log):
-        self.name = name
+    def __init__(self, configuration: str, run_folder: Path, log: Log):
+        self.configuration = configuration
         self.run_folder = run_folder
         self.log = log
 
     def resource_dir(self) -> Path:
-        return Path(__file__).parent / self.name
+        return Path(__file__).parent / self.configuration
 
     def load_resource(self, filename: str) -> str:
         """Load a text resource file from the AI's resource directory."""

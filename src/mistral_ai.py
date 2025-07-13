@@ -60,15 +60,17 @@ class MistralAi(AiInterface):
         else:
             response = self.client.beta.conversations.append(
                 conversation_id=self.conversation_id,
-                inputs=[
-                    # {"role": "system", "content": self.system_prompt},
-                    {"role": "user", "content": context}
-                ],
+                inputs=[{"role": "user", "content": context}],
             )
 
         self.calls += 1
         if response.outputs and len(response.outputs) > 0:
-            return response.outputs[0].content
+            result = response.outputs[0].content
+            if "\n" in result:
+                self.log.ai(result)
+                result = result.splitlines()[-1]
+            return result
+        self.log.ai("NO RESPONSE")
         return "NO RESPONSE"
 
     def close(self) -> None:

@@ -3,7 +3,7 @@ from file_utils import getNextFolderName, readGamePlayNotes
 from log import Log
 from pyfrotz import Frotz
 from mistralai import Mistral
-from mistralai.models import UserMessage, SystemMessage
+from mistralai.utils import BackoffStrategy, RetryConfig
 
 ai = "mistralai"
 
@@ -21,8 +21,13 @@ game_notes = readGamePlayNotes()
 key_name = "MISTRAL_API_KEY"
 api_key = os.environ[key_name]
 model = "mistral-small-latest"  # free
-client = Mistral(api_key=api_key)
+retry_config = RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), True)
+client = Mistral(
+    api_key=api_key,
+    retry_config=retry_config,
+)
 
+# https://github.com/mistralai/client-python?tab=readme-ov-file
 zork_agent = client.beta.agents.create(
     model=model,
     description="AI adventurer playing Zork.",
@@ -34,10 +39,13 @@ zork_agent = client.beta.agents.create(
 response = client.beta.conversations.start(
     agent_id=zork_agent.id,
     inputs=[
-        SystemMessage(
-            "You're an AI adventurer playing Zork. Zork is a text based turn based game.\nWe want you to play it."
-        ),
-        UserMessage(game_notes),
+        {
+            "role": "user",
+            "content": "You're an AI adventurer playing Zork. Zork is a text based turn based game.\nWe want you to play it.\nNotes how to play:\n"
+            + game_notes
+            + "\n"
+            + game_intro,
+        }
     ],
 )
 
@@ -55,12 +63,13 @@ while True:
     response = client.beta.conversations.append(
         conversation_id=response.conversation_id,
         inputs=[
-            SystemMessage(
-                "You're an AI adventurer playing Zork. Zork is a text based turn based game.\nWe want you to play it."
-            ),
-            UserMessage(context),
+            {
+                "role": "user",
+                "content": context,
+            }
         ],
     )
+
     command = response.outputs[0].content
     log.command(command)
 

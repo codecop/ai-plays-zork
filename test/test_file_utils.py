@@ -1,6 +1,6 @@
 import pytest
 from pathlib import Path
-from file_utils import readFile, writeFile, getNextFolderName, readGamePlayNotes
+from file_utils import readFile, writeFile, getNextFolderName
 
 
 def cleanup_test_data(data_dir: Path) -> None:
@@ -51,9 +51,3 @@ def test_getNextFolderName_existing(data_dir: Path) -> None:
 
     next_dir = getNextFolderName(data_dir, "test")
     assert next_dir.parts[-1] == "test-006"
-
-
-def test_readGamePlayNotes() -> None:
-    notes = readGamePlayNotes()
-
-    assert notes.startswith("Zork: The Great Underground Empire")

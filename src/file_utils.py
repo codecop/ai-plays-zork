@@ -37,7 +37,3 @@ def getNextFolderName(basePath: Path, pattern: str) -> Path:
     runFolder.mkdir(exist_ok=True)
 
     return runFolder
-
-
-def readGamePlayNotes() -> str:
-    return readFile("data/Zork Gameplay Notes.txt")

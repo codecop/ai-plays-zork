@@ -1,4 +1,4 @@
-from file_utils import getNextFolderName, readGamePlayNotes
+from file_utils import getNextFolderName
 from log import Log
 from game import Game
 from mistral_ai import MistralAi
@@ -10,9 +10,9 @@ runFolder = getNextFolderName(".", baseName)
 log = Log(runFolder)
 
 # start game
-game = Game("data/zork1.z3")
+game = Game()
+game_notes = game.get_game_play_notes()
 game_intro = game.get_intro()
-game_notes = readGamePlayNotes()
 
 # init AI
 ai = MistralAi(config, runFolder, log)

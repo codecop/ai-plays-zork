@@ -1,10 +1,13 @@
-from typing import Tuple
 from pyfrotz import Frotz
+from file_utils import readFile
 
 
 class Game:
-    def __init__(self, game_file: str):
+    def __init__(self, game_file: str = "data/zork1.z3"):
         self.wrapper = Frotz(game_file)
+
+    def get_game_play_notes(self) -> str:
+        return readFile("data/Zork Gameplay Notes.txt")
 
     def get_intro(self) -> str:
         return self.wrapper.get_intro()

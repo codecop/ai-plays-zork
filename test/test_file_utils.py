@@ -1,6 +1,6 @@
 import pytest
 from pathlib import Path
-from src.file_utils import readFile, writeFile, getNextFolderName, readGamePlayNotes
+from file_utils import readFile, writeFile, getNextFolderName, readGamePlayNotes
 
 
 def cleanup_test_data(data_dir: Path) -> None:

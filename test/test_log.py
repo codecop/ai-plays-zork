@@ -1,7 +1,7 @@
 import pytest
 from pathlib import Path
-from src.log import Log
-from test.test_file_utils import data_dir
+from log import Log
+from test_file_utils import data_dir
 
 
 @pytest.fixture

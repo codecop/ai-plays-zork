@@ -29,7 +29,7 @@ while True:
     # scan answer for "you are dead"
 
     # Get AI's next move
-    context = f"You are in {room}.\n{description}"
+    context = f"Game answers with {room}\n{description}"
     command = ai.get_next_command(context)
     log.command(command)
 

@@ -1,6 +1,8 @@
 from pathlib import Path
 import re
 
+"""Utilities for reading, saving text files and creating 'run' folders."""
+
 encoding = "utf-8"
 
 
@@ -14,7 +16,7 @@ def writeFile(path: str, content: str) -> None:
         file.write(content)
 
 
-def getNextFolderName(basePath: str, pattern: str) -> str:
+def getNextFolderName(basePath: Path, pattern: str) -> Path:
     patternRegex = re.compile(re.escape(pattern) + r"-(\d{3})")
 
     maxNum = 0
@@ -31,9 +33,10 @@ def getNextFolderName(basePath: str, pattern: str) -> str:
     nextNum = maxNum + 1
     nextName = f"{pattern}-{nextNum:03d}"
 
-    (path / nextName).mkdir(exist_ok=True)
+    runFolder = path / nextName
+    runFolder.mkdir(exist_ok=True)
 
-    return nextName
+    return runFolder
 
 
 def readGamePlayNotes() -> str:

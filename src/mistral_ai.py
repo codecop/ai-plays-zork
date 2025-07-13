@@ -11,11 +11,11 @@ model = "mistral-small-latest"
 
 class MistralAi(AiInterface):
 
-    def __init__(self, baseFolder, log: Log):
+    def __init__(self, run_folder: Path, log: Log):
+        super().__init__(run_folder, log)
+
         self.api_key = api_key
         self.model = model
-        self.baseFolder = baseFolder
-        self.log = log
 
         self.retry_config = RetryConfig(
             "backoff", BackoffStrategy(1, 50, 1.1, 100), True
@@ -31,7 +31,7 @@ class MistralAi(AiInterface):
     def name(self) -> str:
         return "mistralai"
 
-    def start(self, game_notes: str, game_intro: str):
+    def start(self, game_notes: str, game_intro: str) -> None:
         system_prompt = self.load_resource("system_prompt.md").format(
             game_notes=game_notes, game_intro=game_intro
         )
@@ -42,6 +42,8 @@ class MistralAi(AiInterface):
             name="Zork Agent",
             instructions=system_prompt,
         )
+
+        # self.write_for_run("system_prompt.md", system_prompt)
 
     def get_next_command(self, context: str) -> str:
         if not self.conversation_id:
@@ -60,6 +62,6 @@ class MistralAi(AiInterface):
             return response.outputs[0].content
         return "NO RESPONSE"
 
-    def close(self):
+    def close(self) -> None:
         # currently no explicit cleanup needed
         pass

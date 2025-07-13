@@ -1,21 +1,27 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
-
-from file_utils import readFile
+from src.file_utils import readFile
+from src.log import Log
 
 
 class AiInterface(ABC):
     """Base class defining the interface for AI implementations."""
+
+    def __init__(self, run_folder: Path, log: Log):
+        self.run_folder = run_folder
+        self.log = log
 
     @abstractmethod
     def name(self) -> str:
         """Return the name of the AI implementation."""
         pass
 
+    def resource_dir(self) -> Path:
+        return Path(__file__).parent / self.name()
+
     def load_resource(self, filename: str) -> str:
         """Load a text resource file from the AI's resource directory."""
-        resource_dir = Path(__file__).parent / self.name()
-        resource_file = resource_dir / filename
+        resource_file = self.resource_dir() / filename
         return readFile(resource_file)
 
     @abstractmethod

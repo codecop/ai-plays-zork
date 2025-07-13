@@ -1,28 +1,33 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
-from src.file_utils import readFile
-from src.log import Log
+from file_utils import readFile, writeFile
+from log import Log
 
 
 class AiInterface(ABC):
     """Base class defining the interface for AI implementations."""
 
-    def __init__(self, run_folder: Path, log: Log):
+    def __init__(self, name: str, run_folder: Path, log: Log):
+        self.name = name
         self.run_folder = run_folder
         self.log = log
 
-    @abstractmethod
-    def name(self) -> str:
-        """Return the name of the AI implementation."""
-        pass
-
     def resource_dir(self) -> Path:
-        return Path(__file__).parent / self.name()
+        return Path(__file__).parent / self.name
 
     def load_resource(self, filename: str) -> str:
         """Load a text resource file from the AI's resource directory."""
         resource_file = self.resource_dir() / filename
         return readFile(resource_file)
+
+    def load_resource(self, filename: str) -> str:
+        """Load a text resource file from the AI's resource directory."""
+        resource_file = self.resource_dir() / filename
+        return readFile(resource_file)
+
+    def write_run_resource(self, filename: str, content: str) -> None:
+        target_file = self.run_folder / filename
+        return writeFile(target_file, content)
 
     @abstractmethod
     def start(self, game_notes: str, game_intro: str) -> None:

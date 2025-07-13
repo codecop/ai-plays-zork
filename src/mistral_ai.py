@@ -1,3 +1,4 @@
+from pathlib import Path
 from mistralai import Mistral
 from mistralai.utils import BackoffStrategy, RetryConfig
 from ai_interface import AiInterface
@@ -11,8 +12,8 @@ model = "mistral-small-latest"
 
 class MistralAi(AiInterface):
 
-    def __init__(self, run_folder: Path, log: Log):
-        super().__init__(run_folder, log)
+    def __init__(self, name:str, run_folder: Path, log: Log):
+        super().__init__(name, run_folder, log)
 
         self.api_key = api_key
         self.model = model
@@ -28,9 +29,6 @@ class MistralAi(AiInterface):
         self.agent = None
         self.conversation_id = None
 
-    def name(self) -> str:
-        return "mistralai"
-
     def start(self, game_notes: str, game_intro: str) -> None:
         system_prompt = self.load_resource("system_prompt.md").format(
             game_notes=game_notes, game_intro=game_intro
@@ -43,7 +41,7 @@ class MistralAi(AiInterface):
             instructions=system_prompt,
         )
 
-        # self.write_for_run("system_prompt.md", system_prompt)
+        self.write_run_resource("system_prompt.md", system_prompt)
 
     def get_next_command(self, context: str) -> str:
         if not self.conversation_id:

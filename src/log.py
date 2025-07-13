@@ -1,6 +1,6 @@
 from pathlib import Path
 from datetime import datetime
-from src.file_utils import encoding
+from file_utils import encoding
 
 
 class AnsiColors:

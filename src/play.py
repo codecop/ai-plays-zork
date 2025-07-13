@@ -4,7 +4,8 @@ from pyfrotz import Frotz
 from mistral_ai import MistralAi
 
 # create run
-baseName = f"{ai.name()}-run"
+config = "mistralai"
+baseName = f"{config}-run"
 runFolder = getNextFolderName(".", baseName)
 log = Log(runFolder)
 
@@ -14,22 +15,21 @@ game_intro = game.get_intro()
 game_notes = readGamePlayNotes()
 
 # init AI
-ai = MistralAi(runFolder, log)
-ai.start(game_notes, game_intro)
+config = MistralAi(config, runFolder, log)
+config.start(game_notes, game_intro)
 
 # run loop
 command = "look"
 while True:
     room, description = game.do_command(command)
     # TODO remove whitespace etc.
-    log.game(room)
-    log.game(description)
+    log.game(f"{room}\n{description}")
 
     # scan answer for "you are dead"
 
     # Get AI's next move
     context = f"Game answers with {room}\n{description}"
-    command = ai.get_next_command(context)
+    command = config.get_next_command(context)
     log.command(command)
 
     if game.game_ended():
@@ -38,7 +38,7 @@ while True:
 # game.do_command("quit")
 # game.do_command("y")
 
-ai.close()
+config.close()
 
 # close game resources
 game.frotz.stdin.close()

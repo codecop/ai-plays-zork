@@ -1,0 +1,16 @@
+Optimize the prompts + add tools:
+  - give it some goal
+  - have it collect knowledge for itself
+  - create maps for itself
+    - Claude can create files
+    - Mistral can use some storage? run tools works. maybe run Python tool on server.
+
+Use SDK to run claude code instance from Python. Can use this SDK https://github.com/anthropics/claude-code-sdk-python
+
+What should UX look like?
+  - right now AI is just giving the output, nothing else. We could have Mistral also output other thoughts or suggestions
+  - throttle? right now AI is too fast. Wait x millis before sending the next command
+
+Try different models
+  - large Mistral
+  - maybe OpenAI backend

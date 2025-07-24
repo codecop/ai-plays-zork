@@ -25,9 +25,13 @@ class AiInterface(ABC):
         resource_file = self.resource_dir() / filename
         return readFile(resource_file)
 
+    def load_run_resource(self, filename: str) ->  str:
+        target_file = self.run_folder / filename
+        return readFile(target_file)
+
     def write_run_resource(self, filename: str, content: str) -> None:
         target_file = self.run_folder / filename
-        return writeFile(target_file, content)
+        writeFile(target_file, content)
 
     @abstractmethod
     def start(self, game_notes: str, game_intro: str) -> None:

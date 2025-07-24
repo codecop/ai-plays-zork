@@ -219,5 +219,6 @@ env3.bat
 clean.bat
 .mistralai_apikey
 
+/claudecode-run-*/
 /claude-run-*/
 /mistralai-run-*/

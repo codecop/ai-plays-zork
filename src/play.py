@@ -2,9 +2,10 @@ from file_utils import getNextFolderName
 from log import Log
 from game import Game
 from mistral_ai import MistralAi
+from claude_code_ai import ClaudeCodeAi
 
 # create run
-config = "mistralai"
+config = "claudecode"  # Change to "mistralai" for Mistral
 baseName = f"{config}-run"
 runFolder = getNextFolderName(".", baseName)
 log = Log(runFolder)
@@ -15,7 +16,10 @@ game_notes = game.get_game_play_notes()
 game_intro = game.get_intro()
 
 # init AI
-ai = MistralAi(config, runFolder, log)
+if config == "claudecode":
+    ai = ClaudeCodeAi(config, runFolder, log)
+else:
+    ai = MistralAi(config, runFolder, log)
 ai.start(game_notes, game_intro)
 
 # run loop

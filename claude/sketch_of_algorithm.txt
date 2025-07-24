@@ -44,3 +44,30 @@ output.txt
 copy of Zork Gameplay Notes.txt
 maybe some log how things went
 maybe some json with statistics
+
+3 "Points" to use claude
+1. start - has created the folder with context files
+   manual claude init in that folder with name of folder (print the expected command to be run)
+   wait for enter
+
+    10003  mkdir claude-run-2
+    10004  cd claude-run-2
+    10006  cp ../claude-run-11223 * .
+    10007  cp ../claude/project.md .
+    10008  cp ../data/Zork\ Gameplay\ Notes.txt .
+    10009  claude --dangerously-skip-permissions
+
+2. next command has context
+   remove output.txt
+   save context to folder
+
+   invoke "tell [folder_name] read context
+   waiting for output.txt
+
+   10010  rm output.txt
+   10011  claude-watch
+   10012* claude-rename claude-run-2 hero
+   10013  tell hero 'there is a new context, process it and create another output file with your action, then stop'
+
+3. close
+   -

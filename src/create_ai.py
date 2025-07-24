@@ -6,12 +6,14 @@ from mistral_ai import MistralAi
 
 
 def create_ai(config: str) -> AiInterface:
+    """Create a given AI for the config."""
+
     # create run
     baseName = f"{config}-run"
     runFolder = getNextFolderName(".", baseName)
     log = Log(runFolder)
 
-    # init AI
+    # create AI
     if config == "mistralai":
         ai = MistralAi(config, runFolder, log)
 

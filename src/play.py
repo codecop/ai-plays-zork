@@ -1,41 +1,35 @@
-from file_utils import getNextFolderName
-from log import Log
+import sys
 from game import Game
-from mistral_ai import MistralAi
-from claude_code_ai import ClaudeCodeAi
+from create_ai import create_ai
 
-# create run
-config = "claudecode"  # Change to "mistralai" for Mistral
-baseName = f"{config}-run"
-runFolder = getNextFolderName(".", baseName)
-log = Log(runFolder)
+
+# init AI
+if len(sys.argv) > 1:
+    config = sys.argv[1]
+else:
+    raise ValueError("No config provided")
+
+ai = create_ai(config)
 
 # start game
 game = Game()
 game_notes = game.get_game_play_notes()
 game_intro = game.get_intro()
-
-# init AI
-if config == "claudecode":
-    ai = ClaudeCodeAi(config, runFolder, log)
-else:
-    ai = MistralAi(config, runFolder, log)
 ai.start(game_notes, game_intro)
 
 # run loop
 command = "look"
 while True:
     game_output = game.do_command(command)
-    log.game(game_output)
+    ai.log.game(game_output)
 
     # Get AI's next move
     context = game_output
     command = ai.get_next_command(context)
-    log.command(command)
+    ai.log.command(command)
 
     if game.game_ended():
         break
 
 ai.close()
 game.close()
-# maybe save statistics

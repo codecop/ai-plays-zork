@@ -29,7 +29,7 @@ while True:
     log.game(game_output)
 
     # Get AI's next move
-    context = f"Game answers with {game_output}"
+    context = game_output
     command = ai.get_next_command(context)
     log.command(command)
 

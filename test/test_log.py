@@ -17,8 +17,9 @@ def test_log_creation(log_file) -> None:
 
     content = path.read_text(encoding="utf-8")
     assert content.startswith("START ")
-    assert "GAME" not in content
+    assert "AI" not in content
     assert "CMD" not in content
+    assert "GAME" not in content
 
 
 def test_log_commands(log_file) -> None:
@@ -30,11 +31,15 @@ def test_log_commands(log_file) -> None:
     command = "look"
     log.command(command)
 
+    ai = "AI response"
+    log.ai(ai)
+
     content = path.read_text(encoding="utf-8")
     lines = content.strip().split("\n")
-    assert len(lines) == 3  # START + game text + command
-    assert lines[1] == f"GAME  {game_text}"
+    assert len(lines) == 4  # START + game text + command
+    assert lines[3] == f"AI    {ai}"
     assert lines[2] == f"CMD   {command}"
+    assert lines[1] == f"GAME  {game_text}"
 
 
 def test_multiline_log(log_file) -> None:

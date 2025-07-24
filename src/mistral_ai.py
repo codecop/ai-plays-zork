@@ -54,13 +54,13 @@ class MistralAi(AiInterface):
         if not self.conversation_id:
             response = self.client.beta.conversations.start(
                 agent_id=self.agent.id,
-                inputs=[{"role": "user", "content": context}],
+                inputs=[{"role": "user", "content": f"Game answers with {context}"}],
             )
             self.conversation_id = response.conversation_id
         else:
             response = self.client.beta.conversations.append(
                 conversation_id=self.conversation_id,
-                inputs=[{"role": "user", "content": context}],
+                inputs=[{"role": "user", "content": f"Game answers with {context}"}],
             )
 
         self.calls += 1

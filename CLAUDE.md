@@ -9,11 +9,13 @@ This project implements an AI that plays the classic text adventure game Zork I.
 ## Development Commands
 
 ### Running the main application
+
 ```bash
 python src/play.py
 ```
 
 ### Running tests
+
 ```bash
 pytest
 # or for verbose output with pytest.ini configuration
@@ -21,6 +23,7 @@ pytest -v -ra
 ```
 
 ### Installing dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -88,7 +91,8 @@ The application requires a `MISTRAL_API_KEY` environment variable to be set for 
 ## Testing
 
 Tests are configured via `pytest.ini` with:
+
 - Verbose output (`-v`)
-- Summary of all results (`-ra`) 
+- Summary of all results (`-ra`)
 - Source paths include both `src` and `test`
 - Test discovery pattern: `test_*.py`

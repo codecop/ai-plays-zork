@@ -13,6 +13,7 @@ class AiInterface(ABC):
         self.log = log
 
     def resource_dir(self) -> Path:
+        """Resource dir is defined by the configuration and is a source of system prompts."""
         return Path(__file__).parent / self.configuration
 
     def load_resource(self, filename: str) -> str:
@@ -20,16 +21,13 @@ class AiInterface(ABC):
         resource_file = self.resource_dir() / filename
         return readFile(resource_file)
 
-    def load_resource(self, filename: str) -> str:
-        """Load a text resource file from the AI's resource directory."""
-        resource_file = self.resource_dir() / filename
-        return readFile(resource_file)
-
-    def load_run_resource(self, filename: str) ->  str:
+    def load_run_resource(self, filename: str) -> str:
+        """A run resource is a file in the current working folder."""
         target_file = self.run_folder / filename
         return readFile(target_file)
 
     def write_run_resource(self, filename: str, content: str) -> None:
+        """A run resource is a file in the current working folder."""
         target_file = self.run_folder / filename
         writeFile(target_file, content)
 

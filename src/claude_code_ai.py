@@ -9,7 +9,6 @@ class ClaudeCodeAi(AiInterface):
 
     def __init__(self, configuration: str, run_folder: Path, log: Log):
         super().__init__(configuration, run_folder, log)
-        self.output_file = run_folder / "output.txt"
         self.timeout_seconds = 30
 
     def start(self, game_notes: str, game_intro: str) -> None:
@@ -32,9 +31,7 @@ class ClaudeCodeAi(AiInterface):
         input("Press when ClaudeCode has started")
 
     def get_next_command(self, context: str) -> str:
-        if self.output_file.exists():
-            self.output_file.unlink()
-
+        self.remove_run_resource("output.txt")
         self.write_run_resource("context.md", context)
 
         subprocess.run(
@@ -60,8 +57,8 @@ class ClaudeCodeAi(AiInterface):
         waited = 0
 
         while waited < max_wait:
-            if self.output_file.exists() and self.output_file.stat().st_size > 0:
-                return self.load_run_resource("output.txt").strip()
+            if self.exists_run_resource("output.txt"):
+                return self.load_run_resource("output.txt")
 
             time.sleep(wait_interval)
             waited += wait_interval

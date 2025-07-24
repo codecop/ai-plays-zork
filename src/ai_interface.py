@@ -21,15 +21,26 @@ class AiInterface(ABC):
         resource_file = self.resource_dir() / filename
         return readFile(resource_file)
 
+    def remove_run_resource(self, filename: str) -> None:
+        """A run resource is a file in the current working folder."""
+        target_file = self.run_folder / filename
+        if target_file.exists():
+            target_file.unlink()
+
     def load_run_resource(self, filename: str) -> str:
         """A run resource is a file in the current working folder."""
         target_file = self.run_folder / filename
-        return readFile(target_file)
+        return readFile(target_file).strip()
 
     def write_run_resource(self, filename: str, content: str) -> None:
         """A run resource is a file in the current working folder."""
         target_file = self.run_folder / filename
         writeFile(target_file, content)
+
+    def exists_run_resource(self, filename: str) -> bool:
+        """A run resource is a file in the current working folder."""
+        target_file = self.run_folder / filename
+        return target_file.exists() and target_file.stat().st_size > 0
 
     @abstractmethod
     def start(self, game_notes: str, game_intro: str) -> None:

@@ -9,7 +9,7 @@ Use SDK to run claude code instance from Python. Can use this SDK https://github
 
 What should UX look like?
   - right now AI is just giving the output, nothing else. We could have Mistral also output other thoughts or suggestions
-  - throttle? right now AI is too fast. Wait x millis before sending the next command
+  - throttle? right now AI is too fast. Wait x millis before sending the next command (DONE)
 
 Try different models
   - large Mistral

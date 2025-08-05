@@ -38,6 +38,7 @@ class MistralAi(AiInterface):
             description=self.config()["description"],
             name=self.config()["name"],
             instructions=system_prompt,
+            tools=self.config()["tools"],
         )
 
         self.log.ai(

@@ -1,5 +1,6 @@
 {
     "model": "mistral-small-latest",
     "name": "Zork Agent",
-    "description": "AI adventurer playing Zork."
+    "description": "AI adventurer playing Zork.",
+    "tools": []
 }

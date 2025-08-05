@@ -1,5 +1,7 @@
+import json
 from pathlib import Path
 from mistralai import Mistral
+from mistralai.models import ConversationResponse
 from mistralai.utils import BackoffStrategy, RetryConfig
 from ai_interface import AiInterface
 from log import Log
@@ -44,7 +46,7 @@ class MistralAi(AiInterface):
 
         self._log_agent_info()
 
-    def _log_agent_info(self):
+    def _log_agent_info(self) -> None:
         self.log.ai(
             f"ai: {self.__class__}\n"
             + f"configuration: {self.configuration}\n"
@@ -57,24 +59,9 @@ class MistralAi(AiInterface):
     def get_next_command(self, context: str) -> str:
         prompt = f"Game answers with {context}"
         response = self._send_initial_prompt_to_server(prompt)
+        return self._handle_response(response)
 
-        if not response.outputs or len(response.outputs) == 0:
-            self.log.ai("NO RESPONSE")
-            return "NO RESPONSE"
-
-        if len(response.outputs) > 1:
-            self.log.ai("WARN multiple responses " + str(response.outputs))
-
-        output = response.outputs[0]
-        if output.type == "message.output":
-            self.calls += 1
-            result = output.content
-            return self._extract_command_from(result)
-        else:
-            self.log.ai("WARN not a message response " + str(output))
-            return "NO RESPONSE"
-
-    def _send_initial_prompt_to_server(self, prompt: str) -> str:
+    def _send_initial_prompt_to_server(self, prompt: str) -> ConversationResponse:
         if not self.conversation_id:
             response = self.client.beta.conversations.start(
                 agent_id=self.agent.id,
@@ -84,15 +71,55 @@ class MistralAi(AiInterface):
         else:
             response = self.client.beta.conversations.append(
                 conversation_id=self.conversation_id,
+                # List[MessageInputEntry]
                 inputs=[{"role": "user", "content": prompt}],
             )
         return response
 
-    def _extract_command_from(self, response: str) -> str:
-        if "\n" in response:
-            self.log.ai(response)
-            response = response.splitlines()[-1]
-        return response
+    def _handle_response(self, response: ConversationResponse) -> str:
+        if not response.outputs or len(response.outputs) == 0:
+            self.log.ai("NO RESPONSE")
+            return "NO RESPONSE"
+
+        output = response.outputs[0]
+        if len(response.outputs) == 1 and output.type == "message.output":
+            self.calls += 1
+            content = output.content
+            return self._extract_command_from(content)
+
+        if len(response.outputs) > 1:
+            self.log.ai("WARN multiple responses " + str(response.outputs))
+
+        # TODO for each function call in the response, call the function and return all of them at once!
+
+        if output.type == "function.call":
+            function_name = output.name
+            function_args = json.loads(output.arguments)
+            # TODO call the function from somewhere, e.g. a injected object/dict
+            function_result = True
+
+            self.log.ai(f"TOOL call {function_name}")
+            response = self.client.beta.conversations.append(
+                conversation_id=self.conversation_id,
+                # List[FunctionResultEntry]
+                inputs=[
+                    {
+                        "tool_call_id": output.tool_call_id,
+                        "result": function_result,
+                    }
+                ],
+            )
+            return self._handle_response(response)
+
+        else:
+            self.log.ai("WARN not a message response " + str(output))
+            return "NO RESPONSE"
+
+    def _extract_command_from(self, content: str) -> str:
+        if "\n" in content:
+            self.log.ai(content)
+            content = content.splitlines()[-1]
+        return content
 
     def close(self) -> None:
         # currently no explicit cleanup needed

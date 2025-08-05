@@ -25,12 +25,3 @@ Always respond with only one command.
 Use `look` to get an overview of the current room. Especially if you are not sure what you can do.
 Use `inventory` to see your inventory.
 If you are going in circles between two or three rooms, look for different exits to go.
-
-## Tools
-
-You have access to the following functions:
-
-- `mark_room_visited`: Mark a room or place in the game as visited. All puzzles in the room are solved.
-- `was_room_visited`: Check if a room or place in the game was visited and all puzzles in that room were solved.
-
-You can access tools using the function call response.

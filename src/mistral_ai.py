@@ -65,7 +65,16 @@ class MistralAi(AiInterface):
 
         self.calls += 1
         if response.outputs and len(response.outputs) > 0:
-            result = response.outputs[0].content
+            if len(response.outputs) > 1:
+                self.log.ai("Multiple responses " + str(response.outputs))
+
+            output = response.outputs[0]
+            if output.type == "message.output":
+                result = output.content
+            else:
+                self.log.ai("Not a message response " + str(output))
+                return "NO RESPONSE"
+
             if "\n" in result:
                 self.log.ai(result)
                 result = result.splitlines()[-1]

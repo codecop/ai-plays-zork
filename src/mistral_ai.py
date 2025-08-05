@@ -7,7 +7,6 @@ import os
 
 
 api_key = os.environ.get("MISTRAL_API_KEY")
-model = "mistral-small-latest"
 
 
 class MistralAi(AiInterface):
@@ -16,7 +15,6 @@ class MistralAi(AiInterface):
         super().__init__(configuration, run_folder, log)
 
         self.api_key = api_key
-        self.model = model
 
         self.retry_config = RetryConfig(
             "backoff", BackoffStrategy(1, 50, 1.1, 100), True
@@ -31,48 +29,51 @@ class MistralAi(AiInterface):
         self.calls = 0
 
     def start(self, game_notes: str, game_intro: str) -> None:
-        self.system_prompt = self.load_resource("system_prompt.md").format(
+        system_prompt = self.load_resource("system_prompt.md").format(
             game_notes=game_notes, game_intro=game_intro
         )
 
         self.agent = self.client.beta.agents.create(
-            model=self.model,
-            description="AI adventurer playing Zork.",
-            name="Zork Agent",
-            instructions=self.system_prompt,
+            model=self.config()["model"],
+            description=self.config()["description"],
+            name=self.config()["name"],
+            instructions=system_prompt,
         )
 
         self.log.ai(
             f"ai: {self.__class__}\n"
             + f"configuration: {self.configuration}\n"
-            + f"model: {self.model}\n"
-            + f"agent id: {self.agent.id}"
+            + f"model: {self.agent.model}\n"
+            + f"agent id: {self.agent.id}\n"
+            + f"name: {self.agent.name}\n"
+            + f"description: {self.agent.description}"
         )
-        self.write_run_resource("system_prompt.md", self.system_prompt)
+        self.write_run_resource("system_prompt.md", system_prompt)
 
     def get_next_command(self, context: str) -> str:
+        prompt = f"Game answers with {context}"
         if not self.conversation_id:
             response = self.client.beta.conversations.start(
                 agent_id=self.agent.id,
-                inputs=[{"role": "user", "content": f"Game answers with {context}"}],
+                inputs=[{"role": "user", "content": prompt}],
             )
             self.conversation_id = response.conversation_id
         else:
             response = self.client.beta.conversations.append(
                 conversation_id=self.conversation_id,
-                inputs=[{"role": "user", "content": f"Game answers with {context}"}],
+                inputs=[{"role": "user", "content": prompt}],
             )
 
         self.calls += 1
         if response.outputs and len(response.outputs) > 0:
             if len(response.outputs) > 1:
-                self.log.ai("Multiple responses " + str(response.outputs))
+                self.log.ai("WARN multiple responses " + str(response.outputs))
 
             output = response.outputs[0]
             if output.type == "message.output":
                 result = output.content
             else:
-                self.log.ai("Not a message response " + str(output))
+                self.log.ai("WARN not a message response " + str(output))
                 return "NO RESPONSE"
 
             if "\n" in result:

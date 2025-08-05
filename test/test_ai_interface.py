@@ -41,3 +41,10 @@ def test_run_resource(ai) -> None:
     assert ai.load_run_resource(file) == "test"
     ai.remove_run_resource(file)
     assert not ai.exists_run_resource(file)
+
+
+def test_config_json(ai) -> None:
+    assert ai.configuration == "mistralai"
+    assert ai.config()["model"] == "mistral-small-latest"
+    assert ai.config()["name"] == "Zork Agent"
+    assert ai.config()["description"] == "AI adventurer playing Zork."

@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
 from file_utils import readFile, writeFile
+import json
 from log import Log
 
 
@@ -11,6 +12,7 @@ class AiInterface(ABC):
         self.configuration = configuration
         self.run_folder = run_folder
         self.log = log
+        self._config = None
 
     def resource_dir(self) -> Path:
         """Resource dir is defined by the configuration and is a source of system prompts."""
@@ -20,6 +22,12 @@ class AiInterface(ABC):
         """Load a text resource file from the AI's resource directory."""
         resource_file = self.resource_dir() / filename
         return readFile(resource_file)
+
+    def config(self) -> dict:
+        """Load the config file from the AI's resource directory."""
+        if self._config is None:
+            self._config = json.loads(readFile(self.resource_dir() / "config.json"))
+        return self._config
 
     def remove_run_resource(self, filename: str) -> None:
         """A run resource is a file in the current working folder."""

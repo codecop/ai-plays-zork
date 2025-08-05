@@ -14,10 +14,10 @@ def create_ai(config: str) -> AiInterface:
     log = Log(runFolder)
 
     # create AI
-    if config == "mistralai":
+    if config.startswith("mistral"):
         ai = MistralAi(config, runFolder, log)
 
-    elif config == "claudecode":
+    elif config.startswith("claudecode"):
         ai = ClaudeCodeAi(config, runFolder, log)
 
     else:

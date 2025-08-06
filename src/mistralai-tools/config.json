@@ -7,7 +7,7 @@
             "type": "function",
             "function": {
                 "name": "mark_room_visited",
-                "description": "Mark a room or place in the game as visited. All puzzles in the room are solved.",
+                "description": "Mark a room or place in the game as visited.",
                 "parameters": {
                     "type": "object",
                     "properties": {
@@ -26,7 +26,7 @@
             "type": "function",
             "function": {
                 "name": "was_room_visited",
-                "description": "Check if a room or place in the game was visited and all puzzles in that room were solved.",
+                "description": "Check if a room or place in the game was visited.",
                 "parameters": {
                     "type": "object",
                     "properties": {

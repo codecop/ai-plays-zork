@@ -77,6 +77,7 @@ class MistralAi(AiInterface):
         return response
 
     def _handle_response(self, response: ConversationResponse) -> str:
+        self.log.ai("Response: " + str(response))
         if not response.outputs or len(response.outputs) == 0:
             self.log.ai("NO RESPONSE")
             return "NO RESPONSE"
@@ -96,7 +97,7 @@ class MistralAi(AiInterface):
             function_name = output.name
             function_args = json.loads(output.arguments)
             # TODO call the function from somewhere, e.g. a injected object/dict
-            function_result = True
+            function_result = "True"
 
             self.log.ai(f"TOOL call {function_name}")
             response = self.client.beta.conversations.append(

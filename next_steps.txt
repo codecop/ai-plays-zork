@@ -14,3 +14,11 @@ What should UX look like?
 Try different models
   - large Mistral
   - maybe OpenAI backend
+
+Questions for MistralAI
+* does it have memory? It does not look like that
+* does it have a goal?
+
+AI    Response: conversation_id='conv_01987fd41a8d727a8e590aec77217871' outputs=[MessageOutputEntry(content='mark_room_visited(room_name="Forest")', object='entry', type='message.output', created_at=datetime.datetime(2025, 8, 6, 14, 41, 52, 664843, tzinfo=TzInfo(UTC)), completed_at=datetime.datetime(2025, 8, 6, 14, 41, 52, 710378, tzinfo=TzInfo(UTC)), id='msg_01987fd4da187752b2fc3fc385457376', agent_id='ag_01987fd419f374268abab99e1d6ee3d9', model='mistral-small-latest', role='assistant')] usage=ConversationUsageInfo(prompt_tokens=2797, completion_tokens=10, total_tokens=2807, connector_tokens=Unset(), connectors=Unset()) object='conversation.response'
+CMD   mark_room_visited(room_name="Forest")
+                conversation_id='conv_01987fd5e36f722fa9de6ec590b7e625' outputs=[FunctionCallEntry(tool_call_id='g02v9AG9u', name='identify_user', arguments='{"user_id": "U128"}', object='entry', type='function.call', created_at=datetime.datetime(2025, 8, 6, 14, 43, 0, 769743, tzinfo=TzInfo(UTC)), completed_at=None, id='fc_01987fd5e42177cfbe5de0b9fb4e50f7')] usage=ConversationUsageInfo(prompt_tokens=87, completion_tokens=16, total_tokens=103, connector_tokens=Unset(), connectors=Unset()) object='conversation.response'

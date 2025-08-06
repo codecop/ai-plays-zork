@@ -11,19 +11,17 @@ You can do two types of things:
 
 * Every time you enter a room, check if you have been there with tool `was_room_visited`.
 * If not, use the `mark_room_visited` tool to mark the room as visited.
-* Then think about what would be a good action according to the current room. Then try that action. Only respond with the action. For example do not say:
-
-  ```
-  I already visited this room. Let's go east.
-  ```
-
-  instead just say
-
-  ```
-  east
-  ```
-
+* Then think about what would be a good action according to the current room. Then try that action.
 * Always respond with only one tool call or game action.
+
+## Response Structure for game actions
+
+When return a game action, build a single text response containing multiple lines
+
+1. line: list the names of the last 3 rooms you have been to in [room1, room2, room3] format
+2. line: summarize your current goal in one sentence
+3. line: empty
+4. line: the desired game action
 
 ## 1. Game Actions
 

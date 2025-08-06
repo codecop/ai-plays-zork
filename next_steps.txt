@@ -1,23 +1,26 @@
-Optimize the prompts + add tools:
+Possible Tasks
+--------------
+
+* Create a visual map of the explored area, like rogue
+  rooms with exits and items to work without
+  show it to user for progress of AI
+  current AI, previous AI, items, exits tried, exits taken
+  (independent of AI)
+  later maybe feed it to AI as knowledge
+
+* Use SDK to run Claude code instance from Python. 
+  Can use this SDK https://github.com/anthropics/claude-code-sdk-python
+  So it would compare with MistralAI and we would see how it does.
+
+* Option Claude prompt with tools, which is its own tools in files
   - give it some goal
   - have it collect knowledge for itself
-  - create maps for itself
-    - Claude can create files
-    - Mistral can use some storage? run tools works. maybe run Python tool on server.
 
-Use SDK to run claude code instance from Python. Can use this SDK https://github.com/anthropics/claude-code-sdk-python
+* Repeat MistralAI workflow with OpenAI backend
+  Python SDK?
+  Goal is to compare what it can do?
 
-What should UX look like?
-  - right now AI is just giving the output, nothing else. We could have Mistral also output other thoughts or suggestions
-  - throttle? right now AI is too fast. Wait x millis before sending the next command (DONE)
-
-Try different models
-  - large Mistral
-  - maybe OpenAI backend
-
-Questions for MistralAI
-* does it have memory? It does not look like that
-* does it have a goal?
-
-Idea: 
-* we could have multiple agents and one is double checking the answer
+* we could have multiple agents and 
+  one is double checking the answer
+  one is remembering things or etc.
+  summarizing, overall goal

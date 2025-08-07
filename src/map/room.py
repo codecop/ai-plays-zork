@@ -9,14 +9,14 @@ class Room:
     description: str
     exits: Dict[Direction, Exit]
 
-    def add_exit(self, exit: Exit) -> "Room":
+    def add_exit(self, new_exit: Exit) -> "Room":
         new_exits = self.exits.copy()
-        new_exits[exit.direction] = exit
+        new_exits[new_exit.direction] = new_exit
         return Room(name=self.name, description=self.description, exits=new_exits)
 
-    def update_exit(self, direction: Direction, exit: Exit) -> "Room":
+    def update_exit(self, direction: Direction, new_exit: Exit) -> "Room":
         new_exits = self.exits.copy()
-        new_exits[direction] = exit
+        new_exits[direction] = new_exit
         return Room(name=self.name, description=self.description, exits=new_exits)
 
     def get_exit(self, direction: Direction) -> Exit:

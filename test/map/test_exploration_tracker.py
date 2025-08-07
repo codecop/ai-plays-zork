@@ -1,4 +1,4 @@
-from map import ExplorationTracker, GameMap, Room, Exit, ExplorationAction, Direction
+from map import ExplorationTracker, Room, Exit, ExplorationAction, Direction
 
 
 def test_add_room():

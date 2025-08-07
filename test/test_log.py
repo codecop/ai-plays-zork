@@ -1,11 +1,11 @@
 from pathlib import Path
 import pytest
-from test_file_utils import data_dir  # pylint: disable=unused-import
+from test_file_utils import fixture_data_dir  # pylint: disable=unused-import
 from log import Log
 
 
-@pytest.fixture
-def log_file(data_dir: Path) -> (Log, Path):
+@pytest.fixture(name="log_file")
+def fixture_log_file(data_dir: Path) -> (Log, Path):
     log_path = data_dir
     log = Log(log_path)
     return log, log.path

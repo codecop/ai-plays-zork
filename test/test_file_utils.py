@@ -12,8 +12,8 @@ def cleanup_test_data(data_dir: Path) -> None:
     data_dir.rmdir()
 
 
-@pytest.fixture
-def data_dir() -> Path:
+@pytest.fixture(name="data_dir")
+def fixture_data_dir() -> Path:
     """Fixture to create and clean up test directory"""
     data_dir = Path("./test/data/tmp")
     data_dir.mkdir(exist_ok=True)

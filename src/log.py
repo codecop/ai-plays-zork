@@ -3,7 +3,7 @@ from datetime import datetime
 from file_utils import ENCODING
 
 
-class AnsiColors:
+class AnsiColors:  # pylint: disable=too-few-public-methods
     RED = "\033[91m"
     GREEN = "\033[92m"
     YELLOW = "\033[93m"

@@ -1,6 +1,6 @@
 from pathlib import Path
 import pytest
-from test_file_utils import data_dir  # pylint: disable=unused-import
+from test_file_utils import fixture_data_dir  # pylint: disable=unused-import
 from ai_interface import AiInterface
 from log import Log
 
@@ -18,8 +18,8 @@ class EmptyAi(AiInterface):
         assert False
 
 
-@pytest.fixture
-def ai(data_dir: Path) -> EmptyAi:
+@pytest.fixture(name="ai")
+def fixture_ai(data_dir: Path) -> EmptyAi:
     run_path = data_dir
     log = Log(run_path)
     return EmptyAi("mistralai", run_path, log)

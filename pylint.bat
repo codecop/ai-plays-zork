@@ -1,4 +1,4 @@
 @setlocal
 @set PYTHONPATH=src
-@pylint.exe --rcfile .pylintrc src test %*
+@pylint.exe src test %*
 @endlocal

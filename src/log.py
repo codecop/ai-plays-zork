@@ -7,6 +7,7 @@ class AnsiColors:  # pylint: disable=too-few-public-methods
     RED = "\033[91m"
     GREEN = "\033[92m"
     YELLOW = "\033[93m"
+    BLUE = "\033[94m"
     CYAN = "\033[96m"
     RESET = "\033[0m"
 
@@ -31,6 +32,9 @@ class Log:
 
     def command(self, command: str) -> None:
         self._write("CMD  ", command, AnsiColors.GREEN)
+
+    def room(self, text: str) -> None:
+        self._write("ROOM ", text, AnsiColors.BLUE)
 
     def _write(self, prefix: str, message: str, color: str = "") -> None:
         lines = message.split("\n")

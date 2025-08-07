@@ -1,15 +1,19 @@
 import time
 from ai_interface import AiInterface
 from game import Game
+from tracker import Tracker
 
 
 def run(ai: AiInterface, threshold: float = 0) -> None:
     """Run the game loop with a given AI."""
+    log = ai.log  # reuse same logger
 
     # start game
     game = Game()
     game_notes = game.get_game_play_notes()
     game_intro = game.get_intro()
+
+    tracker = Tracker()
 
     ai.start(game_notes, game_intro)
 
@@ -18,7 +22,12 @@ def run(ai: AiInterface, threshold: float = 0) -> None:
     command = "look"
     while True:
         game_output = game.do_command(command)
-        ai.log.game(game_output)
+        log.game(game_output)
+
+        # analyse output old way
+        new_room = tracker.get_room_from_description(game_output)
+        if new_room:
+            log.room(new_room)
 
         # wait for threshold
         elapsed_time = time.time() - start_time
@@ -29,7 +38,7 @@ def run(ai: AiInterface, threshold: float = 0) -> None:
 
         # Get AI's next move
         command = ai.get_next_command(game_output)
-        ai.log.command(command)
+        log.command(command)
 
         if game.game_ended():
             break

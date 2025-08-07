@@ -45,7 +45,7 @@ def test_next_folder_name_new(data_dir: Path) -> None:
 
 def test_next_folder_name_existing(data_dir: Path) -> None:
     # Create some test folders
-    test_dirs = ["test-001", "test-002", "test-005"]
+    test_dirs = ["test-001", "test-002", "test-005", "other"]
     for test_dir in test_dirs:
         (data_dir / test_dir).mkdir(exist_ok=True)
 

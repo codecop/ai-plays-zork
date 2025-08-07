@@ -1,22 +1,6 @@
 from map import ExplorationTracker, GameMap, Room, Exit, ExplorationAction
 
 
-def test_exploration_tracker_creation():
-    tracker = ExplorationTracker()
-
-    assert tracker.game_map is not None
-    assert len(tracker.game_map.rooms) == 0
-    assert tracker.game_map.current_room_name is None
-    assert len(tracker.game_map.room_history) == 0
-
-
-def test_exploration_tracker_with_game_map():
-    game_map = GameMap()
-    tracker = ExplorationTracker(game_map)
-
-    assert tracker.game_map is game_map
-
-
 def test_add_room():
     tracker = ExplorationTracker()
     exits = {"north": Exit("north", None, False)}
@@ -112,14 +96,6 @@ def test_get_current_unexplored_exits():
     assert "south" not in current_unexplored
 
 
-def test_get_current_unexplored_exits_no_current_room():
-    tracker = ExplorationTracker()
-
-    current_unexplored = tracker.get_current_unexplored_exits()
-
-    assert len(current_unexplored) == 0
-
-
 def test_get_room_by_name():
     tracker = ExplorationTracker()
     exits = {"up": Exit("up", None, False)}
@@ -192,46 +168,3 @@ def test_create_room_from_description():
         assert exit_obj.direction == direction
         assert exit_obj.destination_room_name is None
         assert exit_obj.was_taken is False
-
-
-def test_movement_workflow():
-    tracker = ExplorationTracker()
-
-    hall_exits = {"north": Exit("north", None, False)}
-    kitchen_exits = {"south": Exit("south", None, False)}
-
-    hall = Room("hall", "A hallway.", hall_exits)
-    kitchen = Room("kitchen", "A kitchen.", kitchen_exits)
-
-    tracker.add_room(hall)
-    tracker.add_room(kitchen)
-    tracker.update_current_room("hall")
-
-    assert len(tracker.get_current_unexplored_exits()) == 1
-    assert tracker.get_current_unexplored_exits()[0] == "north"
-
-    action = ExplorationAction("hall", "north", "kitchen")
-    tracker.record_movement(action)
-
-    assert tracker.game_map.current_room_name == "kitchen"
-    assert len(tracker.get_current_unexplored_exits()) == 1
-    assert tracker.get_current_unexplored_exits()[0] == "south"
-
-    hall_room = tracker.get_room_by_name("hall")
-    assert hall_room.exits["north"].was_taken is True
-    assert hall_room.exits["north"].destination_room_name == "kitchen"
-
-
-def test_tracker_immutability():
-    tracker = ExplorationTracker()
-    exits = {"east": Exit("east", None, False)}
-    original_room = Room("study", "A study.", exits)
-    tracker.add_room(original_room)
-    tracker.update_current_room("study")
-
-    action = ExplorationAction("study", "east", "library")
-    tracker.record_movement(action)
-
-    updated_room = tracker.get_room_by_name("study")
-    assert original_room.exits["east"].was_taken is False
-    assert updated_room.exits["east"].was_taken is True

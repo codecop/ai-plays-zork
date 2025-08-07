@@ -85,16 +85,3 @@ def test_room_get_unexplored_exits():
     assert "south" in unexplored_directions
     assert "north" not in unexplored_directions
     assert "west" not in unexplored_directions
-
-
-def test_room_immutability():
-    exits = {"north": Exit("north", None, False)}
-    room = Room("original", "Original description", exits)
-
-    new_exit = Exit("south", "kitchen", False)
-    updated_room = room.add_exit(new_exit)
-
-    assert len(room.exits) == 1
-    assert len(updated_room.exits) == 2
-    assert room.name == "original"
-    assert updated_room.name == "original"

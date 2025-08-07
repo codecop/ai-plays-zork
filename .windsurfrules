@@ -44,6 +44,12 @@
 
 - Python version: 3.9
 
+### Project Structure
+
+- standard Python project layout
+- `src/` for source code
+- `test/` for test files
+
 ## Code Style
 
 - Indentation: 4 spaces
@@ -59,7 +65,13 @@
 - Module (file) naming: lowercase with underscore
 - Collection naming: Use plural or descriptive names
 
-## Comments
+## Documentation
+
+- Remove ALL comments and docstrings from classes and methods
+- Omit module-level docstrings
+- Code should be self-documenting through clear naming
+
+### Comments
 
 - Omit inferred API comments
 - Keep single line comments to a minimum
@@ -77,6 +89,11 @@
 - Prefer dependency injection
 - Never use static methods or Singletons
 
+### Dependency Injection Pattern
+
+- Accept Optional dependencies in constructors with lazy initialization
+- Use pattern: `param or DefaultClass()` for optional dependencies
+
 ## Error Handling
 
 - Null handling: Use Optional or null objects where appropriate
@@ -87,19 +104,10 @@
 
 - Single responsibility principle
 
-## Code Organization and Class Design
+## Immutability
 
-### Project Structure
-
-- standard Python project layout
-- `src/` for source code
-- `test/` for test files
-
-### Separation of Concerns
-
-- Separate argument parsing, configuration, and dependency injection
-- Dedicated classes for specific responsibilities
-- Separate file system operations and business logic
+- Use `@dataclass(frozen=True)` for value objects
+- Provide immutable update methods that return new instances
 
 ## Design Patterns
 
@@ -112,3 +120,9 @@ Preferred patterns:
 - Strategy Pattern
 - First Class Collection
 - Value Object
+
+## Separation of Concerns
+
+- Separate argument parsing, configuration, and dependency injection
+- Dedicated classes for specific responsibilities
+- Separate file system operations and business logic

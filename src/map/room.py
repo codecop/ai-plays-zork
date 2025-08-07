@@ -1,28 +1,28 @@
 from typing import Dict
 from dataclasses import dataclass
-from .exit import Exit
+from .exit import Exit, Direction
 
 
 @dataclass(frozen=True)
 class Room:
     name: str
     description: str
-    exits: Dict[str, Exit]
+    exits: Dict[Direction, Exit]
 
     def add_exit(self, exit: Exit) -> "Room":
         new_exits = self.exits.copy()
         new_exits[exit.direction] = exit
         return Room(name=self.name, description=self.description, exits=new_exits)
 
-    def update_exit(self, direction: str, exit: Exit) -> "Room":
+    def update_exit(self, direction: Direction, exit: Exit) -> "Room":
         new_exits = self.exits.copy()
         new_exits[direction] = exit
         return Room(name=self.name, description=self.description, exits=new_exits)
 
-    def get_exit(self, direction: str) -> Exit:
+    def get_exit(self, direction: Direction) -> Exit:
         return self.exits.get(direction)
 
-    def get_available_directions(self) -> list[str]:
+    def get_available_directions(self) -> list[Direction]:
         return list(self.exits.keys())
 
     def get_unexplored_exits(self) -> list[Exit]:

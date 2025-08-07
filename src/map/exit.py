@@ -1,10 +1,24 @@
 from typing import Optional
 from dataclasses import dataclass
+from enum import Enum
+
+
+class Direction(Enum):
+    NORTH = "north"
+    SOUTH = "south"
+    EAST = "east"
+    WEST = "west"
+    UP = "up"
+    DOWN = "down"
+    NORTHEAST = "northeast"
+    NORTHWEST = "northwest"
+    SOUTHEAST = "southeast"
+    SOUTHWEST = "southwest"
 
 
 @dataclass(frozen=True)
 class Exit:
-    direction: str
+    direction: Direction
     destination_room_name: Optional[str]
     was_taken: bool = False
 

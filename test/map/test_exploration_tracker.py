@@ -1,9 +1,9 @@
-from map import ExplorationTracker, GameMap, Room, Exit, ExplorationAction
+from map import ExplorationTracker, GameMap, Room, Exit, ExplorationAction, Direction
 
 
 def test_add_room():
     tracker = ExplorationTracker()
-    exits = {"north": Exit("north", None, False)}
+    exits = {Direction.NORTH: Exit(Direction.NORTH, None, False)}
     room = Room("kitchen", "A bright kitchen.", exits)
 
     tracker.add_room(room)
@@ -15,7 +15,7 @@ def test_add_room():
 
 def test_update_current_room():
     tracker = ExplorationTracker()
-    exits = {"south": Exit("south", None, False)}
+    exits = {Direction.SOUTH: Exit(Direction.SOUTH, None, False)}
     room = Room("hall", "A long hallway.", exits)
     tracker.add_room(room)
 
@@ -29,21 +29,21 @@ def test_update_current_room():
 def test_record_movement():
     tracker = ExplorationTracker()
 
-    hall_exits = {"north": Exit("north", None, False)}
+    hall_exits = {Direction.EAST: Exit(Direction.EAST, None, False)}
     hall = Room("hall", "A long hallway.", hall_exits)
-    kitchen_exits = {"south": Exit("south", None, False)}
+    kitchen_exits = {Direction.WEST: Exit(Direction.WEST, None, False)}
     kitchen = Room("kitchen", "A bright kitchen.", kitchen_exits)
 
     tracker.add_room(hall)
     tracker.add_room(kitchen)
     tracker.update_current_room("hall")
 
-    action = ExplorationAction("hall", "north", "kitchen")
+    action = ExplorationAction("hall", Direction.EAST, "kitchen")
     tracker.record_movement(action)
 
     hall_room = tracker.get_room_by_name("hall")
-    assert hall_room.exits["north"].was_taken is True
-    assert hall_room.exits["north"].destination_room_name == "kitchen"
+    assert hall_room.exits[Direction.EAST].was_taken is True
+    assert hall_room.exits[Direction.EAST].destination_room_name == "kitchen"
     assert tracker.game_map.current_room_name == "kitchen"
 
 
@@ -51,12 +51,12 @@ def test_get_unexplored_exits():
     tracker = ExplorationTracker()
 
     exits1 = {
-        "north": Exit("north", None, False),
-        "east": Exit("east", "library", True),
+        Direction.NORTH: Exit(Direction.NORTH, None, False),
+        Direction.EAST: Exit(Direction.EAST, "library", True),
     }
     exits2 = {
-        "south": Exit("south", None, False),
-        "west": Exit("west", None, False),
+        Direction.SOUTH: Exit(Direction.SOUTH, None, False),
+        Direction.WEST: Exit(Direction.WEST, None, False),
     }
 
     room1 = Room("hall", "A hallway.", exits1)
@@ -69,19 +69,19 @@ def test_get_unexplored_exits():
 
     assert len(unexplored) == 3
     unexplored_set = set(unexplored)
-    assert ("hall", "north") in unexplored_set
-    assert ("study", "south") in unexplored_set
-    assert ("study", "west") in unexplored_set
-    assert ("hall", "east") not in unexplored_set
+    assert ("hall", Direction.NORTH) in unexplored_set
+    assert ("study", Direction.SOUTH) in unexplored_set
+    assert ("study", Direction.WEST) in unexplored_set
+    assert ("hall", Direction.EAST) not in unexplored_set
 
 
 def test_get_current_unexplored_exits():
     tracker = ExplorationTracker()
 
     exits = {
-        "north": Exit("north", None, False),
-        "south": Exit("south", "kitchen", True),
-        "east": Exit("east", None, False),
+        Direction.NORTH: Exit(Direction.NORTH, None, False),
+        Direction.SOUTH: Exit(Direction.SOUTH, "kitchen", True),
+        Direction.EAST: Exit(Direction.EAST, None, False),
     }
     room = Room("hall", "A hallway.", exits)
 
@@ -91,14 +91,14 @@ def test_get_current_unexplored_exits():
     current_unexplored = tracker.get_current_unexplored_exits()
 
     assert len(current_unexplored) == 2
-    assert "north" in current_unexplored
-    assert "east" in current_unexplored
-    assert "south" not in current_unexplored
+    assert Direction.NORTH in current_unexplored
+    assert Direction.EAST in current_unexplored
+    assert Direction.SOUTH not in current_unexplored
 
 
 def test_get_room_by_name():
     tracker = ExplorationTracker()
-    exits = {"up": Exit("up", None, False)}
+    exits = {Direction.UP: Exit(Direction.UP, None, False)}
     room = Room("basement", "A dark basement.", exits)
     tracker.add_room(room)
 
@@ -112,7 +112,7 @@ def test_get_room_by_name():
 
 def test_get_current_room():
     tracker = ExplorationTracker()
-    exits = {"down": Exit("down", None, False)}
+    exits = {Direction.DOWN: Exit(Direction.DOWN, None, False)}
     room = Room("attic", "A dusty attic.", exits)
     tracker.add_room(room)
 
@@ -128,8 +128,8 @@ def test_get_current_room():
 def test_get_exploration_summary():
     tracker = ExplorationTracker()
 
-    exits1 = {"north": Exit("north", None, False)}
-    exits2 = {"south": Exit("south", None, True)}
+    exits1 = {Direction.NORTH: Exit(Direction.NORTH, None, False)}
+    exits2 = {Direction.SOUTH: Exit(Direction.SOUTH, None, True)}
     room1 = Room("hall", "A hallway.", exits1)
     room2 = Room("kitchen", "A kitchen.", exits2)
 
@@ -150,7 +150,7 @@ def test_get_exploration_summary():
 
 def test_create_room_from_description():
     tracker = ExplorationTracker()
-    directions = ["north", "south", "east"]
+    directions = [Direction.NORTH, Direction.SOUTH, Direction.EAST]
 
     room = tracker.create_room_from_description(
         "garden", "A beautiful garden.", directions
@@ -159,9 +159,9 @@ def test_create_room_from_description():
     assert room.name == "garden"
     assert room.description == "A beautiful garden."
     assert len(room.exits) == 3
-    assert "north" in room.exits
-    assert "south" in room.exits
-    assert "east" in room.exits
+    assert Direction.NORTH in room.exits
+    assert Direction.SOUTH in room.exits
+    assert Direction.EAST in room.exits
 
     for direction in directions:
         exit_obj = room.exits[direction]

@@ -1,7 +1,7 @@
 from typing import List, Tuple, Optional, Dict
 from .game_map import GameMap
 from .room import Room
-from .exit import Exit
+from .exit import Exit, Direction
 from .exploration_action import ExplorationAction
 
 
@@ -25,7 +25,7 @@ class ExplorationTracker:
 
         self.update_current_room(action.to_room_name)
 
-    def get_unexplored_exits(self) -> List[Tuple[str, str]]:
+    def get_unexplored_exits(self) -> List[Tuple[str, Direction]]:
         unexplored = []
         for room_name, room in self.game_map.rooms.items():
             for direction, exit_obj in room.exits.items():
@@ -33,7 +33,7 @@ class ExplorationTracker:
                     unexplored.append((room_name, direction))
         return unexplored
 
-    def get_current_unexplored_exits(self) -> List[str]:
+    def get_current_unexplored_exits(self) -> List[Direction]:
         current_room = self.get_current_room()
         if not current_room:
             return []
@@ -63,7 +63,7 @@ class ExplorationTracker:
         }
 
     def create_room_from_description(
-        self, name: str, description: str, available_directions: List[str]
+        self, name: str, description: str, available_directions: List[Direction]
     ) -> Room:
         exits = {}
         for direction in available_directions:

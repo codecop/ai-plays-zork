@@ -1,4 +1,4 @@
-from .exit import Exit
+from .exit import Exit, Direction
 from .room import Room
 from .exploration_action import ExplorationAction
 from .game_map import GameMap

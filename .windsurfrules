@@ -53,8 +53,8 @@
 ## Naming Conventions
 
 - Class naming: PascalCase
-- Method naming: camelCase (use verbs)
-- Variable naming: camelCase
+- Method naming: lowercase with underscore (use verbs)
+- Variable naming: lowercase with underscore
 - Constant naming: UPPER_SNAKE_CASE
 - Module (file) naming: lowercase with underscore
 - Collection naming: Use plural or descriptive names

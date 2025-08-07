@@ -1,4 +1,5 @@
 """Utilities for reading, saving text files and creating 'run' folders."""
+
 import re
 from pathlib import Path
 
@@ -23,11 +24,7 @@ def next_folder_name(base_path: Path, pattern: str) -> Path:
 
     path = Path(base_path)
     for item in path.iterdir():
-        if item.is_dir():
-            match = pattern_regex.fullmatch(item.name)
-            if match:
-                num = int(match.group(1))
-                max_num = max(max_num, num)
+        max_num = _next_num(pattern_regex, item, max_num)
 
     next_num = max_num + 1
     next_name = f"{pattern}-{next_num:03d}"
@@ -36,3 +33,13 @@ def next_folder_name(base_path: Path, pattern: str) -> Path:
     run_folder.mkdir(exist_ok=True)
 
     return run_folder
+
+
+def _next_num(pattern_regex: re.Pattern, item: Path, current_num: int) -> int:
+    if item.is_dir():
+        match = pattern_regex.fullmatch(item.name)
+        if match:
+            num = int(match.group(1))
+            return max(current_num, num)
+
+    return current_num

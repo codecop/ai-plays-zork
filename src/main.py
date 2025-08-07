@@ -1,6 +1,6 @@
 import sys
 from create_ai import create_ai
-from run import run
+from run_game_loop import run
 
 CONFIG = None
 THRESHOLD_SECONDS = None

@@ -1,39 +1,38 @@
-from pathlib import Path
-import re
-
 """Utilities for reading, saving text files and creating 'run' folders."""
+import re
+from pathlib import Path
 
-encoding = "utf-8"
+
+ENCODING = "utf-8"
 
 
-def readFile(path) -> str:
-    with open(path, "r", encoding=encoding) as file:
+def read_file(path) -> str:
+    with open(path, "r", encoding=ENCODING) as file:
         return file.read()
 
 
-def writeFile(path, content: str) -> None:
-    with open(path, "w", encoding=encoding) as file:
+def write_file(path, content: str) -> None:
+    with open(path, "w", encoding=ENCODING) as file:
         file.write(content)
 
 
-def getNextFolderName(basePath: Path, pattern: str) -> Path:
-    patternRegex = re.compile(re.escape(pattern) + r"-(\d{3})")
+def next_folder_name(base_path: Path, pattern: str) -> Path:
+    pattern_regex = re.compile(re.escape(pattern) + r"-(\d{3})")
 
-    maxNum = 0
+    max_num = 0
 
-    path = Path(basePath)
+    path = Path(base_path)
     for item in path.iterdir():
         if item.is_dir():
-            match = patternRegex.fullmatch(item.name)
+            match = pattern_regex.fullmatch(item.name)
             if match:
                 num = int(match.group(1))
-                if num > maxNum:
-                    maxNum = num
+                max_num = max(max_num, num)
 
-    nextNum = maxNum + 1
-    nextName = f"{pattern}-{nextNum:03d}"
+    next_num = max_num + 1
+    next_name = f"{pattern}-{next_num:03d}"
 
-    runFolder = path / nextName
-    runFolder.mkdir(exist_ok=True)
+    run_folder = path / next_name
+    run_folder.mkdir(exist_ok=True)
 
-    return runFolder
+    return run_folder

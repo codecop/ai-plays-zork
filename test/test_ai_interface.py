@@ -1,21 +1,21 @@
-import pytest
 from pathlib import Path
-from log import Log
+import pytest
+from test_file_utils import data_dir  # pylint: disable=unused-import
 from ai_interface import AiInterface
-from test_file_utils import data_dir
+from log import Log
 
 
 class EmptyAi(AiInterface):
     """Empty implementation to test resource methods."""
 
     def start(self, game_notes: str, game_intro: str):
-        assert false
+        assert False
 
     def get_next_command(self, context: str):
-        assert false
+        assert False
 
     def close(self):
-        assert false
+        assert False
 
 
 @pytest.fixture

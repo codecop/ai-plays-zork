@@ -1,7 +1,7 @@
+import json
 from abc import ABC, abstractmethod
 from pathlib import Path
-from file_utils import readFile, writeFile
-import json
+from file_utils import read_file, write_file
 from log import Log
 
 
@@ -21,12 +21,12 @@ class AiInterface(ABC):
     def load_resource(self, filename: str) -> str:
         """Load a text resource file from the AI's resource directory."""
         resource_file = self.resource_dir() / filename
-        return readFile(resource_file)
+        return read_file(resource_file)
 
     def config(self) -> dict:
         """Load the config file from the AI's resource directory."""
         if self._config is None:
-            self._config = json.loads(readFile(self.resource_dir() / "config.json"))
+            self._config = json.loads(read_file(self.resource_dir() / "config.json"))
         return self._config
 
     def remove_run_resource(self, filename: str) -> None:
@@ -38,12 +38,12 @@ class AiInterface(ABC):
     def load_run_resource(self, filename: str) -> str:
         """A run resource is a file in the current working folder."""
         target_file = self.run_folder / filename
-        return readFile(target_file).strip()
+        return read_file(target_file).strip()
 
     def write_run_resource(self, filename: str, content: str) -> None:
         """A run resource is a file in the current working folder."""
         target_file = self.run_folder / filename
-        writeFile(target_file, content)
+        write_file(target_file, content)
 
     def exists_run_resource(self, filename: str) -> bool:
         """A run resource is a file in the current working folder."""
@@ -53,7 +53,6 @@ class AiInterface(ABC):
     @abstractmethod
     def start(self, game_notes: str, game_intro: str) -> None:
         """Initialize the AI with game context."""
-        pass
 
     @abstractmethod
     def get_next_command(self, context: str) -> str:
@@ -65,9 +64,7 @@ class AiInterface(ABC):
         Returns:
             The next command to execute in the game.
         """
-        pass
 
     @abstractmethod
     def close(self) -> None:
         """Clean up any resources used by the AI."""
-        pass

@@ -1,6 +1,6 @@
 from pathlib import Path
 from datetime import datetime
-from file_utils import encoding
+from file_utils import ENCODING
 
 
 class AnsiColors:
@@ -44,5 +44,5 @@ class Log:
         print(f"{color}{log_message}{AnsiColors.RESET}", flush=True)
 
     def _log(self, message: str) -> None:
-        with open(self.path, "a", encoding=encoding) as f:
+        with open(self.path, "a", encoding=ENCODING) as f:
             f.write(f"{message}\n")

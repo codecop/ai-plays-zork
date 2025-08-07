@@ -1,7 +1,7 @@
-import pytest
 from pathlib import Path
+import pytest
+from test_file_utils import data_dir  # pylint: disable=unused-import
 from log import Log
-from test_file_utils import data_dir
 
 
 @pytest.fixture

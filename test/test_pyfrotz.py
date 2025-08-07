@@ -6,9 +6,11 @@ def test_pyfrotz():
 
     game = Frotz("data/zork1.z3")
     game_intro = game.get_intro()
+    assert game_intro == ""
 
     room, description = game.do_command("look")
     assert room.rstrip() == "West of House"
+    assert description.startswith("You are standing in an open field west of a white house")
 
     # while not game.game_ended():
     #     pass

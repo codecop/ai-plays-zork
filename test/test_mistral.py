@@ -4,12 +4,12 @@ import pytest
 from mistralai import Mistral
 
 # Skip all tests if API key is not set
-key_name = "MISTRAL_API_KEY"
-if key_name not in os.environ:
-    pytest.skip(key_name + " variable not set", allow_module_level=True)
+KEY_NAME = "MISTRAL_API_KEY"
+if KEY_NAME not in os.environ:
+    pytest.skip(KEY_NAME + " variable not set", allow_module_level=True)
 
-api_key = os.environ[key_name]
-model = "mistral-small-latest"  # free
+api_key = os.environ[KEY_NAME]
+MODEL = "mistral-small-latest"  # free
 
 
 # Try a basic MistralAI connection, see https://docs.mistral.ai/getting-started/clients/
@@ -18,7 +18,7 @@ def test_mistral_completion():
     client = Mistral(api_key=api_key)
 
     chat_response = client.chat.complete(
-        model=model,
+        model=MODEL,
         messages=[
             {
                 "role": "user",
@@ -36,7 +36,7 @@ def test_mistral_agent():
     client = Mistral(api_key=api_key)
 
     simple_agent = client.beta.agents.create(
-        model=model,
+        model=MODEL,
         description="A unit test Agent with persistent state.",
         name="Test Agent",
     )
@@ -67,7 +67,7 @@ def test_mistral_function_calling():
     client = Mistral(api_key=api_key)
 
     simple_agent = client.beta.agents.create(
-        model=model,
+        model=MODEL,
         description="A unit test Agent with functions.",
         name="Test Function Calling Agent",
         tools=[

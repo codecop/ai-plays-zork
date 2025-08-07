@@ -15,7 +15,12 @@ jobs=4
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use"--disable=all --enable=classes
 # --disable=W"
-disable=missing-docstring
+disable=fixme,
+        missing-docstring,
+        locally-disabled,  # logs suppressed messages
+        suppressed-message,  # warns about "pylint: disable"
+        use-implicit-booleaness-not-comparison-to-string,
+        use-implicit-booleaness-not-comparison-to-zero
 #        too-few-public-methods,
 #        no-self-use
 
@@ -27,8 +32,6 @@ enable=all,
        useless-suppression
 
 # not-enabled=no-absolute-import,
-#             locally-disabled,  # logs suppressed messages
-#             suppressed-message  # warns about "pylint: disable"
 
 
 [REFACTORING]
@@ -40,10 +43,6 @@ max-nested-blocks=2
 
 [DESIGN]
 
-# 1. One level of indentation per method (stronger)
-# Maximum number of branch for function / method body
-# max-branches=2
-
 # 8. No classes with more than two instance variables
 # Maximum number of attributes for a class (see R0902).
-max-attributes=3
+max-attributes=4

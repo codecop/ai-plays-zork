@@ -16,7 +16,7 @@ class ClaudeCodeAi(AiInterface):
         self.write_run_resource("project.md", project_content)
         self.write_run_resource("Zork Gameplay Notes.txt", game_notes)
 
-        initial_context = f"""Wait for first game state"""
+        initial_context = "Wait for first game state"
         self.write_run_resource("context.md", initial_context)
 
         self.log.ai(
@@ -38,7 +38,8 @@ class ClaudeCodeAi(AiInterface):
             [
                 "/Users/ladak/ai/tools/claude-tell.sh",
                 self.run_folder,
-                "'there is a new context, process it and create another output file with your action, then stop'",
+                "'there is a new context, process it and create another output file with your " + 
+                "action, then stop'",
             ],
             cwd=self.run_folder,
             input="",

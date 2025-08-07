@@ -1,14 +1,11 @@
 import json
+import os
 from pathlib import Path
 from mistralai import Mistral
 from mistralai.models import ConversationResponse
 from mistralai.utils import BackoffStrategy, RetryConfig
 from ai_interface import AiInterface
 from log import Log
-import os
-
-
-api_key = os.environ.get("MISTRAL_API_KEY")
 
 
 class MistralAi(AiInterface):
@@ -16,19 +13,16 @@ class MistralAi(AiInterface):
     def __init__(self, configuration: str, run_folder: Path, log: Log):
         super().__init__(configuration, run_folder, log)
 
-        self.api_key = api_key
-
-        self.retry_config = RetryConfig(
-            "backoff", BackoffStrategy(1, 50, 1.1, 100), True
-        )
-        self.client = Mistral(
-            api_key=self.api_key,
-            retry_config=self.retry_config,
-        )
-
         self.agent = None
         self.conversation_id = None
         self.calls = 0
+
+        api_key = os.environ.get("MISTRAL_API_KEY")
+        retry_config = RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), True)
+        self.client = Mistral(
+            api_key=api_key,
+            retry_config=retry_config,
+        )
 
     def start(self, game_notes: str, game_intro: str) -> None:
         system_prompt = self.load_resource("system_prompt.md").format(
@@ -91,7 +85,8 @@ class MistralAi(AiInterface):
         if len(response.outputs) > 1:
             self.log.ai("WARN multiple responses " + str(response.outputs))
 
-        # TODO for each function call in the response, call the function and return all of them at once!
+        # TODO for each function call in the response,
+        # call the function and return all of them at once!
 
         if output.type == "function.call":
             function_name = output.name
@@ -112,9 +107,8 @@ class MistralAi(AiInterface):
             )
             return self._handle_response(response)
 
-        else:
-            self.log.ai("WARN not a message response " + str(output))
-            return "NO RESPONSE"
+        self.log.ai("WARN not a message response " + str(output))
+        return "NO RESPONSE"
 
     def _extract_command_from(self, content: str) -> str:
         if "\n" in content:

@@ -1,6 +1,6 @@
+import time
 from ai_interface import AiInterface
 from game import Game
-import time
 
 
 def run(ai: AiInterface, threshold: float = 0) -> None:

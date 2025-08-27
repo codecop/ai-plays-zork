@@ -1,6 +1,7 @@
 # Project dependencies
 pyFrotz==0.1.5
 mistralai==1.8.2
+graphviz==0.21
 
 # latest dependency for Mistral without warning
 pydantic==2.10.6

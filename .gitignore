@@ -223,3 +223,8 @@ clean.bat
 /claude-run-*/
 /mistralai-run-*/
 /mistralai-tools-run-*/
+
+# Graphviz
+*.gv
+*.gv.pdf
+*.gv.png

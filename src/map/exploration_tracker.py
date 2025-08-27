@@ -26,6 +26,22 @@ class ExplorationTracker:
             self.g.edge(action.from_room_name, action.to_room_name, label=action.direction)
             self.g_updated = True
 
+            # maybe use ports? plus rank for layout... Code not tested
+            # # Direction to port mapping for proper compass arrows
+            # direction_ports = {
+            #     'north': ('s', 'n'), 'south': ('n', 's'),
+            #     'east': ('w', 'e'), 'west': ('e', 'w'),
+            #     'up': ('s', 'n'), 'down': ('n', 's')
+            # }
+            
+            # if action.direction in direction_ports:
+            #     from_port, to_port = direction_ports[action.direction]
+            #     self.g.edge(f"{action.from_room_name}:{from_port}", 
+            #                f"{action.to_room_name}:{to_port}", 
+            #                label=action.direction)
+            # else:
+            #     self.g.edge(action.from_room_name, action.to_room_name, label=action.direction)            
+
         # TODO not working as it does not create new rooms on the first hit?
         from_room = self.game_map.get_room(action.from_room_name)
         if from_room and action.direction in from_room.exits:

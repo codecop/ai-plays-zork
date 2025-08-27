@@ -28,13 +28,24 @@ def run(ai: AiInterface, threshold: float = 0) -> None:
         game_output = game.do_command(command)
         log.game(game_output)
 
-        if current_room != None and current_room != game.room_name():
+        if current_room is not None and current_room != game.room_name():
             log.room(game.room_name())
             # we moved
-            with open('commands.txt', 'a') as f:
-                f.write(command + '\n')
+            with open("commands.txt", "a", encoding="utf-8") as f:
+                f.write(command + "\n")
 
-            directions = ["north", "south", "east", "west", "northeast", "northwest", "southeast", "southwest", "up", "down"]
+            directions = [
+                "north",
+                "south",
+                "east",
+                "west",
+                "northeast",
+                "northwest",
+                "southeast",
+                "southwest",
+                "up",
+                "down",
+            ]
             direction_regex = "|".join(directions)
             direction_regex = ".*(" + direction_regex + ").*"
             match = re.match(direction_regex, command, re.IGNORECASE)
@@ -49,14 +60,10 @@ def run(ai: AiInterface, threshold: float = 0) -> None:
             # print(direction)
 
             # track movement
-            action = ExplorationAction(
-                current_room,
-                direction,
-                game.room_name()
-            )
+            action = ExplorationAction(current_room, direction, game.room_name())
             tracker.record_movement(action)
             tracker.render_map()
-            
+
         current_room = game.room_name()
 
         # wait for threshold

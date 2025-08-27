@@ -22,7 +22,7 @@ def patched_frotz_read(self, parse_room=True):
         self.derived_name = score_move_match.group(1).strip()
         self.derived_score = int(score_move_match.group(2))
         self.derived_moves = int(score_move_match.group(3))
-        # print(f"Name: {self.derived_name}, Score: {self.derived_score}, Moves: {self.derived_moves}")
+        # print(f"{self.derived_name}, Score: {self.derived_score}, Moves: {self.derived_moves}")
 
     lines = [l for l in output[:-1].split("\n") if l.strip() and "Score: " not in l]
     if parse_room:

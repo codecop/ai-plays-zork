@@ -1,9 +1,9 @@
 from typing import List, Tuple, Optional, Dict
+from graphviz import Digraph
 from .game_map import GameMap
 from .room import Room
 from .exit import Exit, Direction
 from .exploration_action import ExplorationAction
-from graphviz import Digraph
 
 
 class ExplorationTracker:
@@ -20,10 +20,10 @@ class ExplorationTracker:
         self.game_map.set_current_room(room_name)
 
     def record_movement(self, action: ExplorationAction) -> None:
-        edge = action.from_room_name + action.to_room_name + action.direction
+        edge = action.from_room_name + action.to_room_name + str(action.direction)
         if edge not in self.edges:
             self.edges.add(edge)
-            self.g.edge(action.from_room_name, action.to_room_name, label=action.direction)
+            self.g.edge(action.from_room_name, action.to_room_name, label=str(action.direction))
             self.g_updated = True
 
             # maybe use ports? plus rank for layout... Code not tested
@@ -33,14 +33,14 @@ class ExplorationTracker:
             #     'east': ('w', 'e'), 'west': ('e', 'w'),
             #     'up': ('s', 'n'), 'down': ('n', 's')
             # }
-            
+
             # if action.direction in direction_ports:
             #     from_port, to_port = direction_ports[action.direction]
-            #     self.g.edge(f"{action.from_room_name}:{from_port}", 
-            #                f"{action.to_room_name}:{to_port}", 
+            #     self.g.edge(f"{action.from_room_name}:{from_port}",
+            #                f"{action.to_room_name}:{to_port}",
             #                label=action.direction)
             # else:
-            #     self.g.edge(action.from_room_name, action.to_room_name, label=action.direction)            
+            #     self.g.edge(action.from_room_name, action.to_room_name, label=action.direction)
 
         # TODO not working as it does not create new rooms on the first hit?
         from_room = self.game_map.get_room(action.from_room_name)

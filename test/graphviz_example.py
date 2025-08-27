@@ -9,7 +9,7 @@ g = Digraph("CompassMap", filename="compass_map.gv")
 
 # shape the rooms, not needed
 # g.node("Center", shape="box")
-# g.node("North_Room", shape="box") 
+# g.node("North_Room", shape="box")
 
 # place port in proper direction
 # Use ports to make arrows point in compass directions:

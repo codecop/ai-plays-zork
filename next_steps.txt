@@ -1,5 +1,11 @@
 Possible Tasks
---------------
+==============
+
+Visualization
+-------------
+
+* show the map as Graphviz, this is WIP
+  TODO next fix layout of the map using port and rank so it is correct aligned
 
 * Create a visual map of the explored area, like rogue
   rooms with exits and items to work without
@@ -7,6 +13,18 @@ Possible Tasks
   current AI, previous AI, items, exits tried, exits taken
   (independent of AI)
   later maybe feed it to AI as knowledge
+
+---
+
+Other models
+-------------
+
+First step is to write a test for a conversation/completion.
+  - having a state and asking several questions on that
+  - using a System prompt as guidance
+
+* Use a local model from OpenAI "oss20b..." 
+  through Ollama
 
 * Use SDK to run Claude code instance from Python. 
   Can use this SDK https://github.com/anthropics/claude-code-sdk-python
@@ -19,6 +37,8 @@ Possible Tasks
 * Repeat MistralAI workflow with OpenAI backend
   Python SDK?
   Goal is to compare what it can do?
+
+---
 
 * we could have multiple agents and 
   one is double checking the answer

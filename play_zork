@@ -1,0 +1,3 @@
+#!/usr/bin/env ./venv/bin/python3
+from pyfrotz import Frotz
+Frotz("data/zork1.z3").play_loop()

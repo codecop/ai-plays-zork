@@ -36,7 +36,7 @@ def run(ai: AiInterface, threshold: float = 0) -> None:
 
             directions = ["north", "south", "east", "west", "northeast", "northwest", "southeast", "southwest", "up", "down"]
             direction_regex = "|".join(directions)
-            direction_regex = "(" + direction_regex + ")"
+            direction_regex = ".*(" + direction_regex + ").*"
             match = re.match(direction_regex, command, re.IGNORECASE)
             if match:
                 direction = match.group(1)
@@ -55,6 +55,7 @@ def run(ai: AiInterface, threshold: float = 0) -> None:
                 game.room_name()
             )
             tracker.record_movement(action)
+            tracker.render_map()
             
         current_room = game.room_name()
 

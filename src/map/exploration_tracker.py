@@ -3,10 +3,14 @@ from .game_map import GameMap
 from .room import Room
 from .exit import Exit, Direction
 from .exploration_action import ExplorationAction
+from graphviz import Digraph
 
 
 class ExplorationTracker:
     def __init__(self, game_map: Optional[GameMap] = None):
+        self.g = Digraph("G", filename="map.gv")
+        self.edges = set()
+        self.g_updated = False
         self.game_map = game_map or GameMap()
 
     def add_room(self, room: Room) -> None:
@@ -16,6 +20,13 @@ class ExplorationTracker:
         self.game_map.set_current_room(room_name)
 
     def record_movement(self, action: ExplorationAction) -> None:
+        edge = action.from_room_name + action.to_room_name + action.direction
+        if edge not in self.edges:
+            self.edges.add(edge)
+            self.g.edge(action.from_room_name, action.to_room_name, label=action.direction)
+            self.g_updated = True
+
+        # TODO not working as it does not create new rooms on the first hit?
         from_room = self.game_map.get_room(action.from_room_name)
         if from_room and action.direction in from_room.exits:
             exit_obj = from_room.exits[action.direction]
@@ -72,3 +83,8 @@ class ExplorationTracker:
             )
 
         return Room(name=name, description=description, exits=exits)
+
+    def render_map(self) -> None:
+        if self.g_updated:
+            self.g.view()
+            self.g_updated = False

@@ -1,7 +1,9 @@
+import re
 import time
 from ai_interface import AiInterface
 from game import Game
-from tracker import Tracker
+from map.exploration_action import ExplorationAction
+from map.exploration_tracker import ExplorationTracker
 
 
 def run(ai: AiInterface, threshold: float = 0) -> None:
@@ -13,21 +15,48 @@ def run(ai: AiInterface, threshold: float = 0) -> None:
     game_notes = game.get_game_play_notes()
     game_intro = game.get_intro()
 
-    tracker = Tracker()
+    tracker = ExplorationTracker()
 
     ai.start(game_notes, game_intro)
 
     # run loop
     start_time = time.time()
     command = "look"
+    current_room = None
     while True:
+        # TODO write all AI commands to a separate log in the run folder
         game_output = game.do_command(command)
         log.game(game_output)
 
-        # analyse output old way
-        new_room = tracker.get_room_from_description(game_output)
-        if new_room:
-            log.room(new_room)
+        if current_room != None and current_room != game.room_name():
+            log.room(game.room_name())
+            # we moved
+            with open('commands.txt', 'a') as f:
+                f.write(command + '\n')
+
+            directions = ["north", "south", "east", "west", "northeast", "northwest", "southeast", "southwest", "up", "down"]
+            direction_regex = "|".join(directions)
+            direction_regex = "(" + direction_regex + ")"
+            match = re.match(direction_regex, command, re.IGNORECASE)
+            if match:
+                direction = match.group(1)
+                direction = direction.lower()
+            else:
+                direction = command
+                # special cases:
+                # enter window
+                # climb tree
+            # print(direction)
+
+            # track movement
+            action = ExplorationAction(
+                current_room,
+                direction,
+                game.room_name()
+            )
+            tracker.record_movement(action)
+            
+        current_room = game.room_name()
 
         # wait for threshold
         elapsed_time = time.time() - start_time

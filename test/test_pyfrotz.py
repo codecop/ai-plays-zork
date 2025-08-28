@@ -1,4 +1,11 @@
 from pyfrotz import Frotz
+import pytest
+from frotz_patch import patch_frotz
+
+
+@pytest.fixture(scope="module", autouse=True)
+def patch_pyfrotz():
+    patch_frotz()
 
 
 # Use pyfrotz to control a Z-machine interpreter from Python. (curtesy Peter Fichtner)
@@ -22,3 +29,12 @@ def test_pyfrotz():
     game.frotz.stdin.close()
     game.frotz.stdout.close()
     game.frotz.wait()
+
+
+def test_patched_pyfrotz():
+    game = Frotz("data/zork1.z3")
+    game.get_intro()
+
+    assert game.derived_name == "West of House"
+    assert game.derived_score == 0
+    assert game.derived_moves == 1  # intro sends an initial look

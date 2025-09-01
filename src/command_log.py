@@ -1,17 +1,30 @@
 from pathlib import Path
 from file_utils import ENCODING
+from log import Log
 
 
-class CommandLog:
+class CommandLog(Log):
     """Record the ai commands to log files."""
 
     def __init__(self, path: Path, name: str):
-        self.path = path / f"{name}_commands.txt"
-        self.path.parent.mkdir(parents=True, exist_ok=True)
+        # super().__init__(path)  # pylint: disable=super-init-not-called
+        self.room_path = path / f"{name}rooms.txt"
+        self.room_path.parent.mkdir(parents=True, exist_ok=True)
+        self.command_path = path / f"{name}commands.txt"
+        self.command_path.parent.mkdir(parents=True, exist_ok=True)
+
+    def ai(self, text: str) -> None:
+        pass
+
+    def game(self, text: str) -> None:
+        pass
 
     def command(self, command: str) -> None:
-        self._log(self.path, command)
+        self._log_separate(self.command_path, command)
 
-    def _log(self, path: Path, message: str) -> None:
+    def room(self, text: str) -> None:
+        self._log_separate(self.room_path, text)
+
+    def _log_separate(self, path: Path, message: str) -> None:
         with open(path, "a", encoding=ENCODING) as f:
             f.write(f"{message}\n")

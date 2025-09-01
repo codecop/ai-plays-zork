@@ -1,15 +1,16 @@
 import time
 from ai_interface import AiInterface
-from game import Game
-from room_change_tracker import RoomChangeTracker
-from graphviz_room_change import GraphvizRoomChange
 from command_log import CommandLog
+from game import Game
+from graphviz_room_change import GraphvizRoomChange
+from log import CompositeLog
+from room_change_tracker import RoomChangeTracker
 
 
 def run(ai: AiInterface, threshold: float = 0) -> None:
     """Run the game loop with a given AI."""
-    log = ai.log  # reuse same logger
-    command_log = CommandLog(ai.run_folder, "all")
+
+    log = CompositeLog(ai.log, CommandLog(ai.run_folder, ""))
 
     # start game
     game = Game()
@@ -17,7 +18,7 @@ def run(ai: AiInterface, threshold: float = 0) -> None:
     game_intro = game.get_intro()
 
     tracker = RoomChangeTracker(
-        GraphvizRoomChange(ai.run_folder), ai.log, CommandLog(ai.run_folder, "move")
+        GraphvizRoomChange(ai.run_folder), log, CommandLog(ai.run_folder, "move_")
     )
 
     ai.start(game_notes, game_intro)
@@ -26,7 +27,6 @@ def run(ai: AiInterface, threshold: float = 0) -> None:
     start_time = time.time()
     command = "look"
     while True:
-        # TODO write all AI commands to a separate log in the run folder
         game_output = game.do_command(command)
         log.game(game_output)
 
@@ -42,7 +42,6 @@ def run(ai: AiInterface, threshold: float = 0) -> None:
         # Get AI's next move
         command = ai.get_next_command(game_output)
         log.command(command)
-        command_log.command(command)
 
         if game.game_ended():
             break

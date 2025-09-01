@@ -1,5 +1,4 @@
 from typing import List, Tuple, Optional, Dict
-from graphviz import Digraph
 from .game_map import GameMap
 from .room import Room
 from .exit import Exit, Direction
@@ -8,9 +7,6 @@ from .exploration_action import ExplorationAction
 
 class ExplorationTracker:
     def __init__(self, game_map: Optional[GameMap] = None):
-        self.g = Digraph("G", filename="map.gv")
-        self.edges = set()
-        self.g_updated = False
         self.game_map = game_map or GameMap()
 
     def add_room(self, room: Room) -> None:
@@ -20,28 +16,6 @@ class ExplorationTracker:
         self.game_map.set_current_room(room_name)
 
     def record_movement(self, action: ExplorationAction) -> None:
-        edge = action.from_room_name + action.to_room_name + str(action.direction)
-        if edge not in self.edges:
-            self.edges.add(edge)
-            self.g.edge(action.from_room_name, action.to_room_name, label=str(action.direction))
-            self.g_updated = True
-
-            # maybe use ports? plus rank for layout... Code not tested
-            # # Direction to port mapping for proper compass arrows
-            # direction_ports = {
-            #     'north': ('s', 'n'), 'south': ('n', 's'),
-            #     'east': ('w', 'e'), 'west': ('e', 'w'),
-            #     'up': ('s', 'n'), 'down': ('n', 's')
-            # }
-
-            # if action.direction in direction_ports:
-            #     from_port, to_port = direction_ports[action.direction]
-            #     self.g.edge(f"{action.from_room_name}:{from_port}",
-            #                f"{action.to_room_name}:{to_port}",
-            #                label=action.direction)
-            # else:
-            #     self.g.edge(action.from_room_name, action.to_room_name, label=action.direction)
-
         # TODO not working as it does not create new rooms on the first hit?
         from_room = self.game_map.get_room(action.from_room_name)
         if from_room and action.direction in from_room.exits:
@@ -99,8 +73,3 @@ class ExplorationTracker:
             )
 
         return Room(name=name, description=description, exits=exits)
-
-    def render_map(self) -> None:
-        if self.g_updated:
-            self.g.view()
-            self.g_updated = False

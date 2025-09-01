@@ -1,9 +1,8 @@
-import re
 import time
 from ai_interface import AiInterface
 from game import Game
-from map.exploration_action import ExplorationAction
-from map.exploration_tracker import ExplorationTracker
+from room_change_tracker import RoomChangeTracker
+from graphviz_room_change import GraphvizRoomChange
 
 
 def run(ai: AiInterface, threshold: float = 0) -> None:
@@ -15,56 +14,19 @@ def run(ai: AiInterface, threshold: float = 0) -> None:
     game_notes = game.get_game_play_notes()
     game_intro = game.get_intro()
 
-    tracker = ExplorationTracker()
+    tracker = RoomChangeTracker(GraphvizRoomChange(ai.run_folder), ai.log, debug=True)
 
     ai.start(game_notes, game_intro)
 
     # run loop
     start_time = time.time()
     command = "look"
-    current_room = None
     while True:
         # TODO write all AI commands to a separate log in the run folder
         game_output = game.do_command(command)
         log.game(game_output)
 
-        if current_room is not None and current_room != game.room_name():
-            log.room(game.room_name())
-            # we moved
-            with open("commands.txt", "a", encoding="utf-8") as f:
-                f.write(command + "\n")
-
-            directions = [
-                "north",
-                "south",
-                "east",
-                "west",
-                "northeast",
-                "northwest",
-                "southeast",
-                "southwest",
-                "up",
-                "down",
-            ]
-            direction_regex = "|".join(directions)
-            direction_regex = ".*(" + direction_regex + ").*"
-            match = re.match(direction_regex, command, re.IGNORECASE)
-            if match:
-                direction = match.group(1)
-                direction = direction.lower()
-            else:
-                direction = command
-                # special cases:
-                # enter window
-                # climb tree
-            # print(direction)
-
-            # track movement
-            action = ExplorationAction(current_room, direction, game.room_name())
-            tracker.record_movement(action)
-            tracker.render_map()
-
-        current_room = game.room_name()
+        tracker.check_for_movement(game.room_name(), command)
 
         # wait for threshold
         elapsed_time = time.time() - start_time

@@ -19,28 +19,29 @@ DIRECTIONS = [
 DIRECTION_RE = ".*(" + "|".join(DIRECTIONS) + ").*"
 
 
-class RoomName:
-    def __init__(self, tracker: RoomChangeInterface, log: Log, debug: bool = False):
-        self.tracker = tracker
-        self.log = log
-        self.debug = debug
+class RoomChangeTracker:
+    def __init__(self, notify: RoomChangeInterface, log: Log, debug: bool = False):
+        self._notify = notify
+        self._log = log
+        self._debug = debug
 
-        self.last_room = None
+        self._last_room = None
 
     def check_for_movement(self, current_room: str, command: str) -> None:
-        has_moved = self.last_room is not None and self.last_room != current_room
+        has_moved = self._last_room is not None and self._last_room != current_room
         if has_moved:
-            self.log.room(current_room)
+            self._log.room(current_room)
 
-            if self.debug:
+            if self._debug:
                 with open("commands.txt", "a", encoding="utf-8") as f:
                     f.write(command + "\n")
 
             direction = self._unify_direction(command)
-            action = ExplorationAction(self.last_room, direction, current_room)
-            self.tracker.record_movement(action)
+            action = ExplorationAction(self._last_room, direction, current_room)
+            self._notify.record_movement(action)
+            self._notify.display()
 
-        self.last_room = current_room
+        self._last_room = current_room
 
     def _unify_direction(self, command: str) -> str:
         match = re.match(DIRECTION_RE, command, re.IGNORECASE)

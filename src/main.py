@@ -1,5 +1,5 @@
 import sys
-from create_ai import create_ai
+from create_ai import create
 from run_game_loop import run
 
 CONFIG = None
@@ -17,5 +17,5 @@ else:
     THRESHOLD_SECONDS = 0
 
 
-ai = create_ai(CONFIG)
-run(ai, THRESHOLD_SECONDS)
+run_folder, log, ai = create(CONFIG)
+run(run_folder, log, ai, THRESHOLD_SECONDS)

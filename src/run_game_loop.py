@@ -1,16 +1,15 @@
 import time
+from pathlib import Path
 from ai_interface import AiInterface
 from command_log import CommandLog
 from game import Game
 from graphviz_room_change import GraphvizRoomChange
-from log import CompositeLog
+from log import Log
 from room_change_tracker import RoomChangeTracker
 
 
-def run(ai: AiInterface, threshold: float = 0) -> None:
+def run(run_folder: Path, log: Log, ai: AiInterface, threshold: float = 0) -> None:
     """Run the game loop with a given AI."""
-
-    log = CompositeLog(ai.log, CommandLog(ai.run_folder, ""))
 
     # start game
     game = Game()
@@ -18,7 +17,7 @@ def run(ai: AiInterface, threshold: float = 0) -> None:
     game_intro = game.get_intro()
 
     tracker = RoomChangeTracker(
-        GraphvizRoomChange(ai.run_folder), log, CommandLog(ai.run_folder, "move_")
+        GraphvizRoomChange(run_folder), log, CommandLog(run_folder, "move_")
     )
 
     ai.start(game_notes, game_intro)

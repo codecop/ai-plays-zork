@@ -3,18 +3,22 @@ from ai_interface import AiInterface
 from game import Game
 from room_change_tracker import RoomChangeTracker
 from graphviz_room_change import GraphvizRoomChange
+from command_log import CommandLog
 
 
 def run(ai: AiInterface, threshold: float = 0) -> None:
     """Run the game loop with a given AI."""
     log = ai.log  # reuse same logger
+    command_log = CommandLog(ai.run_folder, "all")
 
     # start game
     game = Game()
     game_notes = game.get_game_play_notes()
     game_intro = game.get_intro()
 
-    tracker = RoomChangeTracker(GraphvizRoomChange(ai.run_folder), ai.log, debug=True)
+    tracker = RoomChangeTracker(
+        GraphvizRoomChange(ai.run_folder), ai.log, CommandLog(ai.run_folder, "move")
+    )
 
     ai.start(game_notes, game_intro)
 
@@ -38,6 +42,7 @@ def run(ai: AiInterface, threshold: float = 0) -> None:
         # Get AI's next move
         command = ai.get_next_command(game_output)
         log.command(command)
+        command_log.command(command)
 
         if game.game_ended():
             break

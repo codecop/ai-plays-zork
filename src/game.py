@@ -33,7 +33,7 @@ class Game:
 
     def room_name(self) -> str:
         # available via patch
-        return self.wrapper.derived_name
+        return self.wrapper.derived_name  # pylint: disable=no-member
 
     def game_ended(self) -> bool:
         return self.wrapper.game_ended()

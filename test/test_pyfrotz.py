@@ -17,7 +17,9 @@ def test_pyfrotz():
 
     room, description = game.do_command("look")
     assert room.rstrip() == "West of House"
-    assert description.startswith("You are standing in an open field west of a white house")
+    assert description.startswith(
+        "You are standing in an open field west of a white house"
+    )
 
     # while not game.game_ended():
     #     pass
@@ -35,6 +37,7 @@ def test_patched_pyfrotz():
     game = Frotz("data/zork1.z3")
     game.get_intro()
 
-    assert game.derived_name == "West of House"
-    assert game.derived_score == 0
-    assert game.derived_moves == 1  # intro sends an initial look
+    assert game.derived_name == "West of House"  # pylint: disable=no-member
+    assert game.derived_score == 0  # pylint: disable=no-member
+    assert game.derived_moves == 1  # pylint: disable=no-member
+    # intro sends an initial look

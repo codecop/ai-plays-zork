@@ -15,8 +15,8 @@ if len(sys.argv) > 2:
 else:
     THRESHOLD_SECONDS = 0
 
+game_loop = create(CONFIG)
 
-game_loop = create(CONFIG, THRESHOLD_SECONDS)
-game_loop.start_game()
-game_loop.run_loop()
+game_loop.start()
+game_loop.run(THRESHOLD_SECONDS)
 game_loop.close()

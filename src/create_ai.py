@@ -48,9 +48,9 @@ def _create_tracker(run_folder: Path, log: Log) -> RoomChangeTracker:
     )
 
 
-def create(config: str, threshold: float = 0) -> GameLoop:
+def create(config: str) -> GameLoop:
     run_folder, log = _create_run(config)
     ai = _create_ai(config, run_folder, log)
     tracker = _create_tracker(run_folder, log)
 
-    return GameLoop(run_folder, log, ai, tracker, threshold)
+    return GameLoop(log, ai, tracker)

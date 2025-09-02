@@ -1,5 +1,4 @@
 import time
-from pathlib import Path
 from ai import Ai
 from game import Game
 from log import Log
@@ -9,21 +8,16 @@ from room_change_tracker import RoomChangeTracker
 class GameLoop:
     def __init__(
         self,
-        run_folder: Path,
         log: Log,
         ai: Ai,
         tracker: RoomChangeTracker,
-        threshold: float = 0,
     ):
-        self.run_folder = run_folder
         self.log = log
         self.ai = ai
         self.tracker = tracker
         self.game = None
 
-        self.threshold = threshold
-
-    def start_game(self) -> None:
+    def start(self) -> None:
         self.game = Game()
 
         game_notes = self.game.get_game_play_notes()
@@ -31,7 +25,7 @@ class GameLoop:
 
         self.ai.start(game_notes, game_intro)
 
-    def run_loop(self) -> None:
+    def run(self, threshold: float = 0) -> None:
         """Run the game loop with a given AI."""
 
         start_time = time.time()
@@ -44,8 +38,8 @@ class GameLoop:
 
             # wait for threshold
             elapsed_time = time.time() - start_time
-            if elapsed_time < self.threshold:
-                time.sleep(self.threshold - elapsed_time)
+            if elapsed_time < threshold:
+                time.sleep(threshold - elapsed_time)
 
             start_time = time.time()
 

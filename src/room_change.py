@@ -2,7 +2,8 @@ from abc import ABC, abstractmethod
 from map.exploration_action import ExplorationAction
 
 
-class RoomChangeInterface(ABC):
+class RoomChange(ABC):
+    """Base class for tracking of room changes."""
 
     @abstractmethod
     def record_movement(self, action: ExplorationAction) -> None:

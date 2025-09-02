@@ -1,10 +1,10 @@
 from pathlib import Path
 from graphviz import Digraph
 from map.exploration_action import ExplorationAction
-from room_change_interface import RoomChangeInterface
+from room_change import RoomChange
 
 
-class GraphvizRoomChange(RoomChangeInterface):
+class GraphvizRoomChange(RoomChange):
     def __init__(self, run_folder: Path):
         self.g = Digraph("G", filename=run_folder / "map.gv")
         self.edges = set()

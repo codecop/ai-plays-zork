@@ -1,7 +1,7 @@
 import re
 from individual_log import IndividualLog
 from log import Log
-from room_change_interface import RoomChangeInterface
+from room_change import RoomChange
 from map.exploration_action import ExplorationAction
 
 # order is relevant for regex matching
@@ -21,7 +21,7 @@ DIRECTION_RE = ".*(" + "|".join(DIRECTIONS) + ").*"
 
 
 class RoomChangeTracker:
-    def __init__(self, notify: RoomChangeInterface, log: Log, move_log: IndividualLog):
+    def __init__(self, notify: RoomChange, log: Log, move_log: IndividualLog):
         self._notify = notify
         self._log = log
         self._move_log = move_log

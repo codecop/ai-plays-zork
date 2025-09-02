@@ -2,6 +2,8 @@ from log import Log
 
 
 class CompositeLog(Log):
+    """Log combining multiple logs."""
+
     def __init__(self, *logs: Log):
         super().__init__()
         self.logs = logs

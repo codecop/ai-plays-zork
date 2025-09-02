@@ -1,8 +1,8 @@
-from room_change_interface import RoomChangeInterface
+from room_change import RoomChange
 from map.exploration_action import ExplorationAction
 
 
-class NullRoomChange(RoomChangeInterface):
+class NullRoomChange(RoomChange):
     def record_movement(self, action: ExplorationAction) -> None:
         pass
 

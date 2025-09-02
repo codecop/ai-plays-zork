@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class Log(ABC):
+    """Base class of all logs."""
 
     @abstractmethod
     def ai(self, text: str) -> None:

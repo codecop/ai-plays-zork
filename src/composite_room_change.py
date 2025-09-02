@@ -1,9 +1,11 @@
-from room_change_interface import RoomChangeInterface
+from room_change import RoomChange
 from map.exploration_action import ExplorationAction
 
 
-class CompositeRoomChange(RoomChangeInterface):
-    def __init__(self, *changes: RoomChangeInterface) -> None:
+class CompositeRoomChange(RoomChange):
+    """Room Change combining multiple change."""
+
+    def __init__(self, *changes: RoomChange) -> None:
         self.changes = changes
 
     def record_movement(self, action: ExplorationAction) -> None:

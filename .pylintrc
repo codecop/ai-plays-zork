@@ -19,7 +19,8 @@ disable=fixme,
         locally-disabled,  # logs suppressed messages
         suppressed-message,  # warns about "pylint: disable"
         use-implicit-booleaness-not-comparison-to-string,
-        use-implicit-booleaness-not-comparison-to-zero
+        use-implicit-booleaness-not-comparison-to-zero,
+        too-few-public-methods
 
 enable=all
 

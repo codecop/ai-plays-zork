@@ -2,7 +2,7 @@ from pathlib import Path
 import pytest
 from test_file_utils import fixture_data_dir  # pylint: disable=unused-import
 from ai_interface import AiInterface
-from log import Log
+from nice_log import NiceLog
 
 
 class EmptyAi(AiInterface):
@@ -21,7 +21,7 @@ class EmptyAi(AiInterface):
 @pytest.fixture(name="ai")
 def fixture_ai(data_dir: Path) -> EmptyAi:
     run_path = data_dir
-    log = Log(run_path)
+    log = NiceLog(run_path)
     return EmptyAi("mistralai", run_path, log)
 
 

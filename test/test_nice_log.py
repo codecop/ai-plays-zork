@@ -1,13 +1,13 @@
 from pathlib import Path
 import pytest
 from test_file_utils import fixture_data_dir  # pylint: disable=unused-import
-from log import Log
+from nice_log import NiceLog
 
 
 @pytest.fixture(name="log_file")
-def fixture_log_file(data_dir: Path) -> (Log, Path):
+def fixture_log_file(data_dir: Path) -> (NiceLog, Path):
     log_path = data_dir
-    log = Log(log_path)
+    log = NiceLog(log_path)
     return log, log.path
 
 

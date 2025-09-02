@@ -3,8 +3,9 @@ from ai_interface import AiInterface
 from claude_code_ai import ClaudeCodeAi
 from command_log import CommandLog
 from file_utils import next_folder_name
-from log import CompositeLog
+from composite_log import CompositeLog
 from log import Log
+from nice_log import NiceLog
 from mistral_ai import MistralAi
 
 
@@ -13,7 +14,7 @@ def _create_run(config: str) -> (Path, Log):
 
     base_name = f"{config}-run"
     run_folder = next_folder_name(".", base_name)
-    log = CompositeLog(Log(run_folder), CommandLog(run_folder, ""))
+    log = CompositeLog(NiceLog(run_folder), CommandLog(run_folder, ""))
 
     return run_folder, log
 

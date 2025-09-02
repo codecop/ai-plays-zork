@@ -1,1 +1,1 @@
-pytest --cov --cov-report=term-missing
+pytest --cov --cov-report=term-missing %*

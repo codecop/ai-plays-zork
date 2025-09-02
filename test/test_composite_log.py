@@ -1,35 +1,10 @@
+from memory_log import MemoryLog
 from composite_log import CompositeLog
-from log import Log
-
-
-class FakeLog(Log):
-
-    def __init__(self):
-        self.ai_messages = []
-        self.game_messages = []
-        self.command_messages = []
-        self.room_messages = []
-        self.warn_messages = []
-
-    def ai(self, text: str) -> None:
-        self.ai_messages.append(text)
-
-    def game(self, text: str) -> None:
-        self.game_messages.append(text)
-
-    def command(self, command: str) -> None:
-        self.command_messages.append(command)
-
-    def room(self, text: str) -> None:
-        self.room_messages.append(text)
-
-    def warn(self, text: str) -> None:
-        self.warn_messages.append(text)
 
 
 def test_composite_log_delegates_to_all_logs():
-    fake_log1 = FakeLog()
-    fake_log2 = FakeLog()
+    fake_log1 = MemoryLog()
+    fake_log2 = MemoryLog()
     composite_log = CompositeLog(fake_log1, fake_log2)
 
     composite_log.ai("AI message")

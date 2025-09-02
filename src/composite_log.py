@@ -3,7 +3,7 @@ from log import Log
 
 class CompositeLog(Log):
     def __init__(self, *logs: Log):
-        # super().__init__(path)  # pylint: disable=super-init-not-called
+        super().__init__()
         self.logs = logs
 
     def ai(self, text: str) -> None:

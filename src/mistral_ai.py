@@ -4,11 +4,11 @@ from pathlib import Path
 from mistralai import Mistral
 from mistralai.models import ConversationResponse
 from mistralai.utils import BackoffStrategy, RetryConfig
-from ai_interface import AiInterface
+from ai import Ai
 from log import Log
 
 
-class MistralAi(AiInterface):
+class MistralAi(Ai):
 
     def __init__(self, configuration: str, run_folder: Path, log: Log):
         super().__init__(configuration, run_folder, log)

@@ -1,5 +1,5 @@
 from pathlib import Path
-from ai_interface import AiInterface
+from ai import Ai
 from claude_code_ai import ClaudeCodeAi
 from command_log import CommandLog
 from file_utils import next_folder_name
@@ -19,7 +19,7 @@ def _create_run(config: str) -> (Path, Log):
     return run_folder, log
 
 
-def _create_ai(config: str, run_folder: Path, log: Log) -> AiInterface:
+def _create_ai(config: str, run_folder: Path, log: Log) -> Ai:
     """Create the AI for the config."""
 
     if config.startswith("mistral"):
@@ -34,7 +34,7 @@ def _create_ai(config: str, run_folder: Path, log: Log) -> AiInterface:
     return ai
 
 
-def create(config: str) -> (Path, Log, AiInterface):
+def create(config: str) -> (Path, Log, Ai):
     run_folder, log = _create_run(config)
     ai = _create_ai(config, run_folder, log)
     return run_folder, log, ai

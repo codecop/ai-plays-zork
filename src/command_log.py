@@ -7,7 +7,7 @@ class CommandLog(Log):
     """Record the ai commands to log files."""
 
     def __init__(self, path: Path, name: str):
-        # super().__init__(path)  # pylint: disable=super-init-not-called
+        super().__init__()
         self.room_path = path / f"{name}rooms.txt"
         self.room_path.parent.mkdir(parents=True, exist_ok=True)
         self.command_path = path / f"{name}commands.txt"

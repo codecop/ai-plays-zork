@@ -5,7 +5,7 @@ from file_utils import read_file, write_file
 from log import Log
 
 
-class AiInterface(ABC):
+class Ai(ABC):
     """Base class defining the interface for AI implementations."""
 
     def __init__(self, configuration: str, run_folder: Path, log: Log):

@@ -1,6 +1,6 @@
 import time
 from pathlib import Path
-from ai_interface import AiInterface
+from ai import Ai
 from command_log import CommandLog
 from game import Game
 from graphviz_room_change import GraphvizRoomChange
@@ -8,7 +8,7 @@ from log import Log
 from room_change_tracker import RoomChangeTracker
 
 
-def run(run_folder: Path, log: Log, ai: AiInterface, threshold: float = 0) -> None:
+def run(run_folder: Path, log: Log, ai: Ai, threshold: float = 0) -> None:
     """Run the game loop with a given AI."""
 
     # start game

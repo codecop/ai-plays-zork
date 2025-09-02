@@ -1,11 +1,11 @@
 from pathlib import Path
 import pytest
 from test_file_utils import fixture_data_dir  # pylint: disable=unused-import
-from ai_interface import AiInterface
+from ai import Ai
 from nice_log import NiceLog
 
 
-class EmptyAi(AiInterface):
+class EmptyAi(Ai):
     """Empty implementation to test resource methods."""
 
     def start(self, game_notes: str, game_intro: str):

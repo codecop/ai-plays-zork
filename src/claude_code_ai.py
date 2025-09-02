@@ -1,11 +1,11 @@
 import subprocess
 import time
 from pathlib import Path
-from ai_interface import AiInterface
+from ai import Ai
 from log import Log
 
 
-class ClaudeCodeAi(AiInterface):
+class ClaudeCodeAi(Ai):
 
     def __init__(self, configuration: str, run_folder: Path, log: Log):
         super().__init__(configuration, run_folder, log)

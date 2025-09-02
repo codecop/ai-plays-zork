@@ -10,6 +10,7 @@ class AnsiColors:  # pylint: disable=too-few-public-methods
     YELLOW = "\033[93m"
     BLUE = "\033[94m"
     CYAN = "\033[96m"
+    WHITE = "\033[97m"
     RESET = "\033[0m"
 
 
@@ -29,13 +30,16 @@ class NiceLog(Log):
         self._write("AI   ", text, AnsiColors.YELLOW)
 
     def game(self, text: str) -> None:
-        self._write("GAME ", text, AnsiColors.RED)
+        self._write("GAME ", text, AnsiColors.WHITE)
 
     def command(self, command: str) -> None:
         self._write("CMD  ", command, AnsiColors.GREEN)
 
     def room(self, text: str) -> None:
         self._write("ROOM ", text, AnsiColors.BLUE)
+
+    def warn(self, text: str) -> None:
+        self._write("WARN ", text, AnsiColors.RED)
 
     def _write(self, prefix: str, message: str, color: str = "") -> None:
         lines = message.split("\n")

@@ -64,7 +64,7 @@ class ClaudeCodeAi(Ai):
             time.sleep(wait_interval)
             waited += wait_interval
 
-        self.log.ai("Timeout waiting for Claude Code output")
+        self.log.warn("Timeout waiting for Claude Code output")
         return None
 
     def close(self) -> None:

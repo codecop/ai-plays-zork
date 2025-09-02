@@ -83,7 +83,7 @@ class MistralAi(Ai):
             return self._extract_command_from(content)
 
         if len(response.outputs) > 1:
-            self.log.ai("WARN multiple responses " + str(response.outputs))
+            self.log.warn("multiple responses " + str(response.outputs))
 
         # TODO for each function call in the response,
         # call the function and return all of them at once!
@@ -107,7 +107,7 @@ class MistralAi(Ai):
             )
             return self._handle_response(response)
 
-        self.log.ai("WARN not a message response " + str(output))
+        self.log.warn("not a message response " + str(output))
         return "NO RESPONSE"
 
     def _extract_command_from(self, content: str) -> str:

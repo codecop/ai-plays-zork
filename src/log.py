@@ -19,3 +19,7 @@ class Log(ABC):
     @abstractmethod
     def room(self, text: str) -> None:
         pass
+
+    @abstractmethod
+    def warn(self, text: str) -> None:
+        pass

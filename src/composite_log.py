@@ -23,3 +23,7 @@ class CompositeLog(Log):
     def room(self, text: str) -> None:
         for log in self.logs:
             log.room(text)
+
+    def warn(self, text: str) -> None:
+        for log in self.logs:
+            log.warn(text)

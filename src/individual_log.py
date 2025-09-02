@@ -8,12 +8,11 @@ class IndividualLog(Log):
 
     def __init__(self, path: Path, name: str):
         super().__init__()
+        path.mkdir(parents=True, exist_ok=True)
 
         self.room_path = path / f"{name}rooms.txt"
-        self.room_path.parent.mkdir(parents=True, exist_ok=True)
-
         self.command_path = path / f"{name}commands.txt"
-        self.command_path.parent.mkdir(parents=True, exist_ok=True)
+        self.warn_path = path / f"{name}warnings.txt"
 
     def ai(self, text: str) -> None:
         pass
@@ -26,6 +25,9 @@ class IndividualLog(Log):
 
     def room(self, text: str) -> None:
         self._log_separate(self.room_path, text)
+
+    def warn(self, text: str) -> None:
+        self._log_separate(self.warn_path, text)
 
     def _log_separate(self, path: Path, message: str) -> None:
         with open(path, "a", encoding=ENCODING) as f:

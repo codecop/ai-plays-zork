@@ -50,6 +50,6 @@ class RoomChangeTracker:
         else:
             direction = command
             # special cases: "enter window", "climb tree"
-            print(f"WARN: unrecognized direction: {direction}")
+            self._log.warn(f"unrecognized direction: {direction}")
 
         return direction.lower()

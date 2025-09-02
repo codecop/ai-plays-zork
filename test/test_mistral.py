@@ -59,7 +59,7 @@ def test_mistral_agent():
 def identify_user(user_id: str) -> str:
     if user_id == "U128":
         return "Hans"
-    return "Peter"
+    assert False
 
 
 # Try using tools, see https://docs.mistral.ai/capabilities/function_calling/

@@ -34,12 +34,20 @@ def test_log_commands(log_file) -> None:
     ai = "AI response"
     log.ai(ai)
 
+    room = "Kitchen"
+    log.room(room)
+
+    warn = "Warning"
+    log.warn(warn)
+
     content = path.read_text(encoding="utf-8")
     lines = content.strip().split("\n")
-    assert len(lines) == 4  # START + game text + command
-    assert lines[3] == f"AI    {ai}"
-    assert lines[2] == f"CMD   {command}"
+    assert len(lines) == 6  # START + game text + command + ai + room + warn
     assert lines[1] == f"GAME  {game_text}"
+    assert lines[2] == f"CMD   {command}"
+    assert lines[3] == f"AI    {ai}"
+    assert lines[4] == f"ROOM  {room}"
+    assert lines[5] == f"WARN  {warn}"
 
 
 def test_multiline_log(log_file) -> None:

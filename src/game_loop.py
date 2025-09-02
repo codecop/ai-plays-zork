@@ -1,8 +1,8 @@
-import time
 from ai import Ai
 from game import Game
 from log import Log
 from room_change_tracker import RoomChangeTracker
+from wait_threshold import WaitThreshold
 
 
 class GameLoop:
@@ -28,7 +28,7 @@ class GameLoop:
     def run(self, threshold: float = 0) -> None:
         """Run the game loop with a given AI."""
 
-        start_time = time.time()
+        wait_threshold = WaitThreshold(threshold)
         command = "look"
         while True:
             game_output = self.game.do_command(command)
@@ -37,11 +37,7 @@ class GameLoop:
             self.tracker.check_for_movement(self.game.room_name(), command)
 
             # wait for threshold
-            elapsed_time = time.time() - start_time
-            if elapsed_time < threshold:
-                time.sleep(threshold - elapsed_time)
-
-            start_time = time.time()
+            wait_threshold.wait()
 
             # Get AI's next move
             command = self.ai.get_next_command(game_output)

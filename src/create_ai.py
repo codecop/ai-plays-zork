@@ -1,12 +1,18 @@
+"""Creates the dependencies of the whole application."""
+
 from pathlib import Path
 from ai import Ai
 from claude_code_ai import ClaudeCodeAi
 from individual_log import IndividualLog
 from file_utils import next_folder_name
 from composite_log import CompositeLog
+from composite_room_change import CompositeRoomChange
+from game_loop import GameLoop
+from graphviz_room_change import GraphvizRoomChange
 from log import Log
 from nice_log import NiceLog
 from mistral_ai import MistralAi
+from room_change_tracker import RoomChangeTracker
 
 
 def _create_run(config: str) -> (Path, Log):
@@ -34,7 +40,17 @@ def _create_ai(config: str, run_folder: Path, log: Log) -> Ai:
     return ai
 
 
-def create(config: str) -> (Path, Log, Ai):
+def _create_tracker(run_folder: Path, log: Log) -> RoomChangeTracker:
+    return RoomChangeTracker(
+        CompositeRoomChange(GraphvizRoomChange(run_folder)),
+        log,
+        IndividualLog(run_folder, "move_"),
+    )
+
+
+def create(config: str, threshold: float = 0) -> GameLoop:
     run_folder, log = _create_run(config)
     ai = _create_ai(config, run_folder, log)
-    return run_folder, log, ai
+    tracker = _create_tracker(run_folder, log)
+
+    return GameLoop(run_folder, log, ai, tracker, threshold)

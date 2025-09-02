@@ -3,13 +3,15 @@ from file_utils import ENCODING
 from log import Log
 
 
-class CommandLog(Log):
-    """Record the ai commands to log files."""
+class IndividualLog(Log):
+    """Record the ai commands and rooms to individual log files."""
 
     def __init__(self, path: Path, name: str):
         super().__init__()
+
         self.room_path = path / f"{name}rooms.txt"
         self.room_path.parent.mkdir(parents=True, exist_ok=True)
+
         self.command_path = path / f"{name}commands.txt"
         self.command_path.parent.mkdir(parents=True, exist_ok=True)
 

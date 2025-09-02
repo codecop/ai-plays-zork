@@ -1,7 +1,7 @@
 from pathlib import Path
 from ai import Ai
 from claude_code_ai import ClaudeCodeAi
-from command_log import CommandLog
+from individual_log import IndividualLog
 from file_utils import next_folder_name
 from composite_log import CompositeLog
 from log import Log
@@ -14,7 +14,7 @@ def _create_run(config: str) -> (Path, Log):
 
     base_name = f"{config}-run"
     run_folder = next_folder_name(".", base_name)
-    log = CompositeLog(NiceLog(run_folder), CommandLog(run_folder, ""))
+    log = CompositeLog(NiceLog(run_folder), IndividualLog(run_folder, ""))
 
     return run_folder, log
 

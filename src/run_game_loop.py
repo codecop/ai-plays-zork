@@ -1,7 +1,7 @@
 import time
 from pathlib import Path
 from ai import Ai
-from command_log import CommandLog
+from individual_log import IndividualLog
 from game import Game
 from graphviz_room_change import GraphvizRoomChange
 from log import Log
@@ -17,7 +17,7 @@ def run(run_folder: Path, log: Log, ai: Ai, threshold: float = 0) -> None:
     game_intro = game.get_intro()
 
     tracker = RoomChangeTracker(
-        GraphvizRoomChange(run_folder), log, CommandLog(run_folder, "move_")
+        GraphvizRoomChange(run_folder), log, IndividualLog(run_folder, "move_")
     )
 
     ai.start(game_notes, game_intro)

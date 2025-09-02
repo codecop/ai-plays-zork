@@ -1,6 +1,9 @@
+"""Script to start the whole thing."""
+
 import sys
 from create_ai import create
 
+# commandline arguments
 CONFIG = None
 THRESHOLD_SECONDS = None
 
@@ -15,8 +18,8 @@ if len(sys.argv) > 2:
 else:
     THRESHOLD_SECONDS = 0
 
-game_loop = create(CONFIG)
-
-game_loop.start()
-game_loop.run(THRESHOLD_SECONDS)
-game_loop.close()
+# create and run application
+application = create(CONFIG)
+application.start()
+application.run(THRESHOLD_SECONDS)
+application.close()

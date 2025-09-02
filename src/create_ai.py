@@ -1,4 +1,4 @@
-"""Creates the dependencies of the whole application."""
+"""Creates the dependency tree of the whole application."""
 
 from pathlib import Path
 from ai import Ai

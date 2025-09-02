@@ -6,12 +6,9 @@ from wait_threshold import WaitThreshold
 
 
 class GameLoop:
-    def __init__(
-        self,
-        log: Log,
-        ai: Ai,
-        tracker: RoomChangeTracker,
-    ):
+    """Driver class to combine Game output with AI and vice versa."""
+
+    def __init__(self, log: Log, ai: Ai, tracker: RoomChangeTracker):
         self.log = log
         self.ai = ai
         self.tracker = tracker

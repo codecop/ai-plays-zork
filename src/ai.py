@@ -6,7 +6,7 @@ from log import Log
 
 
 class Ai(ABC):
-    """Base class defining the interface for AI implementations."""
+    """Base class defining the interface for any AI implementation."""
 
     def __init__(self, configuration: str, run_folder: Path, log: Log):
         self.configuration = configuration

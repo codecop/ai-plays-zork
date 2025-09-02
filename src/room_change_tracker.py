@@ -1,5 +1,4 @@
 import re
-from individual_log import IndividualLog
 from log import Log
 from room_change import RoomChange
 from map.exploration_action import ExplorationAction
@@ -21,7 +20,9 @@ DIRECTION_RE = ".*(" + "|".join(DIRECTIONS) + ").*"
 
 
 class RoomChangeTracker:
-    def __init__(self, notify: RoomChange, log: Log, move_log: IndividualLog):
+    """Keep track of current room and when a room has changed."""
+
+    def __init__(self, notify: RoomChange, log: Log, move_log: Log):
         self._notify = notify
         self._log = log
         self._move_log = move_log

@@ -4,7 +4,7 @@ from log import Log
 
 
 class IndividualLog(Log):
-    """Record the ai commands and rooms to individual log files."""
+    """Record the ai commands and rooms to individual log files each."""
 
     def __init__(self, path: Path, name: str):
         super().__init__()

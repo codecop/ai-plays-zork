@@ -5,6 +5,8 @@ from room_change import RoomChange
 
 
 class GraphvizRoomChange(RoomChange):
+    """Draw the map of visited new rooms using Graphviz."""
+
     def __init__(self, run_folder: Path):
         self.g = Digraph("G", filename=run_folder / "map.gv")
         self.edges = set()

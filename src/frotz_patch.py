@@ -1,3 +1,5 @@
+"""Monkey patch Frotz to access the room name, score and moves."""
+
 import re
 from pyfrotz import Frotz
 

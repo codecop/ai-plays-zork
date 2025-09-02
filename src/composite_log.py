@@ -2,7 +2,7 @@ from log import Log
 
 
 class CompositeLog(Log):
-    """Log combining multiple logs."""
+    """Log combining multiple logs as one."""
 
     def __init__(self, *logs: Log):
         super().__init__()

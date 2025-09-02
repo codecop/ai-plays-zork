@@ -5,6 +5,8 @@ from frotz_patch import patch_frotz
 
 
 class Game:
+    """Wrapper around Frotz with simplified interface."""
+
     def __init__(self, game_file: str = "data/zork1.z3"):
         patch_frotz()
 

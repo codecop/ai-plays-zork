@@ -225,6 +225,6 @@ clean.bat
 /mistralai-tools-run-*/
 
 # Graphviz
-*.gv
-*.gv.pdf
-*.gv.png
+/*.gv
+/*.gv.pdf
+/*.gv.png

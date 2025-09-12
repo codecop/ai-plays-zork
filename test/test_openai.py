@@ -1,6 +1,7 @@
 import os
 import pytest
 from openai import OpenAI
+from agents import Agent, Runner
 
 # Skip all tests if API key is not set
 KEY_NAME = "OPENAI_API_KEY"
@@ -53,3 +54,25 @@ def test_openai_completion():
 #     )
 #     assert len(response.outputs) == 1
 #     print(response.outputs[0].content)
+
+
+# see https://github.com/openai/openai-agents-python/blob/main/examples/basic/hello_world.py
+def test_openai_agent():
+    simple_agent = Agent(
+        model=MODEL,
+        name="Test Agent",
+        # instructions="You only respond in haikus.",
+    )
+    # print(simple_agent)
+
+    result = Runner.run_sync(simple_agent, "Who is Albert Einstein? Just 1 sentence")
+    # print(result)
+    print(result.final_output)
+    # assert "abc" == result.final_output
+
+    new_input = result.to_input_list() + [
+        {"role": "user", "content": "Give another sentence."}
+    ]
+    result = Runner.run_sync(simple_agent, new_input)
+    print(result.final_output)
+    # assert "abc" == result.final_output

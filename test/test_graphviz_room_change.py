@@ -26,6 +26,7 @@ def test_graph_file(data_dir) -> None:
     gv.display()
     actual_file = data_dir / "map.gv"
     assert actual_file.exists()
+    # assert (data_dir / "map.gv.pdf").exists()
 
     expected_file = "test/data/graphviz_room_change/single.gv"
     expected_content = read_file(expected_file)

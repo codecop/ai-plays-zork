@@ -1,10 +1,11 @@
 from test_file_utils import fixture_data_dir  # pylint: disable=unused-import
+from file_utils import read_file
 from graphviz_room_change import GraphvizRoomChange
 from map.exploration_action import ExplorationAction
 
 
 def test_unique_edges(data_dir) -> None:
-    gv = GraphvizRoomChange(data_dir)
+    gv = GraphvizRoomChange(data_dir, False)
 
     gv.record_movement(ExplorationAction("room1", "room2", "north"))
     assert gv.is_graph_updated
@@ -17,6 +18,17 @@ def test_unique_edges(data_dir) -> None:
     gv.record_movement(ExplorationAction("room2", "room1", "south"))
     assert len(gv.known_edges) == 2
 
-    # gv.display()
-    # f = data_dir / "map.gv"
-    # assert f.exists()
+
+def test_graph_file(data_dir) -> None:
+    gv = GraphvizRoomChange(data_dir, False)
+    gv.record_movement(ExplorationAction("southern room", "north", "northern room"))
+
+    gv.display()
+    actual_file = data_dir / "map.gv"
+    assert actual_file.exists()
+
+    expected_file = "test/data/graphviz_room_change/single.gv"
+    expected_content = read_file(expected_file)
+
+    actual_content = read_file(actual_file)
+    assert actual_content == expected_content

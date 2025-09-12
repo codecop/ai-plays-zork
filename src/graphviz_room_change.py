@@ -19,8 +19,9 @@ DIRECTION_PORTS = {
 class GraphvizRoomChange(RoomChange):
     """Draw the map of visited new rooms using Graphviz."""
 
-    def __init__(self, path: Path):
+    def __init__(self, path: Path, view: bool = True):
         path.mkdir(parents=True, exist_ok=True)
+        self.view = view
         filename = path / "map.gv"
         self.g = Digraph("G", filename=filename)
         self.known_edges = set()
@@ -46,5 +47,8 @@ class GraphvizRoomChange(RoomChange):
 
     def display(self) -> None:
         if self.is_graph_updated:
-            self.g.view()
+            if self.view:
+                self.g.view()
+            else:
+                self.g.save()
             self.is_graph_updated = False

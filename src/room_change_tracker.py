@@ -5,14 +5,14 @@ from map.exploration_action import ExplorationAction
 
 # order is relevant for regex matching
 DIRECTIONS = [
-    "north",
-    "east",
-    "south",
-    "west",
     "northeast",
     "southeast",
     "southwest",
     "northwest",
+    "north",
+    "east",
+    "south",
+    "west",
     "up",
     "down",
 ]

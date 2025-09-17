@@ -1,6 +1,12 @@
 Possible Tasks
 ==============
 
+Command Line Tools for Claude or other CLI Agents
+* What do we need from the map? What's the query?
+* Track items that we find
+* Breardcrumbs: paths and what happened
+* Track open tasks
+
 Visualization
 -------------
 

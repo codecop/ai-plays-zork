@@ -7,7 +7,7 @@ SESSION_NAME="zork-game"
 
 # Check if session exists
 if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
-    echo "Error: No session '$SESSION_NAME' found. Run ./tools/launch_zork_session.sh first" >&2
+    echo "Error: No session '$SESSION_NAME' found. Run ./src/common/tools/launch_zork_session.sh first" >&2
     exit 1
 fi
 

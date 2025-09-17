@@ -13,5 +13,5 @@ fi
 echo "\"$1\" \"$2\" \"$3\""  >> $MAP_PATH
 
 mv $MAP_PATH $MAP_PATH.bak
-sort --ignore-case -o $MAP_PATH $MAP_PATH.bak
+sort --ignore-case $MAP_PATH.bak | uniq > $MAP_PATH
 

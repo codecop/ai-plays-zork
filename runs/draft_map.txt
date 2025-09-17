@@ -1,0 +1,4 @@
+"Behind House" "enter window" "Kitchen"
+"Kitchen" "go west" "Living Room"
+"South of House" "go east" "Behind House"
+"West of House" "go south" "South of House"

@@ -17,5 +17,5 @@ else
 
     # Create new session and attach to it
     # Use full paths and run directly with bash
-    tmux new-session -s "$SESSION_NAME" -c "$PROJECT_DIR" "bash -c '~/.pyfrotz/dfrotz data/zork1.z3'"
+    tmux new-session -s "$SESSION_NAME" -c "$PROJECT_DIR" "bash -c './play_zork.sh'"
 fi

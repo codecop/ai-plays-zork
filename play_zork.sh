@@ -1,2 +1,2 @@
 #!/bin/bash
-~/.pyfrotz/dfrotz data/zork1.z3
+~/.pyfrotz/dfrotz frotz/data/zork1.z3

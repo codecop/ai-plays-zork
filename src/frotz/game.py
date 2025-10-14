@@ -1,7 +1,7 @@
 import re
 from pyfrotz import Frotz
 from file_utils import read_file
-from frotz_patch import patch_frotz
+from frotz.frotz_patch import patch_frotz
 
 
 class Game:
@@ -14,7 +14,7 @@ class Game:
         self.has_quit = False
 
     def get_game_play_notes(self) -> str:
-        return read_file("data/Zork Gameplay Notes.txt")
+        return read_file("frotz/data/Zork Gameplay Notes.txt")
 
     def get_intro(self) -> str:
         return self.wrapper.get_intro()

@@ -1,4 +1,4 @@
-from game import Game
+from frotz.game import Game
 
 
 def test_game_formatting():

@@ -1,6 +1,6 @@
 from pyfrotz import Frotz
 import pytest
-from frotz_patch import patch_frotz
+from frotz.frotz_patch import patch_frotz
 
 
 @pytest.fixture(scope="module", autouse=True)

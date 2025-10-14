@@ -1,5 +1,5 @@
 from ai import Ai
-from game import Game
+from frotz.game import Game
 from log import Log
 from room_change_tracker import RoomChangeTracker
 from wait_threshold import WaitThreshold

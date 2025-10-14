@@ -9,7 +9,7 @@
 
 * MCP specification <https://modelcontextprotocol.info/specification/2024-11-05/>
 
-### look at protocol
+### look at Protocol
 
 * JSON-RPC message format, uses JSON-RPC 2.0
   * Request object
@@ -46,6 +46,39 @@ MCP defines three core message types based on JSON-RPC 2.0:
 * Requests: Bidirectional messages with method and parameters expecting a response
 * Responses: Successful results or errors matching specific request IDs
 * Notifications: One-way messages requiring no response
+
+Protocol can be stdio or http
+
+* Windsurf supports two transport types for MCP servers: stdio and http/websocket.
+
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "<YOUR_PERSONAL_ACCESS_TOKEN>"
+      }
+    }
+  }
+}
+```
+
+```json
+{
+  "mcpServers": {
+    "figma": {
+      "serverUrl": "<your-server-url>/mcp"
+    }
+  }
+}
+```
+
+Restart Windsurf or reload the MCP connection.
 
 ### Features
 

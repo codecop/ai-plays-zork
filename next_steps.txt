@@ -1,3 +1,5 @@
+1) move tmux script to src/frotz and make them work with tmux windows. readme is tools description
+
 Cleanup Tasks (alone)
 
 * make tmux work on Windows

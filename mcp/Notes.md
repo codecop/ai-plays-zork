@@ -1,9 +1,11 @@
 # Idea: make Zork an MCP, so it is a tool
 
 * Python and the MCP SDK
-* FastMCP <https://github.com/jlowin/fastmcp>
+* FastMCP <https://github.com/jlowin/fastmcp> -- seems the state of the art now
+  * <https://gofastmcp.com/tutorials/create-mcp-server>
 * maybe build it from scratch to learn it?
 * <https://towardsdatascience.com/creating-and-deploying-an-mcp-server-from-scratch/> like Mistral
+* build using FastAPI <https://allmcp.org/blogs/mcp-server-python-guide>
 
 ## from scratch
 

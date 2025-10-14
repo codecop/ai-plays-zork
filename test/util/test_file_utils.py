@@ -3,7 +3,7 @@ from util.file_utils import read_file, write_file, next_folder_name
 
 
 def test_read_file() -> None:
-    test_file = "test/data/file_utils/utf8-sample"
+    test_file = "test/util/data/file_utils/utf8-sample"
     content = read_file(test_file)
 
     assert content == "Two lines test content\nwith special chars äöüß\n"

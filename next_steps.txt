@@ -13,6 +13,17 @@ Command Line Tools for Claude or other CLI Agents
 * Breadcrumbs: paths and what happened
 * Track open tasks
 
+## Tools in general
+
+1. Karte zeichnen / Raumgraph pflegen
+update_map(current_location, exits, description)
+
+2. Memory / Wissen speichern
+Tool: remember_fact(key, value)
+Tool: recall_fact(key)
+
+Oder hints für raum
+
 Visualization
 -------------
 
@@ -56,3 +67,15 @@ First step is to write a test for a conversation/completion.
   one is double checking the answer
   one is remembering things or etc.
   summarizing, overall goal
+
+---
+
+## Older Notes
+
+* create runs folder mit sub folders, sauberer
+* Idea: game is also a tool. so we can go meta.
+. loop tests? müsste ai mocken. geht
+- tests? müsste game mocken
+- room Change der cycle entdeckt (3* gleiche Räume) und warn und dann exception wirft
+  mit Raum Liste genügt 
+- Game Loop mit try catch und gibt Score und moves aus (auch bei Ctrl Break?)

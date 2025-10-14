@@ -1,8 +1,8 @@
 import json
 from abc import ABC, abstractmethod
 from pathlib import Path
-from file_utils import read_file, write_file
-from log import Log
+from util.file_utils import read_file, write_file
+from util.log import Log
 
 
 class Ai(ABC):

@@ -1,6 +1,6 @@
 from pathlib import Path
-from file_utils import ENCODING
-from log import Log
+from util.file_utils import ENCODING
+from util.log import Log
 
 
 class IndividualLog(Log):

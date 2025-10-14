@@ -1,4 +1,4 @@
-from log import Log
+from util.log import Log
 
 
 class CompositeLog(Log):

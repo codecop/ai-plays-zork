@@ -5,7 +5,7 @@ from mistralai import Mistral
 from mistralai.models import ConversationResponse
 from mistralai.utils import BackoffStrategy, RetryConfig
 from ai import Ai
-from log import Log
+from util.log import Log
 
 
 class MistralAi(Ai):

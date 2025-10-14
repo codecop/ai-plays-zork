@@ -1,7 +1,6 @@
 from pathlib import Path
 import pytest
-from test_file_utils import fixture_data_dir  # pylint: disable=unused-import
-from nice_log import NiceLog
+from util.nice_log import NiceLog
 
 
 @pytest.fixture(name="log_file")

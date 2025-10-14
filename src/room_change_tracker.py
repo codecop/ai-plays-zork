@@ -1,5 +1,5 @@
 import re
-from log import Log
+from util.log import Log
 from room_change import RoomChange
 from map.exploration_action import ExplorationAction
 

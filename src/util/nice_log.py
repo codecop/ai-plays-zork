@@ -1,7 +1,7 @@
 from pathlib import Path
 from datetime import datetime
-from file_utils import ENCODING
-from log import Log
+from util.file_utils import ENCODING
+from util.log import Log
 
 
 class AnsiColors:  # pylint: disable=too-few-public-methods

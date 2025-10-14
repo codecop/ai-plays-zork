@@ -2,7 +2,7 @@ import subprocess
 import time
 from pathlib import Path
 from ai import Ai
-from log import Log
+from util.log import Log
 
 
 class ClaudeCodeAi(Ai):

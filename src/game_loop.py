@@ -1,8 +1,8 @@
 from ai import Ai
 from frotz.game import Game
-from log import Log
 from room_change_tracker import RoomChangeTracker
-from wait_threshold import WaitThreshold
+from util.log import Log
+from util.wait_threshold import WaitThreshold
 
 
 class GameLoop:

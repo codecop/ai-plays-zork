@@ -1,6 +1,6 @@
 import re
 from pyfrotz import Frotz
-from file_utils import read_file
+from util.file_utils import read_file
 from frotz.frotz_patch import patch_frotz
 
 

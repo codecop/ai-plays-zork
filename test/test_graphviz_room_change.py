@@ -1,5 +1,4 @@
-from test_file_utils import fixture_data_dir  # pylint: disable=unused-import
-from file_utils import read_file
+from util.file_utils import read_file
 from graphviz_room_change import GraphvizRoomChange
 from map.exploration_action import ExplorationAction
 

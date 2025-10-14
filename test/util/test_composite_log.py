@@ -1,5 +1,5 @@
-from memory_log import MemoryLog
-from composite_log import CompositeLog
+from util.memory_log import MemoryLog
+from util.composite_log import CompositeLog
 
 
 def test_composite_log_delegates_to_all_logs():

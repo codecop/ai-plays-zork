@@ -1,24 +1,5 @@
 from pathlib import Path
-import pytest
-from file_utils import read_file, write_file, next_folder_name
-
-
-def cleanup_test_data(data_dir: Path) -> None:
-    for item in data_dir.glob("*"):
-        if item.is_dir():
-            item.rmdir()
-        else:
-            item.unlink()
-    data_dir.rmdir()
-
-
-@pytest.fixture(name="data_dir")
-def fixture_data_dir() -> Path:
-    """Fixture to create and clean up test directory"""
-    data_dir = Path("./test/data/tmp")
-    data_dir.mkdir(exist_ok=True)
-    yield data_dir
-    cleanup_test_data(data_dir)
+from util.file_utils import read_file, write_file, next_folder_name
 
 
 def test_read_file() -> None:

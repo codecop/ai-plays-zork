@@ -1,1 +1,1 @@
-frotz\dfrotz.exe data\zork1.z3
+frotz\installation\dfrotz.exe data\zork1.z3

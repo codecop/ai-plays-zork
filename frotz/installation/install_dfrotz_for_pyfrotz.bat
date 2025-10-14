@@ -5,7 +5,7 @@
 @if exist "%TARGET%\dfrotz.exe" @goto done
 
 mkdir "%TARGET%"
-copy "frotz\dfrotz.exe" "%TARGET%"
+copy "dfrotz.exe" "%TARGET%"
 
 :done
 @endlocal

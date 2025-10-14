@@ -16,7 +16,7 @@ install the python package from pip as usual
 pip install pyfrotz
 ```
 
-which will in turn compile and install the `frotz` executable.
+which will in turn compile and install the `dfrotz` executable.
 
 ## Install under Windows
 
@@ -25,5 +25,5 @@ Get `dfrotz`, compiled for Windows by Hugo Labrande, from [IF Archive](https://w
 modify `pyFrotz-0.1.5/setup.py` to skip compilation and install manually using
 
 ```bash
-pip install frotz\pyFrotz-0.1.5
+pip install frotz\installation\pyFrotz-0.1.5
 ```

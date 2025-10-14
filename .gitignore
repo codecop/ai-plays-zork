@@ -228,3 +228,6 @@ clean.bat
 /*.gv
 /*.gv.pdf
 /*.gv.png
+
+Gemini/
+tmux.noback/

@@ -16,7 +16,7 @@ install the python package from pip as usual
 pip install pyfrotz
 ```
 
-which will in turn compile and install `dfrotz`.
+which will in turn compile and install the `frotz` executable.
 
 ## Install under Windows
 

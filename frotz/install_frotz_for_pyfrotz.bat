@@ -1,0 +1,11 @@
+@echo setting up Frotz
+@setlocal
+
+@set TARGET=%HOMEDRIVE%%HOMEPATH%\.pyfrotz
+@if exist "%TARGET%\dfrotz.exe" @goto done
+
+mkdir "%TARGET%"
+copy "frotz\dfrotz.exe" "%TARGET%"
+
+:done
+@endlocal

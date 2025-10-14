@@ -2,7 +2,7 @@ Cleanup Tasks (alone)
 
 * make tmux work on Windows
 * make OpenAI AI implementation like Mistral and let it run
-
+* make mcp server running Frotz inside
 
 Possible Tasks
 ==============

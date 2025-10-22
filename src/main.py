@@ -1,7 +1,7 @@
 """Script to start the whole thing."""
 
 import sys
-from with_loop.create_ai import create
+from with_loop.create_loop_ai import create
 
 # commandline arguments
 CONFIG = None

@@ -1,4 +1,4 @@
-from ai import Ai
+from with_loop.loop_ai import LoopAi
 from frotz.game import Game
 from tools.room_change.room_change_tracker import RoomChangeTracker
 from util.log import Log
@@ -8,7 +8,7 @@ from util.wait_threshold import WaitThreshold
 class GameLoop:
     """Driver class to combine Game output with AI and vice versa."""
 
-    def __init__(self, log: Log, ai: Ai, tracker: RoomChangeTracker):
+    def __init__(self, log: Log, ai: LoopAi, tracker: RoomChangeTracker):
         self.log = log
         self.ai = ai
         self.tracker = tracker

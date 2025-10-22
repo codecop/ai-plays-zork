@@ -1,11 +1,11 @@
 import subprocess
 import time
 from pathlib import Path
-from ai import Ai
+from with_loop.loop_ai import LoopAi
 from util.log import Log
 
 
-class ClaudeCodeAi(Ai):
+class ClaudeCodeAi(LoopAi):
 
     def __init__(self, configuration: str, run_folder: Path, log: Log):
         super().__init__(configuration, run_folder, log)
@@ -29,6 +29,9 @@ class ClaudeCodeAi(Ai):
         print('claude --dangerously-skip-permissions "read project.md and follow the instructions"')
         # TODO maybe we can do that automatically
         input("Press when ClaudeCode has started")
+
+    def file(self) -> Path:
+        return Path(__file__)
 
     def get_next_command(self, context: str) -> str:
         self.remove_run_resource("output.txt")

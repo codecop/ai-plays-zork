@@ -1,10 +1,10 @@
 from pathlib import Path
 import pytest
-from ai import Ai
 from util.nice_log import NiceLog
+from mistral_ai import MistralAi
 
 
-class EmptyAi(Ai):
+class EmptyAi(MistralAi):
     """Empty implementation to test resource methods."""
 
     def start(self, game_notes: str, game_intro: str):

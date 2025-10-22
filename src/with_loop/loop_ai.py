@@ -5,7 +5,7 @@ from util.file_utils import read_file, write_file
 from util.log import Log
 
 
-class Ai(ABC):
+class LoopAi(ABC):
     """Base class defining the interface for any AI implementation."""
 
     def __init__(self, configuration: str, run_folder: Path, log: Log):
@@ -16,7 +16,11 @@ class Ai(ABC):
 
     def resource_dir(self) -> Path:
         """Resource dir is defined by the configuration and is a source of system prompts."""
-        return Path(__file__).parent / self.configuration
+        return self.file().parent / self.configuration
+
+    @abstractmethod
+    def file(self) -> Path:
+        """File of the AI implementation."""
 
     def load_resource(self, filename: str) -> str:
         """Load a text resource file from the AI's resource directory."""

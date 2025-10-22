@@ -4,11 +4,11 @@ from pathlib import Path
 from mistralai import Mistral
 from mistralai.models import ConversationResponse
 from mistralai.utils import BackoffStrategy, RetryConfig
-from ai import Ai
+from with_loop.loop_ai import LoopAi
 from util.log import Log
 
 
-class MistralAi(Ai):
+class MistralAi(LoopAi):
 
     def __init__(self, configuration: str, run_folder: Path, log: Log):
         super().__init__(configuration, run_folder, log)
@@ -23,6 +23,9 @@ class MistralAi(Ai):
             api_key=api_key,
             retry_config=retry_config,
         )
+
+    def file(self) -> Path:
+        return Path(__file__)
 
     def start(self, game_notes: str, game_intro: str) -> None:
         system_prompt = self.load_resource("system_prompt.md").format(

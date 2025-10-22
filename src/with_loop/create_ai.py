@@ -1,10 +1,10 @@
 """Create the dependency tree of the whole application."""
 
 from pathlib import Path
-from ai import Ai
+from with_loop.loop_ai import LoopAi
 from claude_code_ai import ClaudeCodeAi
 from tools.room_change.composite_room_change import CompositeRoomChange
-from game_loop import GameLoop
+from with_loop.game_loop import GameLoop
 from tools.room_change.graphviz_room_change import GraphvizRoomChange
 from util.individual_log import IndividualLog
 from util.file_utils import next_folder_name
@@ -25,7 +25,7 @@ def _create_run(config: str) -> (Path, Log):
     return run_folder, log
 
 
-def _create_ai(config: str, run_folder: Path, log: Log) -> Ai:
+def _create_ai(config: str, run_folder: Path, log: Log) -> LoopAi:
     """Create the AI for the config."""
 
     if config.startswith("mistral"):

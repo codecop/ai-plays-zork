@@ -8,7 +8,7 @@ from with_loop.loop_ai import LoopAi
 from util.log import Log
 
 
-class MistralAi(LoopAi):
+class MistralLoopAi(LoopAi):
 
     def __init__(self, configuration: str, run_folder: Path, log: Log):
         super().__init__(configuration, run_folder, log)

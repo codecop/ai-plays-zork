@@ -12,8 +12,8 @@ from util.nice_log import NiceLog
 from with_loop.loop_ai import LoopAi
 from with_loop.game_loop import GameLoop
 
-from claude_code_ai import ClaudeCodeAi
-from mistral_ai import MistralAi
+from ai.claudecode.claude_code_loop_ai import ClaudeCodeLoopAi
+from ai.mistralai.mistral_loop_ai import MistralLoopAi
 
 
 def _create_run(config: str) -> (Path, Log):
@@ -30,10 +30,10 @@ def _create_ai(config: str, run_folder: Path, log: Log) -> LoopAi:
     """Create the AI for the config."""
 
     if config.startswith("mistral"):
-        ai = MistralAi(config, run_folder, log)
+        ai = MistralLoopAi(config, run_folder, log)
 
     elif config.startswith("claudecode"):
-        ai = ClaudeCodeAi(config, run_folder, log)
+        ai = ClaudeCodeLoopAi(config, run_folder, log)
 
     else:
         raise ValueError(f"Invalid config: {config}")

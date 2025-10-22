@@ -1,10 +1,10 @@
 from pathlib import Path
 import pytest
 from util.nice_log import NiceLog
-from mistral_ai import MistralAi
+from ai.mistralai.mistral_loop_ai import MistralLoopAi
 
 
-class EmptyAi(MistralAi):
+class EmptyAi(MistralLoopAi):
     """Empty implementation to test resource methods."""
 
     def start(self, game_notes: str, game_intro: str):
@@ -25,7 +25,9 @@ def fixture_ai(data_dir: Path) -> EmptyAi:
 
 
 def test_resources(ai) -> None:
-    assert ai.resource_dir().parts[-2] == "src"
+    assert ai.resource_dir().parts[-4] == "src"
+    assert ai.resource_dir().parts[-3] == "ai"
+    assert ai.resource_dir().parts[-2] == "mistralai"
     assert ai.resource_dir().parts[-1] == "mistralai"
 
     resource = ai.load_resource("system_prompt.md")

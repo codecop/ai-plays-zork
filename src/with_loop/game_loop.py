@@ -1,8 +1,8 @@
-from with_loop.loop_ai import LoopAi
 from frotz.game import Game
 from tools.room_change.room_change_tracker import RoomChangeTracker
 from util.log import Log
 from util.wait_threshold import WaitThreshold
+from with_loop.loop_ai import LoopAi
 
 
 class GameLoop:

@@ -1,7 +1,7 @@
 import re
 from pyfrotz import Frotz
-from util.file_utils import read_file
 from frotz.frotz_patch import patch_frotz
+from util.file_utils import read_file
 
 
 class Game:

@@ -1,18 +1,19 @@
 """Create the dependency tree of the whole application."""
 
 from pathlib import Path
-from with_loop.loop_ai import LoopAi
-from claude_code_ai import ClaudeCodeAi
 from tools.room_change.composite_room_change import CompositeRoomChange
-from with_loop.game_loop import GameLoop
 from tools.room_change.graphviz_room_change import GraphvizRoomChange
+from tools.room_change.room_change_tracker import RoomChangeTracker
 from util.individual_log import IndividualLog
 from util.file_utils import next_folder_name
 from util.composite_log import CompositeLog
 from util.log import Log
 from util.nice_log import NiceLog
+from with_loop.loop_ai import LoopAi
+from with_loop.game_loop import GameLoop
+
+from claude_code_ai import ClaudeCodeAi
 from mistral_ai import MistralAi
-from tools.room_change.room_change_tracker import RoomChangeTracker
 
 
 def _create_run(config: str) -> (Path, Log):

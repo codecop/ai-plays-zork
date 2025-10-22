@@ -1,5 +1,5 @@
-from tools.room_change.room_change import RoomChange
 from tools.room_change.exploration_action import ExplorationAction
+from tools.room_change.room_change import RoomChange
 
 
 class CompositeRoomChange(RoomChange):

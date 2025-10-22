@@ -68,7 +68,7 @@
 ## Documentation
 
 - Remove ALL comments and docstrings from classes and methods
-- Omit module-level docstrings
+- Do add module-level docstrings
 - Code should be self-documenting through clear naming
 
 ### Comments

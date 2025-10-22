@@ -1,6 +1,6 @@
 from util.file_utils import read_file
-from graphviz_room_change import GraphvizRoomChange
-from map.exploration_action import ExplorationAction
+from tools.room_change.graphviz_room_change import GraphvizRoomChange
+from tools.room_change.exploration_action import ExplorationAction
 
 
 def test_unique_edges(data_dir) -> None:

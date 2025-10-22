@@ -3,16 +3,16 @@
 from pathlib import Path
 from ai import Ai
 from claude_code_ai import ClaudeCodeAi
-from composite_room_change import CompositeRoomChange
+from tools.room_change.composite_room_change import CompositeRoomChange
 from game_loop import GameLoop
-from graphviz_room_change import GraphvizRoomChange
+from tools.room_change.graphviz_room_change import GraphvizRoomChange
 from util.individual_log import IndividualLog
 from util.file_utils import next_folder_name
 from util.composite_log import CompositeLog
 from util.log import Log
 from util.nice_log import NiceLog
 from mistral_ai import MistralAi
-from room_change_tracker import RoomChangeTracker
+from tools.room_change.room_change_tracker import RoomChangeTracker
 
 
 def _create_run(config: str) -> (Path, Log):

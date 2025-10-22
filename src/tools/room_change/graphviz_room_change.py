@@ -1,7 +1,7 @@
 from pathlib import Path
 from graphviz import Digraph
-from map.exploration_action import ExplorationAction
-from room_change import RoomChange
+from tools.room_change.exploration_action import ExplorationAction
+from tools.room_change.room_change import RoomChange
 
 
 DIRECTION_PORTS = {

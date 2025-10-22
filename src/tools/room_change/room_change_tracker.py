@@ -1,7 +1,7 @@
 import re
 from util.log import Log
-from room_change import RoomChange
-from map.exploration_action import ExplorationAction
+from tools.room_change.room_change import RoomChange
+from tools.room_change.exploration_action import ExplorationAction
 
 # order is relevant for regex matching
 DIRECTIONS = [

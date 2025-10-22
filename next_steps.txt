@@ -1,3 +1,7 @@
+* create runs folder mit sub folders, sauberer
+
+---
+
 1) move tmux script to src/frotz and make them work with tmux windows. readme is tools description
 
 Cleanup Tasks (alone)
@@ -24,7 +28,7 @@ update_map(current_location, exits, description)
 Tool: remember_fact(key, value)
 Tool: recall_fact(key)
 
-Oder hints für raum
+Oder hints fï¿½r raum
 
 Visualization
 -------------
@@ -74,10 +78,9 @@ First step is to write a test for a conversation/completion.
 
 ## Older Notes
 
-* create runs folder mit sub folders, sauberer
 * Idea: game is also a tool. so we can go meta.
-. loop tests? müsste ai mocken. geht
-- tests? müsste game mocken
-- room Change der cycle entdeckt (3* gleiche Räume) und warn und dann exception wirft
-  mit Raum Liste genügt 
+. loop tests? mï¿½sste ai mocken. geht
+- tests? mï¿½sste game mocken
+- room Change der cycle entdeckt (3* gleiche Rï¿½ume) und warn und dann exception wirft
+  mit Raum Liste genï¿½gt 
 - Game Loop mit try catch und gibt Score und moves aus (auch bei Ctrl Break?)

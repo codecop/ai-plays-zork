@@ -31,7 +31,6 @@ Each Markdown section below represents a step in the development workflow and ha
 ### 1. Architecture
 
 - Prefer dependency injection
-- Never use static methods or Singletons
 - Use Value Objects for domain concepts
 
 ### 2. Design Patterns
@@ -63,7 +62,6 @@ Each Markdown section below represents a step in the development workflow and ha
 - Use `@dataclass(frozen=True)` for value objects
 - Provide immutable update methods that return new instances
 - Equality semantics: Based on identity fields
-- Documentation: Required
 
 ## 💻 Python Code
 
@@ -77,7 +75,7 @@ Each Markdown section below represents a step in the development workflow and ha
 - Present changes in small, reviewable chunks
 - Get approval for each change set
 - Review changes before committing
-- Stop after each step.
+- Stop after each step
 
 ### 1. Code Style
 
@@ -100,17 +98,16 @@ Each Markdown section below represents a step in the development workflow and ha
 
 - Maximum method length: 10 lines
 - Maximum class length: 100 lines
-- Use optional parameters or Null Objects for nil handling
 
-### 4. Error Handling
+### 4. Error and Null Handling
 
-- Use optional parameters or Null Objects where appropriate
+- Use optional parameters or Null Objects for None handling
 - Exception types: Use specific exception types
 - Error messages: Include context
 
 ### 5. Resource Management
 
-- Use monitors
+- Use context managers (with statements)
 - Document resource ownership
 
 ### 6. Configuration
@@ -118,7 +115,7 @@ Each Markdown section below represents a step in the development workflow and ha
 - Prefer external configuration
 - Use type-safe config
 
-### 8. Documentation
+### 7. Documentation
 
 - Remove ALL comments and docstrings from classes and methods
 - Do add module-level docstrings

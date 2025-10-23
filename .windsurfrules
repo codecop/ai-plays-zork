@@ -1,128 +1,172 @@
-# Development Workflow
+# Development Rules
 
-## AI Working Process
+- **ALWAYS** start replies with STARTER_CHARACTER + space (default: 🟢 (Green circle)).
+- Stack emojis when requested, don't replace.  
+- **ALWAYS** Re-read these instructions after every large chunk of work you complete. When you re-read this file, say `🟢 Main rules re-read`
 
-1. Git Hygiene
-   - Check for uncommitted changes before starting
-   - Prompt user to commit or stash changes if working directory is not clean
-   - Offer to stage/commit changes if requested
+Each Markdown section below represents a step in the development workflow and has its own starting character:
 
-2. Planning Phase
-   - Present complete implementation plan
-   - Get explicit approval before proceeding
+## ✋ Manual Steps (Hand)
 
-3. Execution Phase
-   - Implement one step at a time
-   - Present changes for review after each step
-   - Get approval before proceeding to next step
-   - Make one logical change at a time
-   - Keep changes focused and atomic
-   - Run tests after each small change
-   - Ensure each commit leaves the system in a working state
-   - Break down complex tasks into smaller, testable units
-   - Avoid mixing refactoring with feature changes
+- STARTER_CHARACTER = ✋
+- When user asks for manual steps use this step.
+- Stack emojis when doing code changes for this step.
 
-4. Code Changes
-   - Break large changes into smaller, reviewable chunks
-   - Present each file change individually
-   - Get approval for each change set
-   - If there are tests, run them
-   - Review changes before committing
-   - Commit after each step
-   - Prefix all commit messages with "(ai)"
+## 🎯 Planning
 
-## Environment
+- STARTER_CHARACTER = 🎯 (Target)
 
-- OS: Windows
-- Shell: CMD.exe
-- Capabilities: Basic batch commands only
-- Line Endings: CRLF
+### 1. Planning Phase
 
-# Python Coding and Design Conventions for Project
+- Present complete implementation plan
+- Get explicit approval before proceeding
+- Break down complex tasks into smaller, testable units
+- Avoid mixing phases like planning, designing, coding, testing, and version control
+- Avoid mixing refactoring with feature changes
 
-## Infrastructure
+## ✏️ Designing
 
-- Python version: 3.9
+- STARTER_CHARACTER = ✏️ (Pencil)
 
-### Project Structure
-
-- standard Python project layout
-- `src/` for source code
-- `test/` for test files
-
-## Code Style
-
-- Indentation: 4 spaces
-- Max line length: 120
-- Charset: ISO-8859-1
-
-## Naming Conventions
-
-- Class naming: PascalCase
-- Method naming: lowercase with underscore (use verbs)
-- Variable naming: lowercase with underscore
-- Constant naming: UPPER_SNAKE_CASE
-- Module (file) naming: lowercase with underscore
-- Collection naming: Use plural or descriptive names
-
-## Documentation
-
-- Remove ALL comments and docstrings from classes and methods
-- Do add module-level docstrings
-- Code should be self-documenting through clear naming
-
-### Comments
-
-- Omit inferred API comments
-- Keep single line comments to a minimum
-
-## Testing
-
-### Test Structure
-
-- Framework: Pytest
-- Test modules: Same name as module under test prefixed with `test_`
-- Test methods: `test_StateUnderTest_Act_ExpectedBehavior`
-
-## Dependencies
+### 1. Architecture
 
 - Prefer dependency injection
 - Never use static methods or Singletons
+- Use Value Objects for domain concepts
 
-### Dependency Injection Pattern
+### 2. Design Patterns
 
-- Accept Optional dependencies in constructors with lazy initialization
-- Use pattern: `param or DefaultClass()` for optional dependencies
+- Prefer: Dependency Injection, Command, Builder, Factory, Strategy
+- Domain Driven Design: First Class Collection, Value Object
+- Avoid: Static methods, Singletons
 
-## Error Handling
-
-- Null handling: Use Optional or null objects where appropriate
-- Exception types: Use specific exception types
-- Error messages: Include context
-
-## Method Design
+### 3. Method Design
 
 - Single responsibility principle
 
-## Immutability
+### 4. Class Design
 
-- Use `@dataclass(frozen=True)` for value objects
-- Provide immutable update methods that return new instances
+- Interfaces: Define contracts
+- Fields: Private with minimal getters/setters
+- Accept Optional dependencies in constructors with lazy initialization
+- Use pattern: `param or DefaultClass()` for optional dependencies
 
-## Design Patterns
-
-Preferred patterns:
-
-- Dependency Injection
-- Command Pattern
-- Builder Pattern
-- Factory Pattern
-- Strategy Pattern
-- First Class Collection
-- Value Object
-
-## Separation of Concerns
+### 5. Separation of Concerns
 
 - Separate argument parsing, configuration, and dependency injection
 - Dedicated classes for specific responsibilities
 - Separate file system operations and business logic
+
+### 6. Value Objects
+
+- Immutability: Required
+- Use `@dataclass(frozen=True)` for value objects
+- Provide immutable update methods that return new instances
+- Equality semantics: Based on identity fields
+- Documentation: Required
+
+## 💻 Python Code
+
+- STARTER_CHARACTER = 💻 (Laptop)
+
+### 0. Code Change Workflow
+
+- Make one logical change at a time
+- Run tests after each change
+- Check for and fix all warnings
+- Present changes in small, reviewable chunks
+- Get approval for each change set
+- Review changes before committing
+- Stop after each step.
+
+### 1. Code Style
+
+- Indentation: 4 spaces
+- Max line length: 120
+- Charset: ISO-8859-1
+- One class per file
+
+### 2. Naming Conventions
+
+- Classes: PascalCase
+- Interfaces: PascalCase (ends with 'able')
+- Collection naming: Use plural or descriptive names
+- Methods: lowercase with underscore (use verbs)
+- Variables: lowercase with underscore
+- Constants: UPPER_SNAKE_CASE
+- Module (file) naming: lowercase with underscore
+
+### 3. Code Quality
+
+- Maximum method length: 10 lines
+- Maximum class length: 100 lines
+- Use optional parameters or Null Objects for nil handling
+
+### 4. Error Handling
+
+- Use optional parameters or Null Objects where appropriate
+- Exception types: Use specific exception types
+- Error messages: Include context
+
+### 5. Resource Management
+
+- Use monitors
+- Document resource ownership
+
+### 6. Configuration
+
+- Prefer external configuration
+- Use type-safe config
+
+### 8. Documentation
+
+- Remove ALL comments and docstrings from classes and methods
+- Do add module-level docstrings
+- Omit inferred API comments
+- Keep single line comments to a minimum
+
+**IMPORTANT** DO NOT COMMENT CODE, even if comments already present. Communicate meaning by writing clean, expressive code.
+
+## ✅ Testing
+
+- STARTER_CHARACTER = ✅ (Check mark)
+
+### 1. Test Structure
+
+- Framework: pytest
+- Test modules: Same name as module under test prefixed with `test_`
+- Test methods: `test_StateUnderTest_Act_ExpectedBehavior`
+- If there are tests, run them
+
+### 2. Test Principles
+
+- Write tests first, then implementation
+- Keep tests independent and fast
+- Run tests after each change
+- Ensure tests cover edge cases
+
+## 🌳 Version Control
+
+- STARTER_CHARACTER = 🌳 (Tree)
+
+### 1. Git Hygiene
+
+- Check for uncommitted changes before starting
+- Prompt user to commit or revert changes if working directory is not clean
+- Review changes before committing
+- Commit after each logical change
+- Write clear, descriptive commit messages
+- Prefix all AI-generated commits with "(ai)"
+
+## 🔧 Environment and Tools
+
+- STARTER_CHARACTER = 🔧 (Wrench)
+- OS: Windows
+- Shell: CMD.exe
+- Capabilities: Basic batch commands only
+- Python version: 3.9
+- Source Layout: Standard Python project layout
+- `src/` for source code
+- `test/` for test files
+- Line Endings: CRLF
+- Encoding: Latin-1/ISO-8859-1 unless `.windsurfrules` which is UTF-8

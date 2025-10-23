@@ -219,6 +219,9 @@ env3.bat
 clean.bat
 .mistralai_apikey
 
+# Marker Peter
+TODO*.txt
+
 /claudecode-run-*/
 /claude-run-*/
 /mistralai-run-*/
@@ -229,5 +232,4 @@ clean.bat
 /*.gv.pdf
 /*.gv.png
 
-Gemini/
 tmux.noback/

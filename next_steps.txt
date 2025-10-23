@@ -1,11 +1,39 @@
----
+1. fix OpenAI Test with
 
-1) move tmux script to src/frotz and make them work with tmux windows. readme is tools description
+import threading
+import asyncio
+
+    try:
+        # For Python 3.10+, use new asyncio policy
+        if hasattr(asyncio, 'get_running_loop'):
+            loop = asyncio.get_running_loop()
+        else:
+            # Fallback for older Python versions
+            loop = asyncio.get_event_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
+    asyncio_thread = threading.Thread(target=run)
+    asyncio_thread.daemon = True
+    asyncio_thread.start()
+
+---
 
 Cleanup Tasks (alone)
 
+* bin folder for all scripts which run directly and indirectly invoked from main
+
+* game loop provide an upper limit to run, see good first runs how it went...
+
 * make tmux work on Windows
+  1) move tmux script to src/frotz and make them work with tmux windows. readme is tools description
+
 * make OpenAI AI implementation like Mistral and let it run
+  * Repeat MistralAI workflow with OpenAI backend
+    Python SDK?
+    Goal is to compare what it can do?
+
 * make mcp server running Frotz inside
 
 Possible Tasks
@@ -26,14 +54,10 @@ update_map(current_location, exits, description)
 Tool: remember_fact(key, value)
 Tool: recall_fact(key)
 
-Oder hints für raum
+Oder hints für Raum
 
 Other models
 -------------
-
-First step is to write a test for a conversation/completion.
-  - having a state and asking several questions on that
-  - using a System prompt as guidance
 
 * Use a local model from OpenAI "oss20b..." 
   through Ollama
@@ -45,10 +69,6 @@ First step is to write a test for a conversation/completion.
 * Option Claude prompt with tools, which is its own tools in files
   - give it some goal
   - have it collect knowledge for itself
-
-* Repeat MistralAI workflow with OpenAI backend
-  Python SDK?
-  Goal is to compare what it can do?
 
 ---
 

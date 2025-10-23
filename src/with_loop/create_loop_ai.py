@@ -19,8 +19,8 @@ from ai.mistralai.mistral_loop_ai import MistralLoopAi
 def _create_run(config: str) -> (Path, Log):
     """Create the run folder and log writing into it."""
 
-    base_name = f"{config}-run"
-    run_folder = next_folder_name(".", base_name)
+    base_name = f"{config}"
+    run_folder = next_folder_name("runs", base_name)
     log = CompositeLog(NiceLog(run_folder), IndividualLog(run_folder, ""))
 
     return run_folder, log

@@ -23,6 +23,8 @@ def next_folder_name(base_path: Path, pattern: str) -> Path:
     max_num = 0
 
     path = Path(base_path)
+    path.mkdir(parents=True, exist_ok=True)
+    
     for item in path.iterdir():
         max_num = _next_num(pattern_regex, item, max_num)
 

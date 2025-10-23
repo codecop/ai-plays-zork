@@ -222,10 +222,7 @@ clean.bat
 # Marker Peter
 TODO*.txt
 
-/claudecode-run-*/
-/claude-run-*/
-/mistralai-run-*/
-/mistralai-tools-run-*/
+/runs/
 
 # Graphviz
 /*.gv

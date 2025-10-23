@@ -1,9 +1,10 @@
+from pathlib import Path
 from tools.room_change.graphviz_room_change import GraphvizRoomChange
 from tools.room_change.exploration_action import ExplorationAction
 from util.file_utils import read_file
 
 
-def test_unique_edges(data_dir) -> None:
+def test_unique_edges(data_dir: Path) -> None:
     gv = GraphvizRoomChange(data_dir, False)
 
     gv.record_movement(ExplorationAction("room1", "room2", "north"))
@@ -18,7 +19,7 @@ def test_unique_edges(data_dir) -> None:
     assert len(gv.known_edges) == 2
 
 
-def test_graph_file(data_dir) -> None:
+def test_graph_file(data_dir: Path) -> None:
     gv = GraphvizRoomChange(data_dir, False)
     gv.record_movement(ExplorationAction("southern room", "north", "northern room"))
 
@@ -27,7 +28,7 @@ def test_graph_file(data_dir) -> None:
     assert actual_file.exists()
     # assert (data_dir / "map.gv.pdf").exists()
 
-    expected_file = "test/data/graphviz_room_change/single.gv"
+    expected_file = "test/tools/room_change/data/graphviz_room_change/single.gv"
     expected_content = read_file(expected_file)
 
     actual_content = read_file(actual_file)

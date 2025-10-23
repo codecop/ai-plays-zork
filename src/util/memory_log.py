@@ -1,7 +1,7 @@
 from util.log import Log
 
 
-class MemoryLog(Log):
+class MemoryLog(Log):  # pylint: disable=too-many-instance-attributes
 
     def __init__(self):
         self.ai_messages = []

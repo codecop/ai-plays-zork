@@ -1,5 +1,3 @@
-* create runs folder mit sub folders, sauberer
-
 ---
 
 1) move tmux script to src/frotz and make them work with tmux windows. readme is tools description
@@ -29,21 +27,6 @@ Tool: remember_fact(key, value)
 Tool: recall_fact(key)
 
 Oder hints für raum
-
-Visualization
--------------
-
-* show the map as Graphviz, this is WIP
-  TODO next fix layout of the map using port and rank so it is correct aligned
-
-* Create a visual map of the explored area, like rogue
-  rooms with exits and items to work without
-  show it to user for progress of AI
-  current AI, previous AI, items, exits tried, exits taken
-  (independent of AI)
-  later maybe feed it to AI as knowledge
-
----
 
 Other models
 -------------

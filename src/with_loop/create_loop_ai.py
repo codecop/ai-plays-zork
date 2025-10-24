@@ -14,6 +14,7 @@ from with_loop.game_loop import GameLoop
 
 from ai.claudecode.claude_code_loop_ai import ClaudeCodeLoopAi
 from ai.mistralai.mistral_loop_ai import MistralLoopAi
+from ai.openai.openai_loop_ai import OpenaiLoopAi
 
 
 def _create_run(config: str) -> (Path, Log):
@@ -34,6 +35,9 @@ def _create_ai(config: str, run_folder: Path, log: Log) -> LoopAi:
 
     elif config.startswith("claudecode"):
         ai = ClaudeCodeLoopAi(config, run_folder, log)
+
+    elif config.startswith("openai"):
+        ai = OpenaiLoopAi(config, run_folder, log)
 
     else:
         raise ValueError(f"Invalid config: {config}")

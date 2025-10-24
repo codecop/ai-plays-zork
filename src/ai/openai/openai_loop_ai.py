@@ -1,6 +1,5 @@
 import asyncio
 from pathlib import Path
-from openai import OpenAI
 from agents import Agent, RunResult, Runner
 from with_loop.loop_ai import LoopAi
 from util.log import Log

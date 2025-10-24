@@ -2,7 +2,6 @@
 pyFrotz==0.1.5
 mistralai==1.9.11
 graphviz==0.21
-openai==2.6.1
 openai-agents==0.4.1
 
 # Test dependencies

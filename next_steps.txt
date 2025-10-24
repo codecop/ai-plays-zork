@@ -1,4 +1,5 @@
-1. fix OpenAI Test with
+* make OpenAI AI implementation like Mistral and let it run
+    Goal is to compare what it can do?
 
 import threading
 import asyncio
@@ -22,17 +23,12 @@ import asyncio
 
 Cleanup Tasks (alone)
 
-* bin folder for all scripts which run directly and indirectly invoked from main
-
 * game loop provide an upper limit to run, see good first runs how it went...
+
+* add coverage
 
 * make tmux work on Windows
   1) move tmux script to src/frotz and make them work with tmux windows. readme is tools description
-
-* make OpenAI AI implementation like Mistral and let it run
-  * Repeat MistralAI workflow with OpenAI backend
-    Python SDK?
-    Goal is to compare what it can do?
 
 * make mcp server running Frotz inside
 

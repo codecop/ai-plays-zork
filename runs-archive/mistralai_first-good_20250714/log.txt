@@ -1,0 +1,136 @@
+START 2025-07-14 00:20:05
+AI    ai: <class 'mistral_ai.MistralAi'>
+      configuration: mistralai
+      model: mistral-small-latest
+      agent id: ag_019805dfc125734195078d03790e38de
+GAME  West of House
+      You are standing in an open field west of a white house, with a boarded front door. There is a small mailbox here.
+CMD   open mailbox
+GAME  Opening the small mailbox reveals a leaflet.
+CMD   take leaflet
+GAME  Taken.
+CMD   read leaflet
+GAME  "WELCOME TO ZORK!
+      ZORK is a game of adventure, danger, and low cunning. In it you will explore some of the most amazing territory ever seen by mortals. No computer should be without one!"
+CMD   inventory
+GAME  You are carrying:
+      A leaflet
+CMD   go east
+GAME  The door is boarded and you can't remove the boards.
+CMD   go south
+GAME  South of House
+      You are facing the south side of a white house. There is no door here, and all the windows are boarded.
+CMD   go east
+GAME  Behind House
+      You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.
+CMD   open window
+GAME  With great effort, you open the window far enough to allow entry.
+CMD   enter window
+GAME  Kitchen
+      You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open. On the table is an elongated brown sack, smelling of hot peppers. A bottle is sitting on the table. The glass bottle contains: A quantity of water
+CMD   take bottle
+GAME  Taken.
+CMD   take sack
+GAME  Taken.
+CMD   inventory
+GAME  You are carrying:
+      A brown sack A glass bottle The glass bottle contains: A quantity of water A leaflet
+CMD   go up
+GAME  You have moved into a dark place.
+      It is pitch black. You are likely to be eaten by a grue.
+CMD   go down
+GAME  Kitchen
+CMD   go west
+GAME  Living Room
+      You are in the living room. There is a doorway to the east, a wooden door with strange gothic lettering to the west, which appears to be nailed shut, a trophy case, and a large oriental rug in the center of the room. Above the trophy case hangs an elvish sword of great antiquity. A battery-powered brass lantern is on the trophy case.
+CMD   take lantern
+GAME  Taken.
+CMD   take sword
+GAME  Taken.
+CMD   inventory
+GAME  You are carrying:
+      A sword A brass lantern A brown sack A glass bottle The glass bottle contains: A quantity of water A leaflet
+CMD   light lantern
+GAME  The brass lantern is now on.
+CMD   examine sword
+GAME  There's nothing special about the sword.
+CMD   examine trophy case
+GAME  The trophy case is empty.
+CMD   go west
+GAME  The door is nailed shut.
+CMD   go east
+GAME  Kitchen
+CMD   go down
+GAME  Only Santa Claus climbs down chimneys.
+CMD   go up
+GAME  Attic
+      This is the attic. The only exit is a stairway leading down. A large coil of rope is lying in the corner. On a table is a nasty-looking knife.
+CMD   take rope
+GAME  Taken.
+CMD   take knife
+GAME  Taken.
+CMD   inventory
+GAME  You are carrying:
+      A nasty knife A rope A sword A brass lantern (providing light) A brown sack A glass bottle The glass bottle contains: A quantity of water A leaflet
+CMD   go down
+GAME  Kitchen
+CMD   go east
+GAME  Behind House
+CMD   go east
+GAME  Clearing
+      You are in a small clearing in a well marked forest path that extends to the east and west.
+CMD   go east
+GAME  Canyon View
+      You are at the top of the Great Canyon on its west wall. From here there is a marvelous view of the canyon and parts of the Frigid River upstream. Across the canyon, the walls of the White Cliffs join the mighty ramparts of the Flathead Mountains to the east. Following the Canyon upstream to the north, Aragain Falls may be seen, complete with rainbow. The mighty Frigid River flows out from a great dark cavern. To the west and south can be seen an immense forest, stretching for miles around. A path leads northwest. It is possible to climb down into the canyon from here.
+CMD   go north
+GAME  You can't go that way.
+CMD   go northwest
+GAME  Clearing
+CMD   go west
+GAME  Behind House
+CMD   go east
+GAME  Clearing
+CMD   go east
+GAME  Canyon View
+CMD   climb down
+GAME  What do you want to climb down?
+CMD   climb down canyon
+GAME  I don't know the word "canyon".
+CMD   climb down wall
+GAME  Rocky Ledge
+      You are on a ledge about halfway up the wall of the river canyon. You can see from here that the main flow from Aragain Falls twists along a passage which it is impossible for you to enter. Below you is the canyon bottom. Above you is more cliff, which appears climbable.
+CMD   climb up
+GAME  (up the cliff)
+      Canyon View
+CMD   climb down
+GAME  What do you want to climb down?
+CMD   climb down wall
+GAME  Rocky Ledge
+CMD   climb down
+GAME  (down the cliff)
+      Canyon Bottom You are beneath the walls of the river canyon which may be climbable here. The lesser part of the runoff of Aragain Falls flows by below. To the north is a narrow path.
+CMD   go north
+GAME  End of Rainbow
+      You are on a small, rocky beach on the continuation of the Frigid River past the Falls. The beach is narrow due to the presence of the White Cliffs. The river canyon opens here and sunlight shines in from above. A rainbow crosses over the falls to the east and a narrow path continues to the southwest.
+CMD   go east
+GAME  You can't go that way.
+CMD   go southwest
+GAME  Canyon Bottom
+CMD   go north
+GAME  End of Rainbow
+CMD   go southwest
+GAME  Canyon Bottom
+CMD   go north
+GAME  End of Rainbow
+CMD   go east
+GAME  You can't go that way.
+CMD   go southwest
+GAME  Canyon Bottom
+CMD   go north
+GAME  End of Rainbow
+CMD   go east
+GAME  You can't go that way.
+CMD   go southwest
+GAME  Canyon Bottom
+CMD   go north
+GAME  End of Rainbow

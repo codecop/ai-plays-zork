@@ -23,10 +23,6 @@ import asyncio
 
 Cleanup Tasks (alone)
 
-* game loop provide an upper limit to run, see good first runs how it went...
-
-* add coverage
-
 * make tmux work on Windows
   1) move tmux script to src/frotz and make them work with tmux windows. readme is tools description
 

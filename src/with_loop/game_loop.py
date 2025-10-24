@@ -22,11 +22,12 @@ class GameLoop:
 
         self.ai.start(game_notes, game_intro)
 
-    def run(self, threshold: float = 0) -> None:
+    def run(self, max_loops: int = 1000, threshold: float = 0) -> None:
         """Run the game loop with a given AI."""
 
         wait_threshold = WaitThreshold(threshold)
         command = "look"
+        loop_count = 0
         while True:
             game_output = self.game.do_command(command)
             self.log.game(game_output)
@@ -36,12 +37,16 @@ class GameLoop:
             # wait for threshold
             wait_threshold.wait()
 
+            if self.game.game_ended():
+                break
+            if loop_count >= max_loops:
+                break
+
             # Get AI's next move
             command = self.ai.get_next_command(game_output)
             self.log.command(command)
 
-            if self.game.game_ended():
-                break
+            loop_count += 1
 
     def close(self) -> None:
         self.ai.close()

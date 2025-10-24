@@ -1,13 +1,14 @@
 # Project dependencies
 pyFrotz==0.1.5
-mistralai==1.9.10
+mistralai==1.9.11
 graphviz==0.21
-openai==1.107.2
-openai-agents==0.3.0
+openai==2.6.1
+openai-agents==0.4.1
 
 # Test dependencies
 pytest==8.4.2
-pytest-cov==6.3.0
+pytest-cov==7.0.0
 
 # Dev dependencies
-pylint==3.3.8
+pylint==3.3.9
+# ^^ last for Python 3.9

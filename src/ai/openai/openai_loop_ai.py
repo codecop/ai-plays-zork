@@ -1,5 +1,6 @@
 import asyncio
 from pathlib import Path
+from typing import Optional, Any
 from agents import Agent, RunResult, Runner
 from with_loop.loop_ai import LoopAi
 from util.log import Log
@@ -10,8 +11,8 @@ class OpenaiLoopAi(LoopAi):
     def __init__(self, configuration: str, run_folder: Path, log: Log):
         super().__init__(configuration, run_folder, log)
 
-        self.agent = None
-        self.last_response = None
+        self.agent: Optional[Agent[Any]] = None
+        self.last_response: Optional[RunResult] = None
         self.calls = 0
 
     def file(self) -> Path:
@@ -33,6 +34,8 @@ class OpenaiLoopAi(LoopAi):
         self._log_agent_info()
 
     def _log_agent_info(self) -> None:
+        if self.agent is None:
+            raise RuntimeError("Agent not initialized")
         self.log.ai(
             f"ai: {self.__class__}\n"
             + f"configuration: {self.configuration}\n"
@@ -53,14 +56,16 @@ class OpenaiLoopAi(LoopAi):
             # For Python 3.10+, use new asyncio policy
             if hasattr(asyncio, "get_running_loop"):
                 return asyncio.get_running_loop()
-            else:
-                # Fallback for older Python versions
-                return asyncio.get_event_loop()
+
+            # Fallback for older Python versions
+            return asyncio.get_event_loop()
         except RuntimeError:
             # return asyncio.new_event_loop()
             return asyncio.get_event_loop()
 
     async def _send_prompt_to_server(self, prompt: str) -> RunResult:
+        if self.agent is None:
+            raise RuntimeError("Agent not initialized")
         if not self.last_response:
             response = await Runner.run(self.agent, prompt)
             self.last_response = response

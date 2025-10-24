@@ -1,8 +1,9 @@
 import json
 import os
+from typing import Optional
 from pathlib import Path
 from mistralai import Mistral
-from mistralai.models import ConversationResponse
+from mistralai.models import ConversationResponse, Agent
 from mistralai.utils import BackoffStrategy, RetryConfig
 from with_loop.loop_ai import LoopAi
 from util.log import Log
@@ -13,8 +14,8 @@ class MistralLoopAi(LoopAi):
     def __init__(self, configuration: str, run_folder: Path, log: Log):
         super().__init__(configuration, run_folder, log)
 
-        self.agent = None
-        self.conversation_id = None
+        self.agent: Optional[Agent] = None
+        self.conversation_id: Optional[str] = None
         self.calls = 0
 
         api_key = os.environ.get("MISTRAL_API_KEY")
@@ -44,6 +45,8 @@ class MistralLoopAi(LoopAi):
         self._log_agent_info()
 
     def _log_agent_info(self) -> None:
+        if self.agent is None:
+            raise RuntimeError("Agent not initialized")
         self.log.ai(
             f"ai: {self.__class__}\n"
             + f"configuration: {self.configuration}\n"
@@ -59,6 +62,8 @@ class MistralLoopAi(LoopAi):
         return self._handle_response(response)
 
     def _send_prompt_to_server(self, prompt: str) -> ConversationResponse:
+        if self.agent is None:
+            raise RuntimeError("Agent not initialized")
         if not self.conversation_id:
             response = self.client.beta.conversations.start(
                 agent_id=self.agent.id,
@@ -93,13 +98,13 @@ class MistralLoopAi(LoopAi):
 
         if output.type == "function.call":
             function_name = output.name
-            function_args = json.loads(output.arguments)
+            function_args = json.loads(str(output.arguments))
             # TODO call the function from somewhere, e.g. a injected object/dict
             function_result = "False"
 
             self.log.ai(f"TOOL call {function_name}")
             response = self.client.beta.conversations.append(
-                conversation_id=self.conversation_id,
+                conversation_id=response.conversation_id,
                 # List[FunctionResultEntry]
                 inputs=[
                     {

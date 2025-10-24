@@ -55,10 +55,10 @@ class MistralLoopAi(LoopAi):
 
     def get_next_command(self, context: str) -> str:
         prompt = f"Game answers with {context}"
-        response = self._send_initial_prompt_to_server(prompt)
+        response = self._send_prompt_to_server(prompt)
         return self._handle_response(response)
 
-    def _send_initial_prompt_to_server(self, prompt: str) -> ConversationResponse:
+    def _send_prompt_to_server(self, prompt: str) -> ConversationResponse:
         if not self.conversation_id:
             response = self.client.beta.conversations.start(
                 agent_id=self.agent.id,

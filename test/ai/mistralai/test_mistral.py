@@ -47,13 +47,13 @@ def test_mistral_agent():
         # store=False
     )
     assert len(response.outputs) == 1
-    print(response.outputs[0].content)
+    print("\n  1: " + response.outputs[0].content)
 
     response = client.beta.conversations.append(
         conversation_id=response.conversation_id, inputs="Give another sentence."
     )
     assert len(response.outputs) == 1
-    print(response.outputs[0].content)
+    print("  2:", response.outputs[0].content, end="")
 
 
 def identify_user(user_id: str) -> str:
@@ -127,5 +127,4 @@ def test_mistral_function_calling():
     assert len(response.outputs) == 1
     output = response.outputs[0]
     assert output.type == "message.output"
-    print(output.content)
     assert output.content == "User U128 is Hans"

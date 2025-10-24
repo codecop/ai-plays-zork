@@ -6,7 +6,7 @@ from util.nice_log import NiceLog
 @pytest.fixture(name="log_file")
 def fixture_log_file(data_dir: Path) -> (NiceLog, Path):
     log_path = data_dir
-    log = NiceLog(log_path)
+    log = NiceLog(log_path, False)  # do not log to std in tests
     return log, log.path
 
 

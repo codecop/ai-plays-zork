@@ -68,12 +68,12 @@ async def test_openai_agent():
 
     result = await Runner.run(simple_agent, "Who is Albert Einstein? Just 1 sentence")
     # print(result)
-    print("\n\t1: " + result.final_output)
+    print("\n  1: " + result.final_output)
     # assert "abc" == result.final_output
 
     new_input = result.to_input_list() + [
         {"role": "user", "content": "Give another sentence."}
     ]
     result = await Runner.run(simple_agent, new_input)
-    print("\t2: " + result.final_output)
+    print("  2: " + result.final_output, end="")
     # assert "abc" == result.final_output

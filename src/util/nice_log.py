@@ -17,8 +17,9 @@ class AnsiColors:  # pylint: disable=too-few-public-methods
 class NiceLog(Log):
     """Record the output of the game and the AI to console and a log file."""
 
-    def __init__(self, path: Path):
+    def __init__(self, path: Path, log_to_std: bool = True):
         self.path = path / "nice_log.txt"
+        self._log_to_std = log_to_std
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self._write_start_time()
 
@@ -50,7 +51,8 @@ class NiceLog(Log):
             log_message += f"\n{spacer}{line}"
 
         self._log(log_message)
-        print(f"{color}{log_message}{AnsiColors.RESET}", flush=True)
+        if self._log_to_std:
+            print(f"{color}{log_message}{AnsiColors.RESET}", flush=True)
 
     def _log(self, message: str) -> None:
         with open(self.path, "a", encoding=ENCODING) as f:

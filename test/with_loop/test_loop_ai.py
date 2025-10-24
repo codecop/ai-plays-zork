@@ -20,7 +20,7 @@ class EmptyAi(MistralLoopAi):
 @pytest.fixture(name="ai")
 def fixture_ai(data_dir: Path) -> EmptyAi:
     run_path = data_dir
-    log = NiceLog(run_path)
+    log = NiceLog(run_path, False)  # do not log to std in tests)
     return EmptyAi("mistralai", run_path, log)
 
 

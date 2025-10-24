@@ -18,7 +18,7 @@ def test_frotz_subprocess():
 
         while True:
             line = frotz.stdout.readline().rstrip()
-            print('> "' + line + '"', flush=True)
+            # print('> "' + line + '"', flush=True)
             if line == "There is a small mailbox here.":
                 break
         assert line == "There is a small mailbox here."

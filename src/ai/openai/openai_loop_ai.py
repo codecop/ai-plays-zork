@@ -43,10 +43,22 @@ class OpenaiLoopAi(LoopAi):
     def get_next_command(self, context: str) -> str:
         prompt = f"Game answers with {context}"
 
-        loop = asyncio.get_event_loop()
+        loop = self._event_loop()
         response = loop.run_until_complete(self._send_prompt_to_server(prompt))
 
         return self._handle_response(response)
+
+    def _event_loop(self):
+        try:
+            # For Python 3.10+, use new asyncio policy
+            if hasattr(asyncio, "get_running_loop"):
+                return asyncio.get_running_loop()
+            else:
+                # Fallback for older Python versions
+                return asyncio.get_event_loop()
+        except RuntimeError:
+            # return asyncio.new_event_loop()
+            return asyncio.get_event_loop()
 
     async def _send_prompt_to_server(self, prompt: str) -> RunResult:
         if not self.last_response:

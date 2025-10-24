@@ -1,26 +1,3 @@
-* make OpenAI AI implementation like Mistral and let it run
-    Goal is to compare what it can do?
-
-import threading
-import asyncio
-
-    try:
-        # For Python 3.10+, use new asyncio policy
-        if hasattr(asyncio, 'get_running_loop'):
-            loop = asyncio.get_running_loop()
-        else:
-            # Fallback for older Python versions
-            loop = asyncio.get_event_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-
-    asyncio_thread = threading.Thread(target=run)
-    asyncio_thread.daemon = True
-    asyncio_thread.start()
-
----
-
 Cleanup Tasks (alone)
 
 * make tmux work on Windows
@@ -56,7 +33,6 @@ Other models
 
 * Use SDK to run Claude code instance from Python. 
   Can use this SDK https://github.com/anthropics/claude-code-sdk-python
-  So it would compare with MistralAI and we would see how it does.
 
 * Option Claude prompt with tools, which is its own tools in files
   - give it some goal

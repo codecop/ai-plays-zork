@@ -1,3 +1,4 @@
+from typing import Optional
 from frotz.game import Game
 from tools.room_change.room_change_tracker import RoomChangeTracker
 from util.log import Log
@@ -12,7 +13,7 @@ class GameLoop:
         self.log = log
         self.ai = ai
         self.tracker = tracker
-        self.game = None
+        self.game: Optional[Game] = None
 
     def start(self) -> None:
         self.game = Game()
@@ -24,6 +25,8 @@ class GameLoop:
 
     def run(self, max_loops: int = 1000, threshold: float = 0) -> None:
         """Run the game loop with a given AI."""
+        if self.game is None:
+            raise RuntimeError("Game not initialized. Call start() first.")
 
         wait_threshold = WaitThreshold(threshold)
         command = "look"
@@ -50,4 +53,5 @@ class GameLoop:
 
     def close(self) -> None:
         self.ai.close()
-        self.game.close()
+        if self.game is not None:
+            self.game.close()

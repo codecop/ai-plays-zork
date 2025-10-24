@@ -13,7 +13,7 @@ for arg in sys.argv:
         break
 
 THRESHOLD_KEY = "-threshold="
-THRESHOLD_SECONDS = 0
+THRESHOLD_SECONDS = 0.0
 for arg in sys.argv:
     if arg.startswith(THRESHOLD_KEY):
         THRESHOLD_SECONDS = float(arg[len(THRESHOLD_KEY) :])

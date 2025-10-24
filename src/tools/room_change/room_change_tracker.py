@@ -1,4 +1,5 @@
 import re
+from typing import Optional
 from tools.room_change.room_change import RoomChange
 from tools.room_change.exploration_action import ExplorationAction
 from util.log import Log
@@ -27,11 +28,11 @@ class RoomChangeTracker:
         self._log = log
         self._move_log = move_log
 
-        self._last_room = None
+        self._last_room: Optional[str] = None
 
     def check_for_movement(self, current_room: str, command: str) -> bool:
         has_moved = self._last_room is not None and self._last_room != current_room
-        if has_moved:
+        if has_moved and self._last_room is not None:
             self._log.room(current_room)
             if self._move_log:
                 self._move_log.command(command)

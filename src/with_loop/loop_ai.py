@@ -1,6 +1,7 @@
 import json
 from abc import ABC, abstractmethod
 from pathlib import Path
+from typing import Any, Dict, Optional
 from util.file_utils import read_file, write_file
 from util.log import Log
 
@@ -12,7 +13,7 @@ class LoopAi(ABC):
         self.configuration = configuration
         self.run_folder = run_folder
         self.log = log
-        self._config = None
+        self._config: Optional[Dict[str, Any]] = None
 
     def resource_dir(self) -> Path:
         """Resource dir is defined by the configuration and is a source of system prompts."""
@@ -27,7 +28,7 @@ class LoopAi(ABC):
         resource_file = self.resource_dir() / filename
         return read_file(resource_file)
 
-    def config(self) -> dict:
+    def config(self) -> Dict[str, Any]:
         """Load the config file from the AI's resource directory."""
         if self._config is None:
             self._config = json.loads(read_file(self.resource_dir() / "config.json"))

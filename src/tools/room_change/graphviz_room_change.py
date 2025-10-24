@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Set
 from graphviz import Digraph
 from tools.room_change.exploration_action import ExplorationAction
 from tools.room_change.room_change import RoomChange
@@ -24,7 +25,7 @@ class GraphvizRoomChange(RoomChange):
         self.view = view
         filename = path / "map.gv"
         self.g = Digraph("G", filename=filename)
-        self.known_edges = set()
+        self.known_edges: Set[str] = set()
         self.is_graph_updated = False
 
     def record_movement(self, action: ExplorationAction) -> None:

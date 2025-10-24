@@ -1,6 +1,7 @@
 import subprocess
 import time
 from pathlib import Path
+from typing import Optional
 from with_loop.loop_ai import LoopAi
 from util.log import Log
 
@@ -54,11 +55,11 @@ class ClaudeCodeLoopAi(LoopAi):
         command = self._wait_for_output()
         return command if command else "NO RESPONSE"
 
-    def _wait_for_output(self) -> str:
+    def _wait_for_output(self) -> Optional[str]:
         """Wait for output.txt to appear and return its content."""
         max_wait = self.timeout_seconds
         wait_interval = 0.5
-        waited = 0
+        waited = 0.0
 
         while waited < max_wait:
             if self.exists_run_resource("output.txt"):

@@ -1,6 +1,7 @@
 """Create the dependency tree of the whole application."""
 
 from pathlib import Path
+from typing import Tuple
 from tools.room_change.composite_room_change import CompositeRoomChange
 from tools.room_change.graphviz_room_change import GraphvizRoomChange
 from tools.room_change.room_change_tracker import RoomChangeTracker
@@ -17,11 +18,11 @@ from ai.mistralai.mistral_loop_ai import MistralLoopAi
 from ai.openai.openai_loop_ai import OpenaiLoopAi
 
 
-def _create_run(config: str) -> (Path, Log):
+def _create_run(config: str) -> Tuple[Path, Log]:
     """Create the run folder and log writing into it."""
 
     base_name = f"loop_{config}"
-    run_folder = next_folder_name("runs", base_name)
+    run_folder = next_folder_name(Path("runs"), base_name)
     log = CompositeLog(NiceLog(run_folder), IndividualLog(run_folder, ""))
 
     return run_folder, log
@@ -30,6 +31,7 @@ def _create_run(config: str) -> (Path, Log):
 def _create_ai(config: str, run_folder: Path, log: Log) -> LoopAi:
     """Create the AI for the config."""
 
+    ai: LoopAi
     if config.startswith("mistral"):
         ai = MistralLoopAi(config, run_folder, log)
 

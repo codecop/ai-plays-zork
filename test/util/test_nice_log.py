@@ -1,10 +1,11 @@
 from pathlib import Path
+from typing import Tuple
 import pytest
 from util.nice_log import NiceLog
 
 
 @pytest.fixture(name="log_file")
-def fixture_log_file(data_dir: Path) -> (NiceLog, Path):
+def fixture_log_file(data_dir: Path) -> Tuple[NiceLog, Path]:
     log_path = data_dir
     log = NiceLog(log_path, False)  # do not log to std in tests
     return log, log.path

@@ -1,0 +1,2 @@
+unrecognized direction: climb tree
+unrecognized direction: enter window

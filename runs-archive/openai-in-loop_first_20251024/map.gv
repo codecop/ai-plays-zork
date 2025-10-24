@@ -1,0 +1,11 @@
+digraph G {
+	"West of House":n -> "North of House":s [label=north]
+	"North of House":n -> "Forest Path":s [label=north]
+	"Forest Path" -> "Up a Tree" [label="climb tree"]
+	"Up a Tree" -> "Forest Path" [label=down]
+	"Forest Path":s -> "North of House":n [label=south]
+	"North of House":e -> "Behind House":w [label=east]
+	"Behind House" -> Kitchen [label="enter window"]
+	Kitchen:w -> "Living Room":e [label=west]
+	"Living Room":e -> Kitchen:w [label=east]
+}

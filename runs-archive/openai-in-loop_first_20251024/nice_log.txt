@@ -1,0 +1,206 @@
+START 2025-10-24 17:46:43
+AI    ai: <class 'ai.openai.openai_loop_ai.OpenaiLoopAi'>
+      configuration: openai
+      model: gpt-4.1-nano
+      name: Zork Agent
+GAME  West of House
+      You are standing in an open field west of a white house, with a boarded front door. There is a small mailbox here.
+CMD   look
+GAME  West of House
+      You are standing in an open field west of a white house, with a boarded front door. There is a small mailbox here.
+CMD   open mailbox
+GAME  Opening the small mailbox reveals a leaflet.
+CMD   take leaflet
+GAME  Taken.
+CMD   look
+GAME  West of House
+      You are standing in an open field west of a white house, with a boarded front door. There is a small mailbox here.
+CMD   north
+GAME  North of House
+      You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.
+ROOM  North of House
+CMD   north
+GAME  Forest Path
+      This is a path winding through a dimly lit forest. The path heads north- south here. One particularly large tree with some low branches stands at the edge of the path.
+ROOM  Forest Path
+CMD   climb tree
+GAME  Up a Tree
+      You are about 10 feet above the ground nestled among some large branches. The nearest branch above you is above your reach. Beside you on the branch is a small bird's nest. In the bird's nest is a large egg encrusted with precious jewels, apparently scavenged by a childless songbird. The egg is covered with fine gold inlay, and ornamented in lapis lazuli and mother-of-pearl. Unlike most eggs, this one is hinged and closed with a delicate looking clasp. The egg appears extremely fragile.
+ROOM  Up a Tree
+WARN  unrecognized direction: climb tree
+CMD   take egg
+GAME  Taken.
+CMD   climb down
+GAME  (down the tree)
+      Forest Path
+ROOM  Forest Path
+CMD   go south
+GAME  North of House
+ROOM  North of House
+CMD   go east
+GAME  Behind House
+      You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.
+ROOM  Behind House
+CMD   look window
+GAME  That sentence isn't one I recognize.
+CMD   open window
+GAME  With great effort, you open the window far enough to allow entry.
+CMD   enter window
+GAME  Kitchen
+      You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open. On the table is an elongated brown sack, smelling of hot peppers. A bottle is sitting on the table. The glass bottle contains: A quantity of water
+ROOM  Kitchen
+WARN  unrecognized direction: enter window
+CMD   look at sack
+GAME  The brown sack is closed.
+CMD   take sack
+GAME  Taken.
+CMD   look at bottle
+GAME  The glass bottle contains:
+      A quantity of water
+CMD   take bottle
+GAME  Taken.
+CMD   look window
+GAME  That sentence isn't one I recognize.
+CMD   close window
+GAME  The window closes (more easily than it opened).
+CMD   go west
+GAME  Living Room
+      You are in the living room. There is a doorway to the east, a wooden door with strange gothic lettering to the west, which appears to be nailed shut, a trophy case, and a large oriental rug in the center of the room. Above the trophy case hangs an elvish sword of great antiquity. A battery-powered brass lantern is on the trophy case.
+ROOM  Living Room
+CMD   look at sword
+GAME  There's nothing special about the sword.
+CMD   examine trophy case
+GAME  The trophy case is empty.
+CMD   go east
+GAME  Kitchen
+ROOM  Kitchen
+CMD   light lantern
+GAME  You don't have that!
+CMD   inventory
+GAME  You are carrying:
+      A glass bottle The glass bottle contains: A quantity of water A brown sack A jewel-encrusted egg A leaflet
+CMD   light lantern
+GAME  You don't have that!
+CMD   try turn on lantern
+GAME  I don't know the word "try".
+CMD   turn on lantern
+GAME  You can't see any lantern here!
+CMD   go west
+GAME  Living Room
+      Above the trophy case hangs an elvish sword of great antiquity. A battery-powered brass lantern is on the trophy case.
+ROOM  Living Room
+CMD   look at lantern
+GAME  The lamp is turned off.
+CMD   turn on lantern
+GAME  The brass lantern is now on.
+CMD   look around
+GAME  Living Room
+      You are in the living room. There is a doorway to the east, a wooden door with strange gothic lettering to the west, which appears to be nailed shut, a trophy case, and a large oriental rug in the center of the room. Above the trophy case hangs an elvish sword of great antiquity. A battery-powered brass lantern is on the trophy case.
+CMD   go east
+GAME  Kitchen
+ROOM  Kitchen
+CMD   look at door with gothic lettering
+GAME  Those things aren't here!
+CMD   open door to west
+GAME  That sentence isn't one I recognize.
+CMD   close door to west
+GAME  That sentence isn't one I recognize.
+CMD   go west
+GAME  Living Room
+      Above the trophy case hangs an elvish sword of great antiquity. A battery-powered brass lantern is on the trophy case.
+ROOM  Living Room
+CMD   examine sword
+GAME  There's nothing special about the sword.
+CMD   take sword
+GAME  Taken.
+CMD   go east
+GAME  Kitchen
+ROOM  Kitchen
+CMD   turn on lantern
+GAME  You can't see any lantern here!
+CMD   inventory
+GAME  You are carrying:
+      A sword A glass bottle The glass bottle contains: A quantity of water A brown sack A jewel-encrusted egg A leaflet
+CMD   light lantern
+GAME  You don't have that!
+CMD   turn on lantern
+GAME  You can't see any lantern here!
+CMD   go east
+GAME  The kitchen window is closed.
+CMD   go west
+GAME  Living Room
+      A battery-powered brass lantern is on the trophy case.
+ROOM  Living Room
+CMD   look at lantern
+GAME  The lamp is on.
+CMD   turn off lantern
+GAME  (Taken)
+      The brass lantern is now off.
+CMD   look around
+GAME  Living Room
+      You are in the living room. There is a doorway to the east, a wooden door with strange gothic lettering to the west, which appears to be nailed shut, a trophy case, and a large oriental rug in the center of the room.
+CMD   go east
+GAME  Kitchen
+ROOM  Kitchen
+CMD   That sentence isn't one I recognize.
+GAME  I don't know the word "that".
+CMD   open door to west
+GAME  That sentence isn't one I recognize.
+CMD   close door to west
+GAME  That sentence isn't one I recognize.
+CMD   go west
+GAME  Living Room
+ROOM  Living Room
+CMD   look at sword
+GAME  There's nothing special about the sword.
+CMD   taken
+GAME  I don't know the word "taken".
+CMD   take sword
+GAME  You already have that!
+CMD   inventory
+GAME  You are carrying:
+      A brass lantern A sword A glass bottle The glass bottle contains: A quantity of water A brown sack A jewel-encrusted egg A leaflet
+CMD   turn off lantern
+GAME  It is already off.
+CMD   look around
+GAME  Living Room
+      You are in the living room. There is a doorway to the east, a wooden door with strange gothic lettering to the west, which appears to be nailed shut, a trophy case, and a large oriental rug in the center of the room.
+CMD   go east
+GAME  Kitchen
+ROOM  Kitchen
+CMD   That sentence isn't one I recognize.
+GAME  I don't know the word "that".
+CMD   go west
+GAME  Living Room
+ROOM  Living Room
+CMD   look at sword
+GAME  There's nothing special about the sword.
+CMD   take sword
+GAME  You already have that!
+CMD   inventory
+GAME  You are carrying:
+      A brass lantern A sword A glass bottle The glass bottle contains: A quantity of water A brown sack A jewel-encrusted egg A leaflet
+CMD   turn off lantern
+GAME  It is already off.
+CMD   look around
+GAME  Living Room
+      You are in the living room. There is a doorway to the east, a wooden door with strange gothic lettering to the west, which appears to be nailed shut, a trophy case, and a large oriental rug in the center of the room.
+CMD   go east
+GAME  Kitchen
+ROOM  Kitchen
+CMD   That sentence isn't one I recognize.
+GAME  I don't know the word "that".
+CMD   open door to west
+GAME  That sentence isn't one I recognize.
+CMD   close door to west
+GAME  That sentence isn't one I recognize.
+CMD   go west
+GAME  Living Room
+ROOM  Living Room
+CMD   You already have that!
+GAME  I don't know the word "you".
+CMD   take sword
+GAME  You already have that!
+CMD   inventory
+GAME  You are carrying:
+      A brass lantern A sword A glass bottle The glass bottle contains: A quantity of water A brown sack A jewel-encrusted egg A leaflet

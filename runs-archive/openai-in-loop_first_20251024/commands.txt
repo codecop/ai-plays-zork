@@ -1,0 +1,77 @@
+look
+open mailbox
+take leaflet
+look
+north
+north
+climb tree
+take egg
+climb down
+go south
+go east
+look window
+open window
+enter window
+look at sack
+take sack
+look at bottle
+take bottle
+look window
+close window
+go west
+look at sword
+examine trophy case
+go east
+light lantern
+inventory
+light lantern
+try turn on lantern
+turn on lantern
+go west
+look at lantern
+turn on lantern
+look around
+go east
+look at door with gothic lettering
+open door to west
+close door to west
+go west
+examine sword
+take sword
+go east
+turn on lantern
+inventory
+light lantern
+turn on lantern
+go east
+go west
+look at lantern
+turn off lantern
+look around
+go east
+That sentence isn't one I recognize.
+open door to west
+close door to west
+go west
+look at sword
+taken
+take sword
+inventory
+turn off lantern
+look around
+go east
+That sentence isn't one I recognize.
+go west
+look at sword
+take sword
+inventory
+turn off lantern
+look around
+go east
+That sentence isn't one I recognize.
+open door to west
+close door to west
+go west
+You already have that!
+take sword
+inventory

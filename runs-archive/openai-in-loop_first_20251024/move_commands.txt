@@ -1,0 +1,20 @@
+north
+north
+climb tree
+climb down
+go south
+go east
+enter window
+go west
+go east
+go west
+go east
+go west
+go east
+go west
+go east
+go west
+go east
+go west
+go east
+go west

@@ -1,0 +1,15 @@
+{
+  "name": "local-game-mcp-server",
+  "version": "1.0.0",
+  "mcpServers": {
+    "local-game": {
+      "command": "python",
+      "args": [
+        "src\\frotz\\local_game_mcp_server.py",
+        "--debug"
+      ],
+      "cwd": "E:\\Develop\\Python\\Python-3\\AiPlaysZork",
+      "trust": true
+    }
+  }
+}

@@ -3,18 +3,26 @@ import json
 from datetime import datetime
 from pathlib import Path
 from typing import Any
-from frotz.game import Game
+
+try:
+    import frotz.game
+except ModuleNotFoundError:
+    # if started standalone need to fix the import path
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+finally:
+    from frotz.game import Game
 
 
 class GameMcpServer:
+    """MCP server around Game."""
 
     def __init__(self, debug: bool = False):
-        self._debug = debug
+        self._is_debug = debug
         self._game = Game()
         self._last_answer = ""
 
     def _debug(self, message: str) -> None:
-        if not self._debug:
+        if not self._is_debug:
             return
 
         print(f"DEBUG: {message}", file=sys.stderr)
@@ -38,15 +46,11 @@ class GameMcpServer:
 
     def _handle_initialize(self, request_id):
         self._debug(f"Handling initialize request: {request_id}")
-
-        this_mtime = Path(__file__).parent.stat().st_mtime
-        this_date = datetime.fromtimestamp(this_mtime)
-
         return {
             "jsonrpc": "2.0",
             "id": request_id,
             "result": {
-                "protocolVersion": this_date.strftime("%Y-%m-%d"),
+                "protocolVersion": "2024-11-05",
                 "capabilities": {"tools": {}},
                 "serverInfo": {"name": "local-game-mcp-server", "version": "1.0.0"},
             },
@@ -185,6 +189,7 @@ class GameMcpServer:
                 }
 
             self._write_message(response)
+        self.game.close()
 
 
 def main() -> None:

@@ -1,4 +1,4 @@
-# Install MCP into Windsurf
+# Windsurf MCP Server Setup
 
 Windsurf supports two transport types for MCP servers: stdio and http/websocket.
 

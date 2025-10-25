@@ -1,0 +1,12 @@
+{
+  "name": "local-add-mcp-server",
+  "version": "1.0.0",
+  "mcpServers": {
+    "local-add": {
+      "command": "python",
+      "args": [
+        "E:\\Develop\\Python\\Python-3\\AiPlaysZork\\src\\mcp\\local-add-mcp-server.py"
+      ]
+    }
+  }
+}

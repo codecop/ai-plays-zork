@@ -1,4 +1,4 @@
-# Idea: make Zork an MCP, so it is a tool
+# Build an MCP
 
 * Python and the MCP SDK
 * FastMCP <https://github.com/jlowin/fastmcp> -- seems the state of the art now

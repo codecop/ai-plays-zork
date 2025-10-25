@@ -1,0 +1,10 @@
+{
+    "mcpServers": {
+        "adventure-game": {
+            "command": "python",
+            "args": [
+                "E:\\Develop\\Python\\Python-3\\AiPlaysZork\\src\\frotz\\local_game_mcp_server.py"
+            ]
+        }
+    }
+}

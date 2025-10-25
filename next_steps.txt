@@ -3,7 +3,9 @@ Cleanup Tasks (alone)
 * make tmux work on Windows
   1) move tmux script to src/frotz and make them work with tmux windows. readme is tools description
 
-* make mcp server running Frotz inside
+* add log and tracker to MCP and initialise a new with client name of caller
+
+---
 
 Possible Tasks
 ==============
@@ -30,9 +32,6 @@ Other models
 
 * Use a local model from OpenAI "oss20b..." 
   through Ollama
-
-* Use SDK to run Claude code instance from Python. 
-  Can use this SDK https://github.com/anthropics/claude-code-sdk-python
 
 * Option Claude prompt with tools, which is its own tools in files
   - give it some goal

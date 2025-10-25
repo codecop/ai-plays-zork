@@ -4,11 +4,16 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+
+def root_dir() -> Path:
+    return Path(__file__).resolve().parent.parent.parent
+
+
 try:
     import frotz.game
 except ModuleNotFoundError:
     # if started standalone need to fix the import path
-    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    sys.path.insert(0, str(root_dir() / "src"))
 finally:
     from frotz.game import Game
 
@@ -18,8 +23,12 @@ class GameMcpServer:
 
     def __init__(self, debug: bool = False):
         self._is_debug = debug
-        self._game = Game()
-        self._last_answer = ""
+        self._debug(f"Starting GameMcpServer")
+
+        base_folder = str(root_dir() / "frotz/data")
+        self._game = Game(base_folder)
+        self._debug(f"Loading game from {base_folder}")
+        self._last_answer = self._game.get_intro()
 
     def _debug(self, message: str) -> None:
         if not self._is_debug:
@@ -157,7 +166,7 @@ class GameMcpServer:
             }
 
         except Exception as e:
-            self._debug(f"Error in tools/call: {e}")
+            self._debug(f"Error in tools/call: {repr(e)}")
             return {
                 "jsonrpc": "2.0",
                 "id": request_id,

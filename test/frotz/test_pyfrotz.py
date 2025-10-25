@@ -44,3 +44,7 @@ def test_patched_pyfrotz(new_game):
     assert new_game.derived_name == "West of House"
     assert new_game.derived_score == 0
     assert new_game.derived_moves == 1
+
+    room, description = new_game.do_command("look")
+    assert new_game.derived_score == 0
+    assert new_game.derived_moves == 2

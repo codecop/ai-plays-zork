@@ -12,11 +12,14 @@ gemini extensions install E:\Develop\Python\Python-3\AiPlaysZork\src\mcp\Gemini_
 gemini mcp list
 ```
 
+Troubleshooting
+
+```bash
+gemini --debug
+```
+
 Uninstall
 
 ```bash
 gemini extensions uninstall local-add-mcp-server
 ```
-
-How to run it in Gemini?
-TODO This is still open.

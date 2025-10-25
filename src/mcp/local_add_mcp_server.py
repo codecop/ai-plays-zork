@@ -1,10 +1,20 @@
 import sys
 import json
+from pathlib import Path
 from typing import Any
+
+
+def debug(message: str) -> None:
+    print(f"DEBUG: {message}", file=sys.stderr)
+    sys.stderr.flush()
+    log_file = Path(__file__).with_suffix(".log")
+    with log_file.open("a") as fp:
+        fp.write(f"DEBUG: {message}\n")
 
 
 def read_message() -> dict[str, Any] | None:
     line = sys.stdin.readline()
+    debug(f"Read line: {line}")
     if not line:
         return None
     return json.loads(line.strip())
@@ -13,9 +23,11 @@ def read_message() -> dict[str, Any] | None:
 def write_message(message: dict):
     sys.stdout.write(json.dumps(message) + "\n")
     sys.stdout.flush()
+    debug(f"Wrote message: {message}")
 
 
 def handle_initialize(request_id):
+    debug(f"Handling initialize request: {request_id}")
     return {
         "jsonrpc": "2.0",
         "id": request_id,
@@ -28,6 +40,7 @@ def handle_initialize(request_id):
 
 
 def handle_tools_list(request_id):
+    debug(f"Handling tools/list request: {request_id}")
     return {
         "jsonrpc": "2.0",
         "id": request_id,
@@ -51,6 +64,7 @@ def handle_tools_list(request_id):
 
 
 def handle_tools_call(request_id, params: dict):
+    debug(f"Handling tools/call request: {request_id}")
     tool_name = params.get("name")
     arguments = params.get("arguments", {})
 
@@ -72,6 +86,7 @@ def handle_tools_call(request_id, params: dict):
 def main() -> None:
     while True:
         message = read_message()
+        debug(f"Received message: {message}")
         if message is None:
             break
 
@@ -79,11 +94,11 @@ def main() -> None:
         request_id = message.get("id")
         params = message.get("params", {})
 
-        if request_id is str and method == "initialize":
+        if method == "initialize":
             response = handle_initialize(request_id)
-        elif request_id is str and method == "tools/list":
+        elif method == "tools/list":
             response = handle_tools_list(request_id)
-        elif request_id is str and method == "tools/call":
+        elif method == "tools/call":
             response = handle_tools_call(request_id, params)
         else:
             response = {

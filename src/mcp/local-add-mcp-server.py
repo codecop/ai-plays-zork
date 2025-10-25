@@ -20,14 +20,9 @@ def handle_initialize(request_id):
         "id": request_id,
         "result": {
             "protocolVersion": "2024-11-05",
-            "capabilities": {
-                "tools": {}
-            },
-            "serverInfo": {
-                "name": "minimal-mcp-server",
-                "version": "1.0.0"
-            }
-        }
+            "capabilities": {"tools": {}},
+            "serverInfo": {"name": "local-add-mcp-server", "version": "1.0.0"},
+        },
     }
 
 
@@ -44,42 +39,32 @@ def handle_tools_list(request_id):
                         "type": "object",
                         "properties": {
                             "a": {"type": "number"},
-                            "b": {"type": "number"}
+                            "b": {"type": "number"},
                         },
-                        "required": ["a", "b"]
-                    }
+                        "required": ["a", "b"],
+                    },
                 }
             ]
-        }
+        },
     }
 
 
 def handle_tools_call(request_id, params):
     tool_name = params.get("name")
     arguments = params.get("arguments", {})
-    
+
     if tool_name == "add":
         result = arguments["a"] * arguments["b"]
         return {
             "jsonrpc": "2.0",
             "id": request_id,
-            "result": {
-                "content": [
-                    {
-                        "type": "text",
-                        "text": str(result)
-                    }
-                ]
-            }
+            "result": {"content": [{"type": "text", "text": str(result)}]},
         }
-    
+
     return {
         "jsonrpc": "2.0",
         "id": request_id,
-        "error": {
-            "code": -32601,
-            "message": f"Unknown tool: {tool_name}"
-        }
+        "error": {"code": -32601, "message": f"Unknown tool: {tool_name}"},
     }
 
 
@@ -88,11 +73,11 @@ def main():
         message = read_message()
         if message is None:
             break
-        
+
         method = message.get("method")
         request_id = message.get("id")
         params = message.get("params", {})
-        
+
         if method == "initialize":
             response = handle_initialize(request_id)
         elif method == "tools/list":
@@ -103,12 +88,9 @@ def main():
             response = {
                 "jsonrpc": "2.0",
                 "id": request_id,
-                "error": {
-                    "code": -32601,
-                    "message": f"Method not found: {method}"
-                }
+                "error": {"code": -32601, "message": f"Method not found: {method}"},
             }
-        
+
         write_message(response)
 
 

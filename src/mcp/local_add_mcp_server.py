@@ -4,9 +4,18 @@ from pathlib import Path
 from typing import Any
 
 
+DEBUG = True
+if len(sys.argv) > 1:
+    DEBUG = sys.argv[1] == "--debug"
+
+
 def debug(message: str) -> None:
+    if not DEBUG:
+        return
+
     print(f"DEBUG: {message}", file=sys.stderr)
     sys.stderr.flush()
+
     log_file = Path(__file__).with_suffix(".log")
     with log_file.open("a") as fp:
         fp.write(f"DEBUG: {message}\n")

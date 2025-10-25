@@ -3,7 +3,12 @@ import os
 from typing import Optional
 from pathlib import Path
 from mistralai import Mistral
-from mistralai.models import ConversationResponse, Agent
+from mistralai.models import (
+    Agent,
+    ConversationResponse,
+    MessageInputEntryTypedDict,
+    FunctionResultEntryTypedDict,
+)
 from mistralai.utils import BackoffStrategy, RetryConfig
 from with_loop.loop_ai import LoopAi
 from util.log import Log
@@ -64,17 +69,18 @@ class MistralLoopAi(LoopAi):
     def _send_prompt_to_server(self, prompt: str) -> ConversationResponse:
         if self.agent is None:
             raise RuntimeError("Agent not initialized")
+
+        message: MessageInputEntryTypedDict = {"role": "user", "content": prompt}
         if not self.conversation_id:
             response = self.client.beta.conversations.start(
                 agent_id=self.agent.id,
-                inputs=[{"role": "user", "content": prompt}],
+                inputs=[message],  # type: ignore[arg-type]
             )
             self.conversation_id = response.conversation_id
         else:
             response = self.client.beta.conversations.append(
                 conversation_id=self.conversation_id,
-                # List[MessageInputEntry]
-                inputs=[{"role": "user", "content": prompt}],
+                inputs=[message],  # type: ignore[arg-type]
             )
         return response
 
@@ -84,14 +90,14 @@ class MistralLoopAi(LoopAi):
             self.log.ai("NO RESPONSE")
             return "NO RESPONSE"
 
-        output = response.outputs[0]
-        if len(response.outputs) == 1 and output.type == "message.output":
-            self.calls += 1
-            content = output.content
-            return self._extract_command_from(content)
-
         if len(response.outputs) > 1:
             self.log.warn("multiple responses " + str(response.outputs))
+
+        output = response.outputs[0]
+        if output.type == "message.output":
+            self.calls += 1
+            content = str(output.content)  # could be a list of things...
+            return self._extract_command_from(content)
 
         # TODO for each function call in the response,
         # call the function and return all of them at once!
@@ -103,15 +109,13 @@ class MistralLoopAi(LoopAi):
             function_result = "False"
 
             self.log.ai(f"TOOL call {function_name}")
+            message: FunctionResultEntryTypedDict = {
+                "tool_call_id": output.tool_call_id,
+                "result": function_result,
+            }
             response = self.client.beta.conversations.append(
                 conversation_id=response.conversation_id,
-                # List[FunctionResultEntry]
-                inputs=[
-                    {
-                        "tool_call_id": output.tool_call_id,
-                        "result": function_result,
-                    }
-                ],
+                inputs=[message],  # type: ignore[arg-type]
             )
             return self._handle_response(response)
 

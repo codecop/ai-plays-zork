@@ -5,10 +5,10 @@
     "local-add": {
       "command": "python",
       "args": [
-        "local_add_mcp_server.py",
+        "src\\mcp\\local_add_mcp_server.py",
         "--debug"
       ],
-      "cwd": "E:\\Develop\\Python\\Python-3\\AiPlaysZork\\src\\mcp",
+      "cwd": "E:\\Develop\\Python\\Python-3\\AiPlaysZork",
       "trust": true
     }
   }

@@ -37,6 +37,12 @@ class Game:
         # available via patch
         return self.wrapper.derived_name  # pylint: disable=no-member
 
+    def moves(self) -> int:
+        return self.wrapper.derived_moves  # pylint: disable=no-member
+
+    def score(self) -> int:
+        return self.wrapper.derived_score  # pylint: disable=no-member
+
     def game_ended(self) -> bool:
         return self.wrapper.game_ended()
 

@@ -33,5 +33,10 @@ else:
 # create and run application
 application = create(CONFIG)
 application.start()
-application.run(MAX_LOOPS, THRESHOLD_SECONDS)
-application.close()
+
+try:
+    application.run(MAX_LOOPS, THRESHOLD_SECONDS)
+except KeyboardInterrupt:
+    pass
+finally:
+    application.close()

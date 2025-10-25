@@ -53,4 +53,6 @@ class GameLoop:
 
     def close(self) -> None:
         if self.game is not None:
+            self.log.game(f"Moves: {self.game.moves()}")
+            self.log.game(f"Score: {self.game.score()}")
             self.game.close()

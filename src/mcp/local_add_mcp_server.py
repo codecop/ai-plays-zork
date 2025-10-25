@@ -1,15 +1,16 @@
 import sys
 import json
+from typing import Any
 
 
-def read_message():
+def read_message() -> dict[str, Any] | None:
     line = sys.stdin.readline()
     if not line:
         return None
     return json.loads(line.strip())
 
 
-def write_message(message):
+def write_message(message: dict):
     sys.stdout.write(json.dumps(message) + "\n")
     sys.stdout.flush()
 
@@ -49,7 +50,7 @@ def handle_tools_list(request_id):
     }
 
 
-def handle_tools_call(request_id, params):
+def handle_tools_call(request_id, params: dict):
     tool_name = params.get("name")
     arguments = params.get("arguments", {})
 
@@ -68,7 +69,7 @@ def handle_tools_call(request_id, params):
     }
 
 
-def main():
+def main() -> None:
     while True:
         message = read_message()
         if message is None:
@@ -78,11 +79,11 @@ def main():
         request_id = message.get("id")
         params = message.get("params", {})
 
-        if method == "initialize":
+        if request_id is str and method == "initialize":
             response = handle_initialize(request_id)
-        elif method == "tools/list":
+        elif request_id is str and method == "tools/list":
             response = handle_tools_list(request_id)
-        elif method == "tools/call":
+        elif request_id is str and method == "tools/call":
             response = handle_tools_call(request_id, params)
         else:
             response = {

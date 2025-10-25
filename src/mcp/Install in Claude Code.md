@@ -5,7 +5,7 @@
 To add this MCP server to Claude Code, run:
 
 ```bash
-claude mcp add --transport stdio local-add python <path-to-repo>/src/mcp/local-add-mcp-server.py
+claude mcp add --transport stdio local-add python <path-to-repo>/src/mcp/local_add_mcp_server.py
 ```
 
 Replace `<path-to-repo>` with the absolute path to your repository.
@@ -21,7 +21,7 @@ claude mcp list
 You should see:
 
 ```
-local-add: python <path-to-repo>/src/mcp/local-add-mcp-server.py - ✓ Connected
+local-add: python <path-to-repo>/src/mcp/local_add_mcp_server.py - ✓ Connected
 ```
 
 ## Inside Claude Code

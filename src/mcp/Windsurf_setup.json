@@ -3,7 +3,7 @@
         "local-add": {
             "command": "python",
             "args": [
-                "E:\\Develop\\Python\\Python-3\\AiPlaysZork\\src\\mcp\\local-add-mcp-server.py"
+                "E:\\Develop\\Python\\Python-3\\AiPlaysZork\\src\\mcp\\local_add_mcp_server.py"
             ]
         }
     }

@@ -15,7 +15,7 @@ gemini mcp list
 Uninstall
 
 ```bash
-gemini extensions uninstall local-add
+gemini extensions uninstall local-add-mcp-server
 ```
 
 How to run it in Gemini?

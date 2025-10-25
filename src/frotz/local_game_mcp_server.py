@@ -43,9 +43,10 @@ class GameMcpServer:
 
     def _read_message(self) -> dict[str, Any] | None:
         line = sys.stdin.readline()
-        self._debug(f"Read line: {line}")
         if not line:
             return None
+        self._debug("---")
+        self._debug(f"Read line: {line.strip()}")
         return json.loads(line.strip())
 
     def _write_message(self, message: dict):
@@ -122,7 +123,9 @@ class GameMcpServer:
         try:
             if tool_name == "send_command":
                 command = arguments.get("command", "")
+                self._debug(f'Send "{command}" to game')
                 result = self._game.do_command(command)
+                self._debug(f'Game responds: "{result}"')
                 self._last_answer = result
                 return {
                     "jsonrpc": "2.0",
@@ -175,29 +178,35 @@ class GameMcpServer:
 
     def run(self) -> None:
         while True:
-            message = self._read_message()
-            self._debug(f"Received message: {message}")
-            if message is None:
-                break
+            try:
+                message = self._read_message()
+                self._debug(f"Received message: {message}")
+                if message is None:
+                    break
 
-            method = message.get("method")
-            request_id = message.get("id")
-            params = message.get("params", {})
+                method = message.get("method")
+                request_id = message.get("id")
+                params = message.get("params", {})
 
-            if method == "initialize":
-                response = self._handle_initialize(request_id)
-            elif method == "tools/list":
-                response = self._handle_tools_list(request_id)
-            elif method == "tools/call":
-                response = self._handle_tools_call(request_id, params)
-            else:
-                response = {
-                    "jsonrpc": "2.0",
-                    "id": request_id,
-                    "error": {"code": -32601, "message": f"Method not found: {method}"},
-                }
+                if method == "initialize":
+                    response = self._handle_initialize(request_id)
+                elif method == "tools/list":
+                    response = self._handle_tools_list(request_id)
+                elif method == "tools/call":
+                    response = self._handle_tools_call(request_id, params)
+                else:
+                    response = {
+                        "jsonrpc": "2.0",
+                        "id": request_id,
+                        "error": {
+                            "code": -32601,
+                            "message": f"Method not found: {method}",
+                        },
+                    }
 
-            self._write_message(response)
+                self._write_message(response)
+            except Exception as e:
+                self._debug(f"Error in run: {repr(e)}")
         self.game.close()
 
 

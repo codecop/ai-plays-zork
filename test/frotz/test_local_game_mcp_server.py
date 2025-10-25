@@ -1,17 +1,17 @@
-from frotz.local_game_mcp_server import GameMcpServer
 import pytest
+from frotz.local_game_mcp_server import GameMcpServer
 
 
 @pytest.fixture(name="new_server")
 def fixture_new_server():
     server = GameMcpServer(debug=False)
     yield server
-    server._game.close()
+    server.close()
 
 
-def test_Initialize(new_server):
+def test_initialize(new_server):
 
-    response = new_server._handle_initialize(request_id=1)
+    response = new_server.handle_initialize(request_id=1)
 
     assert response["jsonrpc"] == "2.0"
     assert response["id"] == 1
@@ -21,9 +21,9 @@ def test_Initialize(new_server):
     assert response["result"]["serverInfo"]["version"] == "1.0.0"
 
 
-def test_ToolsList(new_server):
+def test_tools_list(new_server):
 
-    response = new_server._handle_tools_list(request_id=2)
+    response = new_server.handle_tools_list(request_id=2)
 
     assert response["jsonrpc"] == "2.0"
     assert response["id"] == 2
@@ -36,10 +36,10 @@ def test_ToolsList(new_server):
     assert "get_gameplay_notes" in tool_names
 
 
-def test_ToolsCall_SendCommand(new_server):
+def test_tools_call_send_command(new_server):
 
     params = {"name": "send_command", "arguments": {"command": "look"}}
-    response = new_server._handle_tools_call(request_id=3, params=params)
+    response = new_server.handle_tools_call(request_id=3, params=params)
 
     assert response["jsonrpc"] == "2.0"
     assert response["id"] == 3
@@ -49,10 +49,10 @@ def test_ToolsCall_SendCommand(new_server):
     assert "West of House" in response["result"]["content"][0]["text"]
 
 
-def test_ToolsCall_GameStatus(new_server):
+def test_tools_call_game_status(new_server):
 
     params = {"name": "get_game_status", "arguments": {}}
-    response = new_server._handle_tools_call(request_id=5, params=params)
+    response = new_server.handle_tools_call(request_id=5, params=params)
 
     assert response["jsonrpc"] == "2.0"
     assert response["id"] == 5
@@ -62,10 +62,10 @@ def test_ToolsCall_GameStatus(new_server):
     assert "Score:" in status_text
 
 
-def test_ToolsCall_UnknownTool(new_server):
+def test_tools_call_unknown_tool(new_server):
 
     params = {"name": "unknown_tool", "arguments": {}}
-    response = new_server._handle_tools_call(request_id=7, params=params)
+    response = new_server.handle_tools_call(request_id=7, params=params)
 
     assert response["jsonrpc"] == "2.0"
     assert response["id"] == 7

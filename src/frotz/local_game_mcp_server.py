@@ -1,6 +1,5 @@
 import sys
 import json
-from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -10,11 +9,10 @@ def root_dir() -> Path:
 
 
 try:
-    import frotz.game
+    from frotz.game import Game
 except ModuleNotFoundError:
     # if started standalone need to fix the import path
     sys.path.insert(0, str(root_dir() / "src"))
-finally:
     from frotz.game import Game
 
 
@@ -23,7 +21,7 @@ class GameMcpServer:
 
     def __init__(self, debug: bool = False):
         self._is_debug = debug
-        self._debug(f"Starting GameMcpServer")
+        self._debug("Starting GameMcpServer")
 
         base_folder = str(root_dir() / "frotz/data")
         self._game = Game(base_folder)
@@ -54,7 +52,7 @@ class GameMcpServer:
         sys.stdout.flush()
         self._debug(f"Wrote message: {message}")
 
-    def _handle_initialize(self, request_id):
+    def handle_initialize(self, request_id):
         self._debug(f"Handling initialize request: {request_id}")
         return {
             "jsonrpc": "2.0",
@@ -66,7 +64,7 @@ class GameMcpServer:
             },
         }
 
-    def _handle_tools_list(self, request_id):
+    def handle_tools_list(self, request_id):
         self._debug(f"Handling tools/list request: {request_id}")
         return {
             "jsonrpc": "2.0",
@@ -97,7 +95,7 @@ class GameMcpServer:
                     },
                     {
                         "name": "get_game_status",
-                        "description": "Get current game status (room name, number of moves, score)",
+                        "description": "Get game status (room name, number of moves, score)",
                         "inputSchema": {
                             "type": "object",
                             "properties": {},
@@ -115,7 +113,7 @@ class GameMcpServer:
             },
         }
 
-    def _handle_tools_call(self, request_id, params: dict):
+    def handle_tools_call(self, request_id, params: dict):
         self._debug(f"Handling tools/call request: {request_id}")
         tool_name = params.get("name")
         arguments = params.get("arguments", {})
@@ -133,7 +131,7 @@ class GameMcpServer:
                     "result": {"content": [{"type": "text", "text": result}]},
                 }
 
-            elif tool_name == "get_last_answer":
+            if tool_name == "get_last_answer":
                 return {
                     "jsonrpc": "2.0",
                     "id": request_id,
@@ -142,7 +140,7 @@ class GameMcpServer:
                     },
                 }
 
-            elif tool_name == "get_game_status":
+            if tool_name == "get_game_status":
                 status_text = (
                     f"Room: {self._game.room_name()}\n"
                     f"Moves: {self._game.moves()}\n"
@@ -154,7 +152,7 @@ class GameMcpServer:
                     "result": {"content": [{"type": "text", "text": status_text}]},
                 }
 
-            elif tool_name == "get_gameplay_notes":
+            if tool_name == "get_gameplay_notes":
                 notes = self._game.get_game_play_notes()
                 return {
                     "jsonrpc": "2.0",
@@ -177,43 +175,54 @@ class GameMcpServer:
             }
 
     def run(self) -> None:
-        while True:
-            try:
-                message = self._read_message()
-                self._debug(f"Received message: {message}")
-                if message is None:
-                    break
+        while self._run_single():
+            pass
 
-                method = message.get("method")
-                request_id = message.get("id")
-                params = message.get("params", {})
+    def _run_single(self) -> bool:
+        try:
+            message = self._read_message()
+            if message is None:
+                return False
 
-                if method == "initialize":
-                    response = self._handle_initialize(request_id)
-                elif method == "tools/list":
-                    response = self._handle_tools_list(request_id)
-                elif method == "tools/call":
-                    response = self._handle_tools_call(request_id, params)
-                else:
-                    response = {
-                        "jsonrpc": "2.0",
-                        "id": request_id,
-                        "error": {
-                            "code": -32601,
-                            "message": f"Method not found: {method}",
-                        },
-                    }
+            method = message.get("method")
+            request_id = message.get("id")
+            params = message.get("params", {})
 
-                self._write_message(response)
-            except Exception as e:
-                self._debug(f"Error in run: {repr(e)}")
-        self.game.close()
+            if method == "initialize":
+                response = self.handle_initialize(request_id)
+            elif method == "tools/list":
+                response = self.handle_tools_list(request_id)
+            elif method == "tools/call":
+                response = self.handle_tools_call(request_id, params)
+            else:
+                response = self._handle_not_found(request_id, method)
+
+            self._write_message(response)
+
+        except Exception as e:
+            self._debug(f"Error in run: {repr(e)}")
+        return True
+
+    def _handle_not_found(self, request_id, method):
+        return {
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "error": {
+                "code": -32601,
+                "message": f"Method not found: {method}",
+            },
+        }
+
+    def close(self) -> None:
+        self._game.close()
+        self._debug("Stopping GameMcpServer")
 
 
 def main() -> None:
     debug_enabled = len(sys.argv) > 1 and sys.argv[1] == "--debug"
     server = GameMcpServer(debug_enabled)
     server.run()
+    server.close()
 
 
 if __name__ == "__main__":

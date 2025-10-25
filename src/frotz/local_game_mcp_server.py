@@ -1,0 +1,197 @@
+import sys
+import json
+from datetime import datetime
+from pathlib import Path
+from typing import Any
+from frotz.game import Game
+
+
+class GameMcpServer:
+
+    def __init__(self, debug: bool = False):
+        self._debug = debug
+        self._game = Game()
+        self._last_answer = ""
+
+    def _debug(self, message: str) -> None:
+        if not self._debug:
+            return
+
+        print(f"DEBUG: {message}", file=sys.stderr)
+        sys.stderr.flush()
+
+        log_file = Path(__file__).with_suffix(".log")
+        with log_file.open("a", encoding="utf-8") as fp:
+            fp.write(f"DEBUG: {message}\n")
+
+    def _read_message(self) -> dict[str, Any] | None:
+        line = sys.stdin.readline()
+        self._debug(f"Read line: {line}")
+        if not line:
+            return None
+        return json.loads(line.strip())
+
+    def _write_message(self, message: dict):
+        sys.stdout.write(json.dumps(message) + "\n")
+        sys.stdout.flush()
+        self._debug(f"Wrote message: {message}")
+
+    def _handle_initialize(self, request_id):
+        self._debug(f"Handling initialize request: {request_id}")
+
+        this_mtime = Path(__file__).parent.stat().st_mtime
+        this_date = datetime.fromtimestamp(this_mtime)
+
+        return {
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "result": {
+                "protocolVersion": this_date.strftime("%Y-%m-%d"),
+                "capabilities": {"tools": {}},
+                "serverInfo": {"name": "local-game-mcp-server", "version": "1.0.0"},
+            },
+        }
+
+    def _handle_tools_list(self, request_id):
+        self._debug(f"Handling tools/list request: {request_id}")
+        return {
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "result": {
+                "tools": [
+                    {
+                        "name": "send_command",
+                        "description": "Send a command to the game and get the response",
+                        "inputSchema": {
+                            "type": "object",
+                            "properties": {
+                                "command": {
+                                    "type": "string",
+                                    "description": "The command to send to the game",
+                                },
+                            },
+                            "required": ["command"],
+                        },
+                    },
+                    {
+                        "name": "get_last_answer",
+                        "description": "Get the last answer from the game again",
+                        "inputSchema": {
+                            "type": "object",
+                            "properties": {},
+                        },
+                    },
+                    {
+                        "name": "get_game_status",
+                        "description": "Get current game status (room name, number of moves, score)",
+                        "inputSchema": {
+                            "type": "object",
+                            "properties": {},
+                        },
+                    },
+                    {
+                        "name": "get_gameplay_notes",
+                        "description": "Get the gameplay notes",
+                        "inputSchema": {
+                            "type": "object",
+                            "properties": {},
+                        },
+                    },
+                ]
+            },
+        }
+
+    def _handle_tools_call(self, request_id, params: dict):
+        self._debug(f"Handling tools/call request: {request_id}")
+        tool_name = params.get("name")
+        arguments = params.get("arguments", {})
+
+        try:
+            if tool_name == "send_command":
+                command = arguments.get("command", "")
+                result = self._game.do_command(command)
+                self._last_answer = result
+                return {
+                    "jsonrpc": "2.0",
+                    "id": request_id,
+                    "result": {"content": [{"type": "text", "text": result}]},
+                }
+
+            elif tool_name == "get_last_answer":
+                return {
+                    "jsonrpc": "2.0",
+                    "id": request_id,
+                    "result": {
+                        "content": [{"type": "text", "text": self._last_answer}]
+                    },
+                }
+
+            elif tool_name == "get_game_status":
+                status_text = (
+                    f"Room: {self._game.room_name()}\n"
+                    f"Moves: {self._game.moves()}\n"
+                    f"Score: {self._game.score()}"
+                )
+                return {
+                    "jsonrpc": "2.0",
+                    "id": request_id,
+                    "result": {"content": [{"type": "text", "text": status_text}]},
+                }
+
+            elif tool_name == "get_gameplay_notes":
+                notes = self._game.get_game_play_notes()
+                return {
+                    "jsonrpc": "2.0",
+                    "id": request_id,
+                    "result": {"content": [{"type": "text", "text": notes}]},
+                }
+
+            return {
+                "jsonrpc": "2.0",
+                "id": request_id,
+                "error": {"code": -32601, "message": f"Unknown tool: {tool_name}"},
+            }
+
+        except Exception as e:
+            self._debug(f"Error in tools/call: {e}")
+            return {
+                "jsonrpc": "2.0",
+                "id": request_id,
+                "error": {"code": -32603, "message": f"Internal error: {str(e)}"},
+            }
+
+    def run(self) -> None:
+        while True:
+            message = self._read_message()
+            self._debug(f"Received message: {message}")
+            if message is None:
+                break
+
+            method = message.get("method")
+            request_id = message.get("id")
+            params = message.get("params", {})
+
+            if method == "initialize":
+                response = self._handle_initialize(request_id)
+            elif method == "tools/list":
+                response = self._handle_tools_list(request_id)
+            elif method == "tools/call":
+                response = self._handle_tools_call(request_id, params)
+            else:
+                response = {
+                    "jsonrpc": "2.0",
+                    "id": request_id,
+                    "error": {"code": -32601, "message": f"Method not found: {method}"},
+                }
+
+            self._write_message(response)
+
+
+def main() -> None:
+    debug_enabled = len(sys.argv) > 1 and sys.argv[1] == "--debug"
+    server = GameMcpServer(debug_enabled)
+    server.run()
+
+
+if __name__ == "__main__":
+    main()

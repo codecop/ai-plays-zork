@@ -13,9 +13,6 @@ class EmptyAi(MistralLoopAi):
     def get_next_command(self, context: str):
         assert False
 
-    def close(self):
-        assert False
-
 
 @pytest.fixture(name="ai")
 def fixture_ai(data_dir: Path) -> EmptyAi:

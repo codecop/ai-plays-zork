@@ -93,7 +93,3 @@ class OpenaiLoopAi(LoopAi):
             self.log.ai(content)
             content = content.splitlines()[-1]
         return content
-
-    def close(self) -> None:
-        # currently no explicit cleanup needed
-        pass

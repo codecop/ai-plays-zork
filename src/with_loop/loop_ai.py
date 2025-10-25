@@ -69,7 +69,3 @@ class LoopAi(ABC):
         Returns:
             The next command to execute in the game.
         """
-
-    @abstractmethod
-    def close(self) -> None:
-        """Clean up any resources used by the AI."""

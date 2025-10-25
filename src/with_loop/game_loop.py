@@ -52,6 +52,5 @@ class GameLoop:
             loop_count += 1
 
     def close(self) -> None:
-        self.ai.close()
         if self.game is not None:
             self.game.close()

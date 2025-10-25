@@ -17,7 +17,7 @@ def debug(message: str) -> None:
     sys.stderr.flush()
 
     log_file = Path(__file__).with_suffix(".log")
-    with log_file.open("a") as fp:
+    with log_file.open("a", encoding="utf-8") as fp:
         fp.write(f"DEBUG: {message}\n")
 
 

@@ -88,23 +88,13 @@ class GameMcpServer(LocalMcp):
             if tool_name == "send_command":
                 command = arguments.get("command", "")
                 self._debug(f'Send "{command}" to game')
-                result = self._game.do_command(command)
-                self._debug(f'Game responds: "{result}"')
-                self._last_answer = result
-                return {
-                    "jsonrpc": "2.0",
-                    "id": request_id,
-                    "result": {"content": [{"type": "text", "text": result}]},
-                }
+                game_response = self._game.do_command(command)
+                self._debug(f'Game responds: "{game_response}"')
+                self._last_answer = game_response
+                return self._handle_text_result(request_id, game_response)
 
             if tool_name == "get_last_answer":
-                return {
-                    "jsonrpc": "2.0",
-                    "id": request_id,
-                    "result": {
-                        "content": [{"type": "text", "text": self._last_answer}]
-                    },
-                }
+                return self._handle_text_result(request_id, self._last_answer)
 
             if tool_name == "get_game_status":
                 status_text = (
@@ -112,33 +102,17 @@ class GameMcpServer(LocalMcp):
                     f"Moves: {self._game.moves()}\n"
                     f"Score: {self._game.score()}"
                 )
-                return {
-                    "jsonrpc": "2.0",
-                    "id": request_id,
-                    "result": {"content": [{"type": "text", "text": status_text}]},
-                }
+                return self._handle_text_result(request_id, status_text)
 
             if tool_name == "get_gameplay_notes":
                 notes = self._game.get_game_play_notes()
-                return {
-                    "jsonrpc": "2.0",
-                    "id": request_id,
-                    "result": {"content": [{"type": "text", "text": notes}]},
-                }
+                return self._handle_text_result(request_id, notes)
 
-            return {
-                "jsonrpc": "2.0",
-                "id": request_id,
-                "error": {"code": -32601, "message": f"Unknown tool: {tool_name}"},
-            }
+            return self._handle_error(request_id, -32601, f"Unknown tool: {tool_name}")
 
         except Exception as e:
             self._debug(f"Error in tools/call: {repr(e)}")
-            return {
-                "jsonrpc": "2.0",
-                "id": request_id,
-                "error": {"code": -32603, "message": f"Internal error: {str(e)}"},
-            }
+            return self._handle_error(request_id, -32603, f"Internal error: {str(e)}")
 
     def close(self) -> None:
         super().close()

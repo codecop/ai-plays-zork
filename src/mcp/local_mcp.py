@@ -86,13 +86,23 @@ class LocalMcp(ABC):
     def handle_tools_call(self, request_id, params: dict):
         pass
 
+    def _handle_text_result(self, request_id, text: str):
+        return {
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "result": {"content": [{"type": "text", "text": text}]},
+        }
+
     def _handle_not_found(self, request_id, method):
+        return self._handle_error(request_id, -32601, f"Method not found: {method}")
+
+    def _handle_error(self, request_id, code: int, message: str):
         return {
             "jsonrpc": "2.0",
             "id": request_id,
             "error": {
-                "code": -32601,
-                "message": f"Method not found: {method}",
+                "code": code,
+                "message": message,
             },
         }
 

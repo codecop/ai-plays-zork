@@ -3,8 +3,12 @@
         "local-add": {
             "command": "python",
             "args": [
-                "E:\\Develop\\Python\\Python-3\\AiPlaysZork\\src\\mcp\\local_add_mcp_server.py"
-            ]
+                "E:\\Develop\\Python\\Python-3\\AiPlaysZork\\src\\mcp\\local_add_mcp_server.py",
+                "--debug"
+            ],
+            "env": {
+                "PYTHONPATH": "E:\\Develop\\Python\\Python-3\\AiPlaysZork\\src"
+            }
         }
     }
 }

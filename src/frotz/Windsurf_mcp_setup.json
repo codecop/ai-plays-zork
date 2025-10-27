@@ -1,10 +1,14 @@
 {
     "mcpServers": {
-        "adventure-game": {
+        "local-game": {
             "command": "python",
             "args": [
-                "E:\\Develop\\Python\\Python-3\\AiPlaysZork\\src\\frotz\\local_game_mcp_server.py"
-            ]
+                "E:\\Develop\\Python\\Python-3\\AiPlaysZork\\src\\frotz\\local_game_mcp_server.py",
+                "--debug"
+            ],
+            "env": {
+                "PYTHONPATH": "E:\\Develop\\Python\\Python-3\\AiPlaysZork\\src"
+            }
         }
     }
 }

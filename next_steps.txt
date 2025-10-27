@@ -1,9 +1,13 @@
 Cleanup Tasks (alone)
 
-* make tmux work on Windows
-  1) move tmux script to src/frotz and make them work with tmux windows. readme is tools description
+zork AI
+. tmux Files zu Game geben als "tmux"
+. andere bash zu Tool Namen "map/console"?
 
 * add log and tracker to MCP and initialise a new with client name of caller
+
+* make tmux work on Windows
+  1) move tmux script to src/frotz and make them work with tmux windows. readme is tools description
 
 ---
 
@@ -24,8 +28,6 @@ update_map(current_location, exits, description)
 2. Memory / Wissen speichern
 Tool: remember_fact(key, value)
 Tool: recall_fact(key)
-
-Oder hints f�r Raum
 
 Other models
 -------------
@@ -49,7 +51,7 @@ Other models
 ## Older Notes
 
 * Idea: game is also a tool. so we can go meta.
-. loop tests? m�sste ai mocken. geht
-- tests? m�sste game mocken
-- room Change der cycle entdeckt (3* gleiche R�ume) und warn und dann exception wirft
-  mit Raum Liste gen�gt 
+. loop tests? m sste ai mocken. geht
+- tests? m sste game mocken
+- room Change der cycle entdeckt (3* gleiche R ume) und warn und dann exception wirft
+  mit Raum Liste gen gt 

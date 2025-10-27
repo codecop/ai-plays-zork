@@ -10,8 +10,11 @@ def fixture_new_server():
 
 
 def test_initialize(new_server):
-
-    response = new_server.handle_initialize(request_id=1)
+    params = {
+        "protocolVersion": "2025-03-26",
+        "clientInfo": {"name": "windsurf-client", "version": "1.0.0"},
+    }
+    response = new_server.handle_initialize(request_id=1, params=params)
 
     assert response["jsonrpc"] == "2.0"
     assert response["id"] == 1
@@ -20,9 +23,10 @@ def test_initialize(new_server):
     assert response["result"]["serverInfo"]["name"] == "local-game-mcp-server"
     assert response["result"]["serverInfo"]["version"] == "1.0.0"
 
+    assert new_server.client == "windsurf-client"
+
 
 def test_tools_list(new_server):
-
     response = new_server.handle_tools_list(request_id=2)
 
     assert response["jsonrpc"] == "2.0"
@@ -37,7 +41,6 @@ def test_tools_list(new_server):
 
 
 def test_tools_call_send_command(new_server):
-
     params = {"name": "send_command", "arguments": {"command": "look"}}
     response = new_server.handle_tools_call(request_id=3, params=params)
 
@@ -50,7 +53,6 @@ def test_tools_call_send_command(new_server):
 
 
 def test_tools_call_game_status(new_server):
-
     params = {"name": "get_game_status", "arguments": {}}
     response = new_server.handle_tools_call(request_id=5, params=params)
 
@@ -63,7 +65,6 @@ def test_tools_call_game_status(new_server):
 
 
 def test_tools_call_unknown_tool(new_server):
-
     params = {"name": "unknown_tool", "arguments": {}}
     response = new_server.handle_tools_call(request_id=7, params=params)
 

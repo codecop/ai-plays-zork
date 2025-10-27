@@ -11,6 +11,7 @@ class LocalMcp(ABC):
     def __init__(self, debug: bool = False):
         self._is_debug = debug
         self._debug(f"Starting {self.__class__.__name__}")
+        self.client = "not_initialized"
 
     def _debug(self, message: str) -> None:
         if not self._is_debug:
@@ -38,7 +39,7 @@ class LocalMcp(ABC):
             params = message.get("params", {})
 
             if method == "initialize":
-                response = self.handle_initialize(request_id)
+                response = self.handle_initialize(request_id, params)
             elif method == "tools/list":
                 response = self.handle_tools_list(request_id)
             elif method == "tools/call":
@@ -62,8 +63,9 @@ class LocalMcp(ABC):
         self._debug(f"Read line: {line.strip()}")
         return json.loads(line.strip())
 
-    def handle_initialize(self, request_id):
+    def handle_initialize(self, request_id, params: dict):
         self._debug(f"Handling initialize request: {request_id}")
+        self.client = params.get("clientInfo", {}).get("name", "unknown-client")
         return {
             "jsonrpc": "2.0",
             "id": request_id,

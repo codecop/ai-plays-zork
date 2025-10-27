@@ -55,7 +55,7 @@ class LocalMcp(ABC):
 
         return True
 
-    def _read_message(self) -> dict[str, Any] | None:
+    def _read_message(self):  # -> dict[str, Any] | None:
         line = sys.stdin.readline()
         if not line:
             return None

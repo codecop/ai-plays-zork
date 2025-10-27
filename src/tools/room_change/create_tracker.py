@@ -6,9 +6,9 @@ from tools.room_change.graphviz_room_change import GraphvizRoomChange
 from tools.room_change.room_change_tracker import RoomChangeTracker
 
 
-def create_tracker(run_folder: Path, log: Log) -> RoomChangeTracker:
+def create_tracker(run_folder: Path, log: Log, view: bool = True) -> RoomChangeTracker:
     return RoomChangeTracker(
-        CompositeRoomChange(GraphvizRoomChange(run_folder)),
+        CompositeRoomChange(GraphvizRoomChange(run_folder, view)),
         log,
         IndividualLog(run_folder, "move_"),
     )

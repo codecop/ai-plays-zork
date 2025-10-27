@@ -1,0 +1,14 @@
+{
+    "mcpServers": {
+        "local-main-game": {
+            "command": "python",
+            "args": [
+                "E:\\Develop\\Python\\Python-3\\AiPlaysZork\\src\\with_mcp\\local_main_mcp_server.py",
+                "--debug"
+            ],
+            "env": {
+                "PYTHONPATH": "E:\\Develop\\Python\\Python-3\\AiPlaysZork\\src"
+            }
+        }
+    }
+}

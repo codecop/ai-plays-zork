@@ -79,31 +79,47 @@ class GameMcpServer(LocalMcp):
             if tool_name == "send_command":
                 command = arguments.get("command", "")
                 self._debug(f'Send "{command}" to game')
-                game_response = self._game.do_command(command)
+                game_response = self.handle_send_command(command)
                 self._debug(f'Game responds: "{game_response}"')
                 self._last_answer = game_response
                 return self._handle_text_result(request_id, game_response)
 
             if tool_name == "get_last_answer":
-                return self._handle_text_result(request_id, self._last_answer)
+                return self._handle_text_result(
+                    request_id, self.handle_get_last_answer()
+                )
 
             if tool_name == "get_game_status":
-                status_text = (
-                    f"Room: {self._game.room_name()}\n"
-                    f"Moves: {self._game.moves()}\n"
-                    f"Score: {self._game.score()}"
+                return self._handle_text_result(
+                    request_id, self.handle_get_game_status()
                 )
-                return self._handle_text_result(request_id, status_text)
 
             if tool_name == "get_gameplay_notes":
-                notes = self._game.get_game_play_notes()
-                return self._handle_text_result(request_id, notes)
+                return self._handle_text_result(
+                    request_id, self.handle_get_gameplay_notes()
+                )
 
             return self._handle_error(request_id, -32601, f"Unknown tool: {tool_name}")
 
         except Exception as e:
             self._debug(f"Error in tools/call: {repr(e)}")
             return self._handle_error(request_id, -32603, f"Internal error: {str(e)}")
+
+    def handle_send_command(self, command: str) -> str:
+        return self._game.do_command(command)
+
+    def handle_get_last_answer(self) -> str:
+        return self._last_answer
+
+    def handle_get_game_status(self) -> str:
+        return (
+            f"Room: {self._game.room_name()}\n"
+            f"Moves: {self._game.moves()}\n"
+            f"Score: {self._game.score()}"
+        )
+
+    def handle_get_gameplay_notes(self) -> str:
+        return self._game.get_game_play_notes()
 
     def close(self) -> None:
         super().close()

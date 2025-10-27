@@ -1,3 +1,3 @@
 """
-MCP general code and information.
+MCP experiments, information and general code.
 """

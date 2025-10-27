@@ -1,14 +1,4 @@
 import sys
-from pathlib import Path
-
-
-def root_dir() -> Path:
-    return Path(__file__).resolve().parent.parent.parent
-
-
-# if started standalone need to fix the import path
-sys.path.insert(0, str(root_dir() / "src"))
-print("sys.path:", sys.path)
 from mcp.local_mcp import LocalMcp
 
 

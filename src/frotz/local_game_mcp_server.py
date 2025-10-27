@@ -1,19 +1,11 @@
 import sys
 from pathlib import Path
+from frotz.game import Game
+from mcp.local_mcp import LocalMcp
 
 
-def root_dir() -> Path:
-    return Path(__file__).resolve().parent.parent.parent
-
-
-try:
-    from frotz.game import Game
-    from mcp.local_mcp import LocalMcp
-except ModuleNotFoundError:
-    # if started standalone need to fix the import path
-    sys.path.insert(0, str(root_dir() / "src"))
-    from frotz.game import Game
-    from mcp.local_mcp import LocalMcp
+def working_dir() -> str:
+    return str(Path(__file__).resolve().parent.parent.parent)
 
 
 class GameMcpServer(LocalMcp):
@@ -22,9 +14,8 @@ class GameMcpServer(LocalMcp):
     def __init__(self, debug: bool = False):
         super().__init__(debug)
 
-        base_folder = str(root_dir() / "frotz/data")
-        self._debug(f"Loading game from {base_folder}")
-        self._game = Game(base_folder)
+        self._debug(f"Loading game from {working_dir()}")
+        self._game = Game(working_dir=working_dir())
         self._last_answer = self._game.get_intro()
 
     def name(self) -> str:

@@ -7,10 +7,15 @@ from util.file_utils import read_file
 class Game:
     """Wrapper around Frotz with simplified interface."""
 
-    def __init__(self, base_folder: str = "frotz/data", game_file: str = "zork1.z3"):
+    def __init__(
+        self,
+        working_dir: str = ".",
+        data_folder: str = "frotz/data",
+        game_file: str = "zork1.z3",
+    ):
         patch_frotz()
 
-        self._base_folder = base_folder
+        self._base_folder = f"{working_dir}/{data_folder}"
         self.wrapper = Frotz(f"{self._base_folder}/{game_file}", reformat_spacing=False)
         self.has_quit = False
 

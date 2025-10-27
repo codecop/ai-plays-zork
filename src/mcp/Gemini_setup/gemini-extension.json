@@ -9,7 +9,10 @@
         "--debug"
       ],
       "cwd": "E:\\Develop\\Python\\Python-3\\AiPlaysZork",
-      "trust": true
+      "trust": true,
+      "env": {
+        "PYTHONPATH": "E:\\Develop\\Python\\Python-3\\AiPlaysZork\\src"
+      }
     }
   }
 }

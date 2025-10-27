@@ -2,7 +2,6 @@ import sys
 import json
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Any
 
 
 class LocalMcp(ABC):

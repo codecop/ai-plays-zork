@@ -17,11 +17,11 @@ def convert_path(path):
     if re.match(r"^[A-Za-z]:", path):
         drive = path[0].lower()
         rest = normalize_path(path[2:])
-        converted = f"/cygdrive/{drive}{rest}"
+        converted = "/cygdrive/" + drive + rest
     else:
         converted = normalize_path(path)
     # if " " in converted:
-    #     converted = f'"{converted}"'
+    #     converted = '"' + converted + '"'
     return converted
 
 
@@ -43,7 +43,7 @@ def convert_value(value):
 def generate_bashrc(output_file="bashrc"):
     env_vars = dict(os.environ)
 
-    with open(output_file, "w", encoding="utf-8") as f:
+    with open(output_file, "w") as f:
         f.write("#!/bin/bash\n")
         f.write("# Generated from Windows environment variables\n\n")
 
@@ -55,13 +55,11 @@ def generate_bashrc(output_file="bashrc"):
                 continue
             converted_value = convert_value(value)
             escaped_value = converted_value.replace('"', '\\"')
-            f.write(f'export {name}="${name}:{escaped_value}"\n')
+            f.write('export ' + name + '="$' + name + ':' + escaped_value + '"\n')
 
-    print(f"File created: {output_file}")
+    print("Created: " + output_file + " from environment")
 
 
 if __name__ == "__main__":
-    output_file = f"{os.getenv('HOME')}/.bashrc"
+    output_file = os.getenv('HOME') + "/.bashrc"
     generate_bashrc(output_file)
-# python bin\env_to_bashrc.py
-# dos2unix %HOME%\.bashrc

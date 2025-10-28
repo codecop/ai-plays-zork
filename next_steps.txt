@@ -1,9 +1,5 @@
 Cleanup Tasks (alone)
 
-. tmux Files zu Game geben als "tmux"
-* make tmux work on Windows
-  1) move tmux script to src/frotz and make them work with tmux windows. readme is tools description
-
 . andere bash zu Tool Namen "map/console"?
 
 ---

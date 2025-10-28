@@ -4,7 +4,8 @@
 # This script creates or attaches to a tmux session named "zork-game"
 
 SESSION_NAME="zork-game"
-PROJECT_DIR="$(cd "$(dirname "$0")/../../.." && pwd)"
+SCRIPT_DIR=$(dirname "$0" | tr -d '\r')
+PROJECT_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
 # Check if session already exists
 if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then

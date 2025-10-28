@@ -25,4 +25,5 @@ tmux send-keys -t "$SESSION_NAME" "$1" C-m
 sleep 0.5
 
 # Show the result
-$(dirname "$0")/get_last_response.sh
+SCRIPT_DIR=$(dirname "$0" | tr -d '\r')
+"$SCRIPT_DIR/get_last_response.sh"

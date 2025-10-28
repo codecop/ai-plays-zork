@@ -4,17 +4,25 @@ import os
 import re
 
 
-def normalize_slashes(path):
-    return path.replace("\\", "/")
+def normalize_path(path):
+    return (
+        path.replace("\\", "/")
+        .replace("/Program Files/", "/Progra~1/")
+        .replace("/Program Files (x86)/", "/Progra~2/")
+        .replace(" ", "\\ ")
+    )
 
 
 def convert_path(path):
     if re.match(r"^[A-Za-z]:", path):
         drive = path[0].lower()
-        rest = normalize_slashes(path[2:])
-        return f"/cygdrive/{drive}{rest}"
-
-    return normalize_slashes(path)
+        rest = normalize_path(path[2:])
+        converted = f"/cygdrive/{drive}{rest}"
+    else:
+        converted = normalize_path(path)
+    # if " " in converted:
+    #     converted = f'"{converted}"'
+    return converted
 
 
 def convert_path_list(value):
@@ -39,14 +47,21 @@ def generate_bashrc(output_file="bashrc"):
         f.write("#!/bin/bash\n")
         f.write("# Generated from Windows environment variables\n\n")
 
-        for name, value in sorted(env_vars.items()):
+        working_vars = ["PATH"]
+
+        for name in working_vars:
+            value = env_vars.get(name)
+            if value is None:
+                continue
             converted_value = convert_value(value)
             escaped_value = converted_value.replace('"', '\\"')
-            f.write(f'export {name}="{escaped_value}"\n')
+            f.write(f'export {name}="${name}:{escaped_value}"\n')
 
-    print(f"Bashrc file created: {output_file}")
+    print(f"File created: {output_file}")
 
 
 if __name__ == "__main__":
-    output_file = "bashrc"
+    output_file = f"{os.getenv('HOME')}/.bashrc"
     generate_bashrc(output_file)
+# python bin\env_to_bashrc.py
+# dos2unix %HOME%\.bashrc

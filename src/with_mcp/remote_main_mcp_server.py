@@ -1,6 +1,13 @@
+import os
 import sys
 from typing import Any
 from fastmcp import Context, FastMCP
+
+
+working_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.insert(0, working_dir)
+
+
 from frotz.game import Game
 from util.create_run import create_run
 from tools.room_change.create_tracker import create_tracker
@@ -10,7 +17,7 @@ class RemoteMainMcpServer:
     """Remote MCP server around Zork game with logging like main loop."""
 
     def __init__(self):
-        self._game: Any = None  # : Game | None
+        self._game = Game()
         self._log: Any = None  # : Log | None
         self._tracker: Any = None  # : RoomChangeTracker | None
         self._last_answer = ""
@@ -20,7 +27,7 @@ class RemoteMainMcpServer:
         self._mcp = FastMCP(name="remote-main-mcp-server")
         self._register_tools()
 
-    def _register_tools(self):
+    def _register_tools(self) -> None:
         @self._mcp.tool
         def send_command(command: str, ctx: Context) -> str:
             """Send a command to the game and get the response"""
@@ -41,9 +48,8 @@ class RemoteMainMcpServer:
             """Get the gameplay notes"""
             return self._get_gameplay_notes(ctx)
 
-    def _initialize_game(self, client_name: str = "Unknown"):
+    def _initialize_game(self, client_name="Unknown") -> None:
         self.client = client_name
-        self._game = Game()
 
         config = client_name
         run_folder, self._log = create_run(config, "mcp")
@@ -106,19 +112,17 @@ class RemoteMainMcpServer:
 
         return self._game.get_game_play_notes()
 
-    def run(self, host: str, port: int, debug: bool):
-        self._mcp.run(transport="http", host=host, port=port, debug=debug)
+    def run(self, host: str, port: int) -> None:
+        self._mcp.run(transport="http", host=host, port=port)
 
-    def close(self):
+    def close(self) -> None:
         self._game.close()
-        self._mcp.close()
 
 
 def main() -> None:
-    debug_enabled = len(sys.argv) > 1 and sys.argv[1] == "--debug"
     server = RemoteMainMcpServer()
     try:
-        server.run(host="127.0.0.1", port=8001, debug=debug_enabled)
+        server.run(host="127.0.0.1", port=8001)
     except Exception as e:
         server.close()
         raise e

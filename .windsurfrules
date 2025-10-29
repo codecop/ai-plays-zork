@@ -35,9 +35,10 @@ Each Markdown section below represents a step in the development workflow and ha
 
 ### 2. Design Patterns
 
+- Paradigm: Object Oriented, always create a class
 - Prefer: Dependency Injection, Command, Builder, Factory, Strategy
 - Domain Driven Design: First Class Collection, Value Object
-- Avoid: Static methods, Singletons
+- Avoid: global variables, static methods, Singletons
 
 ### 3. Method Design
 

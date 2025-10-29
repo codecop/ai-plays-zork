@@ -54,7 +54,7 @@ class RemoteMainMcpServer:
 
         config = client_name
         run_folder, self._log = create_run(config, "mcp")
-        self._tracker = create_tracker(run_folder, self._log, False)
+        self._tracker = create_tracker(run_folder, self._log)
         self._log.ai(
             "ai: remote-main-mcp-server\n"
             + f"configuration: {config}\n"
@@ -66,8 +66,7 @@ class RemoteMainMcpServer:
     def _send_command(self, command: str, ctx: Context) -> str:
         """Send a command to the game and get the response"""
 
-        if self._log is None:
-            self._initialize_game(ctx.session._client_params.clientInfo.name)
+        self._ensure_initialized(ctx)
 
         # Get AI's next move
         if self._log:
@@ -88,16 +87,14 @@ class RemoteMainMcpServer:
     def _get_last_answer(self, ctx: Context) -> str:
         """Get the last answer from the game again"""
 
-        if self._log is None:
-            self._initialize_game(ctx.session._client_params.clientInfo.name)
+        self._ensure_initialized(ctx)
 
         return self._last_answer
 
     def _get_game_status(self, ctx: Context) -> str:
         """Get game status (room name, number of moves, score)"""
 
-        if self._log is None:
-            self._initialize_game(ctx.session._client_params.clientInfo.name)
+        self._ensure_initialized(ctx)
 
         return (
             f"Room: {self._game.room_name()}\n"
@@ -108,10 +105,13 @@ class RemoteMainMcpServer:
     def _get_gameplay_notes(self, ctx: Context) -> str:
         """Get the gameplay notes"""
 
-        if self._log is None:
-            self._initialize_game(ctx.session._client_params.clientInfo.name)
+        self._ensure_initialized(ctx)
 
         return self._game.get_game_play_notes()
+
+    def _ensure_initialized(self, ctx: Context) -> None:
+        if self._log is None:
+            self._initialize_game(ctx.session._client_params.clientInfo.name)
 
     def run(self, host: str, port: int) -> None:
         self._mcp.run(transport="http", host=host, port=port)

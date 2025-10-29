@@ -1,6 +1,5 @@
 import os
 import sys
-from typing import Any
 from fastmcp import Context, FastMCP
 
 
@@ -9,8 +8,10 @@ sys.path.insert(0, working_dir)
 
 
 from frotz.game import Game
+from util.log import Log
 from util.create_run import create_run
 from tools.room_change.create_tracker import create_tracker
+from tools.room_change.room_change_tracker import RoomChangeTracker
 
 
 class RemoteMainMcpServer:
@@ -18,8 +19,8 @@ class RemoteMainMcpServer:
 
     def __init__(self):
         self._game = Game()
-        self._log: Any = None  # : Log | None
-        self._tracker: Any = None  # : RoomChangeTracker | None
+        self._log: Log | None = None
+        self._tracker: RoomChangeTracker | None = None
         self._last_answer = ""
 
         self.client = "not_initialized"

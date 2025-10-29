@@ -1,11 +1,9 @@
 import sys
-from typing import Any
 from frotz.local_game_mcp_server import GameMcpServer, working_dir
 from util.create_run import create_run
+from util.log import Log
 from tools.room_change.create_tracker import create_tracker
-
-# from util.log import Log
-# from tools.room_change.room_change_tracker import RoomChangeTracker
+from tools.room_change.room_change_tracker import RoomChangeTracker
 
 
 class MainMcpServer(GameMcpServer):
@@ -13,8 +11,8 @@ class MainMcpServer(GameMcpServer):
 
     def __init__(self, debug: bool = False):
         super().__init__(debug)
-        self.log: Any = None  # : Log | None
-        self.tracker: Any = None  # : RoomChangeTracker | None
+        self.log: Log | None = None
+        self.tracker: RoomChangeTracker | None = None
 
     def name(self) -> str:
         return "local-main-mcp-server"

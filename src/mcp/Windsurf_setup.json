@@ -9,6 +9,9 @@
             "env": {
                 "PYTHONPATH": "E:\\Develop\\Python\\Python-3\\AiPlaysZork\\src"
             }
+        },
+        "remote-add": {
+            "serverUrl": "http://127.0.0.1:8000/mcp"
         }
     }
 }

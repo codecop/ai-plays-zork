@@ -13,6 +13,7 @@ class RemoteMainMcpServer:
         self._game: Any = None  # : Game | None
         self._log: Any = None  # : Log | None
         self._tracker: Any = None  # : RoomChangeTracker | None
+        self._last_answer = ""
 
         self.client = "not_initialized"
 
@@ -40,7 +41,7 @@ class RemoteMainMcpServer:
             """Get the gameplay notes"""
             return self._get_gameplay_notes(ctx)
 
-    def _initialize_game(self, client_name: str = "Unknown") -> str:
+    def _initialize_game(self, client_name: str = "Unknown"):
         self.client = client_name
         self._game = Game()
 
@@ -48,12 +49,12 @@ class RemoteMainMcpServer:
         run_folder, self._log = create_run(config, "mcp")
         self._tracker = create_tracker(run_folder, self._log, False)
         self._log.ai(
-            f"ai: remote-main-mcp-server\n"
+            "ai: remote-main-mcp-server\n"
             + f"configuration: {config}\n"
             + f"name: {config}"
         )
 
-        return self._game.start()
+        self._last_answer = self._game.get_intro()
 
     def _send_command(self, command: str, ctx: Context) -> str:
         """Send a command to the game and get the response"""
@@ -66,7 +67,8 @@ class RemoteMainMcpServer:
             self._log.command(command)
 
         # Send command to game
-        game_output = self._game.send_command(command)
+        game_output = self._game.do_command(command)
+        self._last_answer = game_output
 
         if self._log:
             self._log.game(game_output)
@@ -119,6 +121,7 @@ def main() -> None:
         server.run(host="127.0.0.1", port=8001, debug=debug_enabled)
     except Exception as e:
         server.close()
+        raise e
 
 
 if __name__ == "__main__":

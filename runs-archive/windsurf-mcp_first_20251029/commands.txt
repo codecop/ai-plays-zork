@@ -1,0 +1,85 @@
+look
+open mailbox
+take leaflet
+inventory
+read leaflet
+south
+west
+east
+north
+north
+climb tree
+examine egg
+open egg
+down
+north
+examine leaves
+north
+south
+south
+east
+open window
+enter window
+examine sack
+open sack
+take all from sack
+inventory
+examine bottle
+take bottle
+go up
+down
+west
+take lantern
+take sword
+examine rug
+examine trophy case
+move rug
+open trap door
+inventory
+light lantern
+go down
+north
+attack troll
+attack troll
+take axe
+east
+look
+inventory
+go down
+examine crack
+northeast
+examine lake
+southeast
+examine stairway
+down
+take bar
+west
+examine room
+look
+exits
+north
+northeast
+southwest
+north
+south
+south
+east
+west
+southwest
+southeast
+examine engravings
+east
+examine railing
+examine dome
+examine floor
+west
+northwest
+examine walls
+examine ceiling
+look up
+east
+south
+west
+north
+south
+north

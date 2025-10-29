@@ -1,0 +1,39 @@
+south
+west
+north
+north
+climb tree
+down
+north
+south
+south
+east
+enter window
+go up
+down
+west
+go down
+north
+east
+go down
+northeast
+southeast
+down
+west
+north
+northeast
+southwest
+north
+south
+south
+east
+west
+southeast
+east
+west
+northwest
+east
+west
+north
+south
+north

@@ -1,6 +1,8 @@
 #!/bin/bash
 
-PROJECT_DIR="$(cd "$(dirname "$0")/../../../.." && pwd)"
+SCRIPT_DIR=$(dirname "$0" | tr -d '\r')
+PROJECT_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+
 MAP_NAME="map.txt"
 MAP_PATH=$PROJECT_DIR/runs/$MAP_NAME
 
@@ -10,8 +12,7 @@ if [ -z "$3" ]; then
     exit 1
 fi
 
-echo "\"$1\" \"$2\" \"$3\""  >> $MAP_PATH
+echo "\"$1\" \"$2\" \"$3\"" >> $MAP_PATH
 
 mv $MAP_PATH $MAP_PATH.bak
 sort --ignore-case $MAP_PATH.bak | uniq > $MAP_PATH
-

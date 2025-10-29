@@ -1,22 +1,5 @@
-Cleanup Tasks (alone)
-
-. andere bash zu Tool Namen "map/console"?
-
----
-
 Possible Tasks
 ==============
-
-Command Line Tools for Claude or other CLI Agents
-* What do we need from the map? What's the query?
-* Track items that we find
-* Breadcrumbs: paths and what happened
-* Track open tasks
-
-## Tools in general
-
-1. Karte zeichnen / Raumgraph pflegen
-update_map(current_location, exits, description)
 
 2. Memory / Wissen speichern
 Tool: remember_fact(key, value)

@@ -12,7 +12,7 @@ if [ -z "$3" ]; then
     exit 1
 fi
 
-echo "\"$1\" \"$2\" \"$3\"" >> $MAP_PATH
+echo "\"$1\" \"$2\" \"$3\"" >> "$MAP_PATH"
 
-mv $MAP_PATH $MAP_PATH.bak
-sort --ignore-case $MAP_PATH.bak | uniq > $MAP_PATH
+mv "$MAP_PATH" "$MAP_PATH.bak"
+sort --ignore-case "$MAP_PATH.bak" | uniq > "$MAP_PATH"

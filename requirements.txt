@@ -2,8 +2,8 @@
 pyFrotz==0.1.5
 mistralai==1.9.11
 graphviz==0.21
-openai-agents==0.4.1
-fastmcp==2.13.0.2
+openai-agents==0.4.2
+# fastmcp==2.13.0.2 ... does not work with mcp.types
 
 # Test dependencies
 pytest==8.4.2

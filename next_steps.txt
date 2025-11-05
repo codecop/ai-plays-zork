@@ -1,9 +1,59 @@
-. zork mit Gemini kaufen lassen
-  . System prompt zu MCP Game verschieben 
-  . mit gemini lokal laufen lassen jetzt wo registered habe
-
 Possible Tasks
 ==============
+
+TODO: fix bug: make the local MCP lazy which means start Game on first command, not on init
+
+* mit gemini lokal laufen lassen jetzt wo registered habe
+
+---
+
+Create a plan for each step (workflow) with
+* look around
+* reflect about what has happened and so on
+
+This is a tool
+* monitor its internal todo list
+* if it is too short, force it to plan
+
+= more agentic on lowest level
+
+---
+
+Ask AI about mental map of high level things.
+* maybe needs another AI monitoring and guiding the high level
+* things of interest: areas, mysteries
+  - we do not even know what kind of things are there, needs to be discovered
+
+= provide dynamic tools for planning and reflection
+
+---
+
+Implement Different AI Roles?
+* Adventurer = going around, knows how to deal with local things, e.g. fight troll
+  - variant: works on a small task, then stops and "reports" back
+  - variant: keeps on working but Navigator can stop and intervene
+  - variant: it decides when it needs new input or help from Navigator
+
+* Scribe = Summarizer, collecting the story, e.g. into little files
+  - assembling and "buffering"
+  - observes the Adventurer
+  - needs to be AI but does not reflect on them
+  - when to update the files?
+
+Implementation
+A JSON Mapper which maps Gemini/Claude conversations JSON to a uniform simple JSON
+ 
+
+* Navigator = thinking in areas? objectives? 
+  - zoomed out summary = little files of what items we have, rooms we have seen etc.
+  - merges the summarized stories
+
+* strategic? = goal? style of playing
+
+= roles are more wider than the game, have a team working together
+= going meta with the task
+
+---
 
 2. Memory / Wissen speichern
 Tool: remember_fact(key, value)

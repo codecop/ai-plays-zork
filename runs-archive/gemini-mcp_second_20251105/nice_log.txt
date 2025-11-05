@@ -1,0 +1,667 @@
+START 2025-11-05 20:55:30
+AI    ai: <class '__main__.MainMcpServer'>
+      configuration: gemini-cli-mcp-client
+      name: gemini-cli-mcp-client
+CMD   look
+GAME  West of House
+      You are standing in an open field west of a white house, with a boarded front door. There is a small mailbox here.
+CMD   open mailbox
+GAME  Opening the small mailbox reveals a leaflet.
+CMD   take leaflet
+GAME  Taken.
+CMD   read leaflet
+GAME  "WELCOME TO ZORK!
+      ZORK is a game of adventure, danger, and low cunning. In it you will explore some of the most amazing territory ever seen by mortals. No computer should be without one!"
+CMD   go north
+GAME  North of House
+      You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.
+ROOM  North of House
+CMD   go north
+GAME  Forest Path
+      This is a path winding through a dimly lit forest. The path heads north- south here. One particularly large tree with some low branches stands at the edge of the path.
+ROOM  Forest Path
+CMD   climb tree
+GAME  Up a Tree
+      You are about 10 feet above the ground nestled among some large branches. The nearest branch above you is above your reach. Beside you on the branch is a small bird's nest. In the bird's nest is a large egg encrusted with precious jewels, apparently scavenged by a childless songbird. The egg is covered with fine gold inlay, and ornamented in lapis lazuli and mother-of-pearl. Unlike most eggs, this one is hinged and closed with a delicate looking clasp. The egg appears extremely fragile. You hear in the distance the chirping of a song bird.
+ROOM  Up a Tree
+WARN  unrecognized direction: climb tree
+CMD   take egg
+GAME  Taken.
+      You hear in the distance the chirping of a song bird.
+CMD   go down
+GAME  Forest Path
+ROOM  Forest Path
+CMD   go south
+GAME  North of House
+ROOM  North of House
+CMD   go east
+GAME  Behind House
+      You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.
+ROOM  Behind House
+CMD   open window
+GAME  With great effort, you open the window far enough to allow entry.
+CMD   go in
+GAME  Kitchen
+      You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open. On the table is an elongated brown sack, smelling of hot peppers. A bottle is sitting on the table. The glass bottle contains: A quantity of water
+ROOM  Kitchen
+WARN  unrecognized direction: go in
+CMD   take sack
+GAME  Taken.
+CMD   take bottle
+GAME  Taken.
+CMD   open sack
+GAME  Opening the brown sack reveals a lunch, and a clove of garlic.
+CMD   take lunch
+GAME  Taken.
+CMD   take garlic
+GAME  Taken.
+CMD   eat lunch
+GAME  Thank you very much. It really hit the spot.
+CMD   go west
+GAME  Living Room
+      You are in the living room. There is a doorway to the east, a wooden door with strange gothic lettering to the west, which appears to be nailed shut, a trophy case, and a large oriental rug in the center of the room. Above the trophy case hangs an elvish sword of great antiquity. A battery-powered brass lantern is on the trophy case.
+ROOM  Living Room
+CMD   take sword
+GAME  Taken.
+CMD   take lantern
+GAME  Taken.
+CMD   examine rug
+GAME  There's nothing special about the carpet.
+CMD   move rug
+GAME  With a great effort, the rug is moved to one side of the room, revealing
+      the dusty cover of a closed trap door.
+CMD   open trap door
+GAME  The door reluctantly opens to reveal a rickety staircase descending into
+      darkness.
+CMD   turn on lantern
+GAME  The brass lantern is now on.
+CMD   go down
+GAME  The trap door crashes shut, and you hear someone barring it.
+      Cellar You are in a dark and damp cellar with a narrow passageway leading north, and a crawlway to the south. On the west is the bottom of a steep metal ramp which is unclimbable. Your sword is glowing with a faint blue glow.
+ROOM  Cellar
+CMD   go north
+GAME  The Troll Room
+      This is a small room with passages to the east and south and a forbidding hole leading west. Bloodstains and deep scratches (perhaps made by an axe) mar the walls. A nasty-looking troll, brandishing a bloody axe, blocks all passages out of the room. Your sword has begun to glow very brightly.
+ROOM  The Troll Room
+CMD   kill troll with sword
+GAME  The quickness of your thrust knocks the troll back, stunned.
+      The troll slowly regains his feet.
+CMD   kill troll with sword
+GAME  The fatal blow strikes the troll square in the heart: He dies.
+      Almost as soon as the troll breathes his last breath, a cloud of sinister black fog envelops him, and when the fog lifts, the carcass has disappeared. Your sword is no longer glowing.
+CMD   go east
+GAME  East-West Passage
+      This is a narrow east-west passageway. There is a narrow stairway leading down at the north end of the room.
+ROOM  East-West Passage
+CMD   go down
+GAME  Chasm
+      A chasm runs southwest to northeast and the path follows it. You are on the south side of the chasm, where a crack opens into a passage.
+ROOM  Chasm
+CMD   go into the passage
+GAME  You hit your head against the way as you attempt this feat.
+CMD   go up
+GAME  East-West Passage
+ROOM  East-West Passage
+CMD   go west
+GAME  The Troll Room
+      There is a bloody axe here.
+ROOM  The Troll Room
+CMD   take axe
+GAME  Your load is too heavy.
+CMD   inventory
+GAME  You are carrying:
+      A brass lantern (providing light) A sword A clove of garlic A glass bottle The glass bottle contains: A quantity of water A brown sack A jewel-encrusted egg A leaflet
+CMD   drop leaflet
+GAME  Dropped.
+CMD   take axe
+GAME  Your load is too heavy.
+CMD   drop sack
+GAME  Dropped.
+CMD   take axe
+GAME  Taken.
+CMD   go west
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+ROOM  Maze
+CMD   go west
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+CMD   go north
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+CMD   go east
+GAME  The Troll Room
+      There is a brown sack here. A small leaflet is on the ground.
+ROOM  The Troll Room
+CMD   drop garlic
+GAME  Dropped.
+CMD   go west
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+ROOM  Maze
+CMD   go west
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+CMD   go south
+GAME  You can't go that way.
+CMD   go north
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+CMD   go east
+GAME  The Troll Room
+      There is a clove of garlic here. There is a brown sack here. A small leaflet is on the ground.
+ROOM  The Troll Room
+CMD   take garlic
+GAME  Taken.
+CMD   go west
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+ROOM  Maze
+CMD   go up
+GAME  You can't go that way.
+CMD   go down
+GAME  You can't go that way.
+CMD   go west
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+CMD   go north
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+CMD   go west
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+CMD   go south
+GAME  You can't go that way.
+CMD   go east
+GAME  Dead End
+      You have come to a dead end in the maze.
+ROOM  Dead End
+CMD   go west
+GAME  You can't go that way.
+CMD   go east
+GAME  You can't go that way.
+CMD   go north
+GAME  You can't go that way.
+CMD   go south
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+ROOM  Maze
+CMD   go east
+GAME  Dead End
+      You have come to a dead end in the maze.
+ROOM  Dead End
+CMD   go south
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+ROOM  Maze
+CMD   go east
+GAME  Dead End
+      You have come to a dead end in the maze.
+ROOM  Dead End
+CMD   go west
+GAME  You can't go that way.
+CMD   go south
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+ROOM  Maze
+CMD   go north
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+CMD   go north
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+CMD   go north
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+CMD   go north
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+CMD   go up
+GAME  You can't go that way.
+CMD   go down
+GAME  You can't go that way.
+CMD   go east
+GAME  The Troll Room
+      There is a brown sack here. A small leaflet is on the ground.
+ROOM  The Troll Room
+CMD   go east
+GAME  East-West Passage
+ROOM  East-West Passage
+CMD   go down
+GAME  Chasm
+ROOM  Chasm
+CMD   go down
+GAME  Are you out of your mind?
+CMD   enter crack
+GAME  You can't fit through the crack.
+CMD   break crack with axe
+GAME  Nice try.
+CMD   jump
+GAME  This was not a very safe place to try jumping.
+      You should have looked before you leaped. **** You have died **** Now, let's take a look here... Well, you probably deserve another chance. I can't quite fix you up completely, but you can't have everything. Forest This is a forest, with trees in all directions. To the east, there appears to be sunlight.
+ROOM  Forest
+WARN  unrecognized direction: jump
+CMD   inventory
+GAME  You are empty-handed.
+CMD   go east
+GAME  Forest Path
+ROOM  Forest Path
+CMD   go south
+GAME  North of House
+      There is a sword here.
+ROOM  North of House
+CMD   take sword
+GAME  Taken.
+CMD   go east
+GAME  Behind House
+ROOM  Behind House
+CMD   go in
+GAME  Kitchen
+ROOM  Kitchen
+WARN  unrecognized direction: go in
+CMD   go west
+GAME  Living Room
+      There is a brass lantern (battery-powered) here.
+ROOM  Living Room
+CMD   take lantern
+GAME  Taken.
+CMD   move rug
+GAME  Having moved the carpet previously, you find it impossible to move it
+      again.
+CMD   open trap door
+GAME  The door reluctantly opens to reveal a rickety staircase descending into
+      darkness.
+CMD   turn on lantern
+GAME  It is already on.
+CMD   go down
+GAME  The trap door crashes shut, and you hear someone barring it.
+      Cellar
+ROOM  Cellar
+CMD   inventory
+GAME  You are carrying:
+      A brass lantern (providing light) A sword
+CMD   go north
+GAME  The Troll Room
+      There is a brown sack here. A small leaflet is on the ground.
+ROOM  The Troll Room
+CMD   take sack
+GAME  Taken.
+CMD   open sack
+GAME  It is already open.
+CMD   look in sack
+GAME  The brown sack is empty.
+CMD   look at ground
+GAME  There's nothing special about the ground.
+CMD   go east
+GAME  East-West Passage
+ROOM  East-West Passage
+CMD   go down
+GAME  Chasm
+ROOM  Chasm
+CMD   look
+GAME  Chasm
+      A chasm runs southwest to northeast and the path follows it. You are on the south side of the chasm, where a crack opens into a passage.
+CMD   use sword on crack
+GAME  I don't know the word "use".
+CMD   attack crack with sword
+GAME  I've known strange people, but fighting a crack?
+CMD   dig crack with sword
+GAME  Digging with a sword is silly.
+CMD   go up
+GAME  East-West Passage
+ROOM  East-West Passage
+CMD   go west
+GAME  The Troll Room
+      A small leaflet is on the ground.
+ROOM  The Troll Room
+CMD   go south
+GAME  Cellar
+ROOM  Cellar
+CMD   open trap door
+GAME  The door is locked from above.
+CMD   go south
+GAME  East of Chasm
+      You are on the east edge of a chasm, the bottom of which cannot be seen. A narrow passage goes north, and the path you are on continues to the east. Someone carrying a large bag is casually leaning against one of the walls here. He does not speak, but it is clear from his aspect that the bag will be taken only over his dead body. Your sword has begun to glow very brightly.
+ROOM  East of Chasm
+CMD   kill man with sword
+GAME  The thief's weapon is knocked to the floor, leaving him unarmed.
+      The robber, somewhat surprised at this turn of events, nimbly retrieves his stiletto.
+CMD   kill thief with sword
+GAME  You charge, but the thief jumps nimbly aside.
+      The thief comes in from the side, feints, and inserts the blade into your ribs. It appears that that last blow was too much for you. I'm afraid you are dead. **** You have died **** Now, let's take a look here... Well, you probably deserve another chance. I can't quite fix you up completely, but you can't have everything. Forest
+ROOM  Forest
+WARN  unrecognized direction: kill thief with sword
+CMD   go east
+GAME  Forest Path
+ROOM  Forest Path
+CMD   go south
+GAME  North of House
+ROOM  North of House
+CMD   look
+GAME  North of House
+      You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.
+CMD   go east
+GAME  Behind House
+ROOM  Behind House
+CMD   go in
+GAME  Kitchen
+ROOM  Kitchen
+WARN  unrecognized direction: go in
+CMD   go west
+GAME  Living Room
+      There is a brass lantern (battery-powered) here.
+ROOM  Living Room
+CMD   look at trophy case
+GAME  The trophy case is empty.
+CMD   open door
+GAME  Which door do you mean, the wooden door or the trap door?
+CMD   open wooden door
+GAME  The door cannot be opened.
+CMD   go up
+GAME  You can't go that way.
+CMD   go down chimney
+GAME  You can't see any chimney here!
+CMD   go down
+GAME  The trap door is closed.
+CMD   enter chimney
+GAME  You can't see any chimney here!
+CMD   look at chimney
+GAME  You can't see any chimney here!
+CMD   climb down chimney
+GAME  You can't see any chimney here!
+CMD   go west
+GAME  The door is nailed shut.
+CMD   go west
+GAME  The door is nailed shut.
+CMD   go east
+GAME  Kitchen
+ROOM  Kitchen
+CMD   go out window
+GAME  That sentence isn't one I recognize.
+CMD   go out
+GAME  Behind House
+ROOM  Behind House
+WARN  unrecognized direction: go out
+CMD   go in
+GAME  Kitchen
+ROOM  Kitchen
+WARN  unrecognized direction: go in
+CMD   go west
+GAME  Living Room
+      There is a brass lantern (battery-powered) here.
+ROOM  Living Room
+CMD   burn door with lantern
+GAME  Which door do you mean, the wooden door or the trap door?
+CMD   burn wooden door with lantern
+GAME  You don't have the brass lantern.
+CMD   take lantern
+GAME  Taken.
+CMD   burn wooden door with lantern
+GAME  With a brass lantern??!?
+CMD   go east
+GAME  Kitchen
+ROOM  Kitchen
+CMD   move table
+GAME  You can't move the kitchen table.
+CMD   look under table
+GAME  There is nothing but dust there.
+CMD   look behind table
+GAME  There is nothing behind the kitchen table.
+CMD   read lettering
+GAME  You can't see any lettering here!
+CMD   read lettering on door
+GAME  That sentence isn't one I recognize.
+CMD   read door
+GAME  You can't see any door here!
+CMD   go west
+GAME  Living Room
+ROOM  Living Room
+CMD   examine wooden door
+GAME  The engravings translate to "This space intentionally left blank."
+CMD   help
+GAME  I don't know the word "help".
+CMD   go east
+GAME  Kitchen
+ROOM  Kitchen
+CMD   look in chimney with lantern
+GAME  That sentence isn't one I recognize.
+CMD   look in chimney
+GAME  You can't look inside a chimney.
+CMD   use chimney
+GAME  I don't know the word "use".
+CMD   open chimney
+GAME  You must tell me how to do that to a chimney.
+CMD   look for lever
+GAME  I don't know the word "lever".
+CMD   look for button
+GAME  You can't see any button here!
+CMD   go west
+GAME  Living Room
+ROOM  Living Room
+CMD   break wooden door
+GAME  What do you want to break the wooden door with?
+CMD   break wooden door with hands
+GAME  Trying to destroy the wooden door with a pair of hands is futile.
+CMD   go east
+GAME  Kitchen
+ROOM  Kitchen
+CMD   go out
+GAME  Behind House
+ROOM  Behind House
+WARN  unrecognized direction: go out
+CMD   go north
+GAME  North of House
+ROOM  North of House
+CMD   go north
+GAME  Forest Path
+ROOM  Forest Path
+CMD   go west
+GAME  Forest
+ROOM  Forest
+CMD   go north
+GAME  Clearing
+      You are in a clearing, with a forest surrounding you on all sides. A path leads south. There is a sword here. There is a clove of garlic here. On the ground is a pile of leaves.
+ROOM  Clearing
+CMD   take sword
+GAME  Taken.
+CMD   take garlic
+GAME  Taken.
+CMD   examine leaves
+GAME  There's nothing special about the pile of leaves.
+CMD   move leaves
+GAME  Done.
+      In disturbing the pile of leaves, a grating is revealed.
+CMD   open grating
+GAME  The grating is locked.
+CMD   go south
+GAME  Forest Path
+ROOM  Forest Path
+CMD   go south
+GAME  North of House
+ROOM  North of House
+CMD   go north
+GAME  Forest Path
+ROOM  Forest Path
+CMD   go west
+GAME  Forest
+ROOM  Forest
+CMD   go west
+GAME  You would need a machete to go further west.
+CMD   go south
+GAME  Forest
+      This is a dimly lit forest, with large trees all around.
+CMD   go east
+GAME  The rank undergrowth prevents eastward movement.
+CMD   go west
+GAME  Forest
+CMD   go west
+GAME  You would need a machete to go further west.
+CMD   go north
+GAME  Clearing
+      On the ground is a pile of leaves.
+ROOM  Clearing
+CMD   burn leaves with lantern
+GAME  With a brass lantern??!?
+CMD   go south
+GAME  Forest Path
+ROOM  Forest Path
+CMD   go south
+GAME  North of House
+ROOM  North of House
+CMD   go east
+GAME  Behind House
+ROOM  Behind House
+CMD   go in
+GAME  Kitchen
+ROOM  Kitchen
+WARN  unrecognized direction: go in
+CMD   take sack
+GAME  You can't see any sack here!
+CMD   take bottle
+GAME  You can't see any bottle here!
+CMD   go west
+GAME  Living Room
+ROOM  Living Room
+CMD   move rug
+GAME  Having moved the carpet previously, you find it impossible to move it
+      again.
+CMD   open trap door
+GAME  The door reluctantly opens to reveal a rickety staircase descending into
+      darkness.
+CMD   look
+GAME  Living Room
+      You are in the living room. There is a doorway to the east, a wooden door with strange gothic lettering to the west, which appears to be nailed shut, a trophy case, and a rug lying beside an open trap door.
+CMD   go east
+GAME  Kitchen
+ROOM  Kitchen
+CMD   go out
+GAME  Behind House
+ROOM  Behind House
+WARN  unrecognized direction: go out
+CMD   go south
+GAME  South of House
+      You are facing the south side of a white house. There is no door here, and all the windows are boarded.
+ROOM  South of House
+CMD   go west
+GAME  West of House
+      There is a small mailbox here.
+ROOM  West of House
+CMD   go south
+GAME  South of House
+ROOM  South of House
+CMD   go east
+GAME  Behind House
+ROOM  Behind House
+CMD   go east
+GAME  Clearing
+      You are in a small clearing in a well marked forest path that extends to the east and west. There is a bloody axe here.
+ROOM  Clearing
+CMD   take axe
+GAME  Taken.
+CMD   go east
+GAME  Canyon View
+      You are at the top of the Great Canyon on its west wall. From here there is a marvelous view of the canyon and parts of the Frigid River upstream. Across the canyon, the walls of the White Cliffs join the mighty ramparts of the Flathead Mountains to the east. Following the Canyon upstream to the north, Aragain Falls may be seen, complete with rainbow. The mighty Frigid River flows out from a great dark cavern. To the west and south can be seen an immense forest, stretching for miles around. A path leads northwest. It is possible to climb down into the canyon from here.
+ROOM  Canyon View
+CMD   go down
+GAME  Rocky Ledge
+      You are on a ledge about halfway up the wall of the river canyon. You can see from here that the main flow from Aragain Falls twists along a passage which it is impossible for you to enter. Below you is the canyon bottom. Above you is more cliff, which appears climbable.
+ROOM  Rocky Ledge
+CMD   go down
+GAME  Canyon Bottom
+      You are beneath the walls of the river canyon which may be climbable here. The lesser part of the runoff of Aragain Falls flows by below. To the north is a narrow path.
+ROOM  Canyon Bottom
+CMD   go north
+GAME  End of Rainbow
+      You are on a small, rocky beach on the continuation of the Frigid River past the Falls. The beach is narrow due to the presence of the White Cliffs. The river canyon opens here and sunlight shines in from above. A rainbow crosses over the falls to the east and a narrow path continues to the southwest.
+ROOM  End of Rainbow
+CMD   go east
+GAME  You can't go that way.
+CMD   go southwest
+GAME  Canyon Bottom
+ROOM  Canyon Bottom
+CMD   go up
+GAME  Rocky Ledge
+ROOM  Rocky Ledge
+CMD   go up
+GAME  Canyon View
+ROOM  Canyon View
+CMD   go northwest
+GAME  Clearing
+ROOM  Clearing
+CMD   go west
+GAME  Behind House
+ROOM  Behind House
+CMD   go north
+GAME  North of House
+ROOM  North of House
+CMD   go north
+GAME  Forest Path
+ROOM  Forest Path
+CMD   go north
+GAME  Clearing
+      On the ground is a pile of leaves.
+ROOM  Clearing
+CMD   unlock grating with axe
+GAME  Can you unlock a grating with a bloody axe?
+CMD   break grating with axe
+GAME  Nice try.
+CMD   go south
+GAME  Forest Path
+ROOM  Forest Path
+CMD   go south
+GAME  North of House
+ROOM  North of House
+CMD   go east
+GAME  Behind House
+ROOM  Behind House
+CMD   go in
+GAME  Kitchen
+ROOM  Kitchen
+WARN  unrecognized direction: go in
+CMD   go west
+GAME  Living Room
+ROOM  Living Room
+CMD   break wooden door with axe
+GAME  You can't seem to damage the door.
+CMD   open trap door
+GAME  Look around.
+CMD   look
+GAME  Living Room
+      You are in the living room. There is a doorway to the east, a wooden door with strange gothic lettering to the west, which appears to be nailed shut, a trophy case, and a rug lying beside an open trap door.
+CMD   go down
+GAME  The trap door crashes shut, and you hear someone barring it.
+      Cellar
+ROOM  Cellar
+CMD   go north
+GAME  The Troll Room
+      A small leaflet is on the ground.
+ROOM  The Troll Room
+CMD   go west
+GAME  Maze
+      This is part of a maze of twisty little passages, all alike.
+ROOM  Maze
+CMD   go east
+GAME  The Troll Room
+      A small leaflet is on the ground.
+ROOM  The Troll Room
+CMD   go south
+GAME  Cellar
+ROOM  Cellar
+CMD   go south
+GAME  East of Chasm
+ROOM  East of Chasm
+CMD   kill thief with sword
+GAME  You can't see any thief here!
+CMD   look
+GAME  East of Chasm
+      You are on the east edge of a chasm, the bottom of which cannot be seen. A narrow passage goes north, and the path you are on continues to the east.
+CMD   go east
+GAME  Gallery
+      This is an art gallery. Most of the paintings have been stolen by vandals with exceptional taste. The vandals left through either the north or west exits. Fortunately, there is still one chance for you to be a vandal, for on the far wall is a painting of unparalleled beauty.
+ROOM  Gallery
+CMD   take painting
+GAME  Taken.
+CMD   go north
+GAME  Studio
+      This appears to have been an artist's studio. The walls and floors are splattered with paints of 69 different colors. Strangely enough, nothing of value is hanging here. At the south end of the room is an open door (also covered with paint). A dark and narrow chimney leads up from a fireplace; although you might be able to get up it, it seems unlikely you could get back down. Loosely attached to a wall is a small piece of paper.
+ROOM  Studio

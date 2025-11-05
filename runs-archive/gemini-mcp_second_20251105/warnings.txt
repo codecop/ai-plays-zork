@@ -1,0 +1,12 @@
+unrecognized direction: climb tree
+unrecognized direction: go in
+unrecognized direction: jump
+unrecognized direction: go in
+unrecognized direction: kill thief with sword
+unrecognized direction: go in
+unrecognized direction: go out
+unrecognized direction: go in
+unrecognized direction: go out
+unrecognized direction: go in
+unrecognized direction: go out
+unrecognized direction: go in

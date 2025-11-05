@@ -3,9 +3,11 @@ Possible Tasks
 
 TODO: fix bug: make the local MCP lazy which means start Game on first command, not on init
 
-* mit gemini lokal laufen lassen jetzt wo registered habe
+Script which creates graphviz PDF from the map.gv files if no PDF is there
 
 ---
+
+> more agentic on lowest level
 
 Create a plan for each step (workflow) with
 * look around
@@ -15,20 +17,24 @@ This is a tool
 * monitor its internal todo list
 * if it is too short, force it to plan
 
-= more agentic on lowest level
-
 ---
+
+> provide dynamic tools for planning and reflection
 
 Ask AI about mental map of high level things.
 * maybe needs another AI monitoring and guiding the high level
 * things of interest: areas, mysteries
   - we do not even know what kind of things are there, needs to be discovered
 
-= provide dynamic tools for planning and reflection
-
 ---
 
-Implement Different AI Roles?
+> Implement Different AI Roles?
+
+Old idea: we could have multiple agents and
+* one is double checking the answer
+* one is remembering things or etc.
+* summarizing, overall goal
+
 * Adventurer = going around, knows how to deal with local things, e.g. fight troll
   - variant: works on a small task, then stops and "reports" back
   - variant: keeps on working but Navigator can stop and intervene
@@ -39,12 +45,10 @@ Implement Different AI Roles?
   - observes the Adventurer
   - needs to be AI but does not reflect on them
   - when to update the files?
+  - Implementation:
+    A JSON Mapper which maps Gemini/Claude conversations JSON to a uniform simple JSON
 
-Implementation
-A JSON Mapper which maps Gemini/Claude conversations JSON to a uniform simple JSON
- 
-
-* Navigator = thinking in areas? objectives? 
+* Navigator = thinking in areas? objectives?
   - zoomed out summary = little files of what items we have, rooms we have seen etc.
   - merges the summarized stories
 
@@ -59,23 +63,12 @@ A JSON Mapper which maps Gemini/Claude conversations JSON to a uniform simple JS
 Tool: remember_fact(key, value)
 Tool: recall_fact(key)
 
-Other models
--------------
-
-* Use a local model from OpenAI "oss20b..." 
-  through Ollama
-
 * Option Claude prompt with tools, which is its own tools in files
   - give it some goal
   - have it collect knowledge for itself
 
----
+Other models
+-------------
 
-* we could have multiple agents and 
-  one is double checking the answer
-  one is remembering things or etc.
-  summarizing, overall goal
-
----
-
-הצü
+* Use a local model from OpenAI "oss20b..."
+  through Ollama

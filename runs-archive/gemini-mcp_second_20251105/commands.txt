@@ -1,0 +1,233 @@
+look
+open mailbox
+take leaflet
+read leaflet
+go north
+go north
+climb tree
+take egg
+go down
+go south
+go east
+open window
+go in
+take sack
+take bottle
+open sack
+take lunch
+take garlic
+eat lunch
+go west
+take sword
+take lantern
+examine rug
+move rug
+open trap door
+turn on lantern
+go down
+go north
+kill troll with sword
+kill troll with sword
+go east
+go down
+go into the passage
+go up
+go west
+take axe
+inventory
+drop leaflet
+take axe
+drop sack
+take axe
+go west
+go west
+go north
+go east
+drop garlic
+go west
+go west
+go south
+go north
+go east
+take garlic
+go west
+go up
+go down
+go west
+go north
+go west
+go south
+go east
+go west
+go east
+go north
+go south
+go east
+go south
+go east
+go west
+go south
+go north
+go north
+go north
+go north
+go up
+go down
+go east
+go east
+go down
+go down
+enter crack
+break crack with axe
+jump
+inventory
+go east
+go south
+take sword
+go east
+go in
+go west
+take lantern
+move rug
+open trap door
+turn on lantern
+go down
+inventory
+go north
+take sack
+open sack
+look in sack
+look at ground
+go east
+go down
+look
+use sword on crack
+attack crack with sword
+dig crack with sword
+go up
+go west
+go south
+open trap door
+go south
+kill man with sword
+kill thief with sword
+go east
+go south
+look
+go east
+go in
+go west
+look at trophy case
+open door
+open wooden door
+go up
+go down chimney
+go down
+enter chimney
+look at chimney
+climb down chimney
+go west
+go west
+go east
+go out window
+go out
+go in
+go west
+burn door with lantern
+burn wooden door with lantern
+take lantern
+burn wooden door with lantern
+go east
+move table
+look under table
+look behind table
+read lettering
+read lettering on door
+read door
+go west
+examine wooden door
+help
+go east
+look in chimney with lantern
+look in chimney
+use chimney
+open chimney
+look for lever
+look for button
+go west
+break wooden door
+break wooden door with hands
+go east
+go out
+go north
+go north
+go west
+go north
+take sword
+take garlic
+examine leaves
+move leaves
+open grating
+go south
+go south
+go north
+go west
+go west
+go south
+go east
+go west
+go west
+go north
+burn leaves with lantern
+go south
+go south
+go east
+go in
+take sack
+take bottle
+go west
+move rug
+open trap door
+look
+go east
+go out
+go south
+go west
+go south
+go east
+go east
+take axe
+go east
+go down
+go down
+go north
+go east
+go southwest
+go up
+go up
+go northwest
+go west
+go north
+go north
+go north
+unlock grating with axe
+break grating with axe
+go south
+go south
+go east
+go in
+go west
+break wooden door with axe
+open trap door
+look
+go down
+go north
+go west
+go east
+go south
+go south
+kill thief with sword
+look
+go east
+take painting
+go north

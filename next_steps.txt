@@ -1,3 +1,7 @@
+. zork mit Gemini kaufen lassen
+  . System prompt zu MCP Game verschieben 
+  . mit gemini lokal laufen lassen jetzt wo registered habe
+
 Possible Tasks
 ==============
 
@@ -23,3 +27,5 @@ Other models
   summarizing, overall goal
 
 ---
+
+הצü

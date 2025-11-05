@@ -1,0 +1,211 @@
+look
+open mailbox
+read leaflet
+go north
+go north
+climb tree
+take egg
+go down
+go south
+go east
+open window
+go in
+take sack and bottle
+go west
+take sword and lantern
+move rug
+open trap door
+turn on lantern
+go down
+go north
+attack troll with sword
+attack troll with sword
+attack troll with sword
+kill troll with sword
+attack troll with sword
+take sword
+kill troll with sword
+kill troll with sword
+kill troll with sword
+go east
+go down
+go up
+go west
+go south
+go south
+go east
+take painting
+go north
+take paper
+drop painting
+take paper
+read paper
+climb chimney
+drop egg
+climb chimney
+drop sack
+climb chimney
+drop bottle
+climb chimney
+drop sword
+climb chimney
+drop lantern
+climb chimney
+take lantern
+take sword
+take bottle
+take sack
+take egg
+take painting
+go south
+go west
+go west
+inventory
+look
+go north
+look
+climb ramp with sword
+go up ramp
+go north
+go west
+go west
+go north
+go east
+go west
+go south
+go south
+go west
+go up
+go down
+look
+drop leaflet
+go north
+go east
+go west
+go south
+go south
+go west
+take leaflet
+go north
+go north
+go west
+go west
+go east
+go north
+go east
+go west
+go south
+go east
+go west
+go south
+go east
+go east
+go north
+attack thief with sword
+inventory
+go south
+go east
+go west
+go south
+go east
+go west
+go south
+go east
+go west
+go south
+go north
+go north
+go north
+go west
+go west
+go west
+go east
+go east
+go north
+go east
+go west
+go south
+go east
+go west
+go south
+go up
+go down
+drop manual
+go north
+go north
+go west
+take manual
+go south
+go east
+go west
+go north
+go south
+go east
+go west
+go south
+go east
+go west
+go south
+go west
+go west
+go west
+go north
+go east
+go east
+go south
+go west
+go west
+go north
+go east
+go east
+go south
+go west
+go west
+look
+go north
+go east
+look
+go north
+look
+go north
+look
+go north
+look
+go north
+look
+go north
+look
+go north
+look
+go east
+look
+go east
+go east
+go north
+go northeast
+go down
+take bar
+look
+go up
+look
+go northwest
+go east
+turn bolt
+inventory
+push bubble
+look
+go north
+take guidebooks and matchbook
+read guidebook
+read matchbook
+go north
+take wrench, screwdriver, and tube
+drop guidebook and matchbook
+take screwdriver and tube
+go south
+go south
+turn bolt with wrench
+go north
+go north
+examine buttons
+push red button

@@ -1,0 +1,64 @@
+North of House
+Forest Path
+Up a Tree
+Forest Path
+North of House
+Behind House
+Kitchen
+Living Room
+Cellar
+The Troll Room
+East-West Passage
+Chasm
+East-West Passage
+The Troll Room
+Cellar
+East of Chasm
+Gallery
+Studio
+Gallery
+East of Chasm
+Cellar
+The Troll Room
+Maze
+The Troll Room
+Maze
+The Troll Room
+Maze
+Dead End
+Maze
+Dead End
+Maze
+Dead End
+Maze
+Dead End
+Maze
+Dead End
+Maze
+Dead End
+Maze
+Dead End
+Maze
+Dead End
+Maze
+Dead End
+Maze
+Dead End
+Maze
+Dead End
+Maze
+The Troll Room
+East-West Passage
+Round Room
+North-South Passage
+Deep Canyon
+Loud Room
+Deep Canyon
+Reservoir South
+Dam
+Dam Lobby
+Maintenance Room
+Dam Lobby
+Dam
+Dam Lobby
+Maintenance Room

@@ -1,9 +1,9 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import json
-import os
 import sys
 from pathlib import Path
+
 
 def uninstall_mcp_servers():
     claude_config_path = Path.home() / ".claude" / "mcp-servers.json"
@@ -50,6 +50,7 @@ def uninstall_mcp_servers():
     print("\n⚠️  Please restart Claude Code for changes to take effect")
 
     return True
+
 
 if __name__ == "__main__":
     success = uninstall_mcp_servers()

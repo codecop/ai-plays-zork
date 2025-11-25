@@ -1,9 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import json
 import os
 import sys
 from pathlib import Path
+
 
 def install_mcp_servers():
     script_dir = Path(__file__).resolve().parent
@@ -26,7 +27,9 @@ def install_mcp_servers():
 
         if "env" in server_config and "PYTHONPATH" in server_config["env"]:
             if not os.path.isabs(server_config["env"]["PYTHONPATH"]):
-                server_config["env"]["PYTHONPATH"] = str(repo_root / server_config["env"]["PYTHONPATH"])
+                server_config["env"]["PYTHONPATH"] = str(
+                    repo_root / server_config["env"]["PYTHONPATH"]
+                )
 
     claude_config_dir.mkdir(parents=True, exist_ok=True)
 
@@ -59,6 +62,7 @@ def install_mcp_servers():
     print("\n⚠️  Please restart Claude Code for changes to take effect")
 
     return True
+
 
 if __name__ == "__main__":
     success = install_mcp_servers()

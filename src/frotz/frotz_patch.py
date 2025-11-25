@@ -1,7 +1,6 @@
 """Monkey patch Frotz to access the room name, score and moves."""
 
 import re
-import subprocess
 from pyfrotz import Frotz
 
 
@@ -47,26 +46,6 @@ def patched_frotz_read(self, parse_room=True):
     return lines
 
 
-def patched_get_frotz(self):
-    import os
-    if os.path.exists('/opt/homebrew/bin/dfrotz'):
-        self.interpreter = '/opt/homebrew/bin/dfrotz'
-    elif os.path.exists('/usr/local/bin/dfrotz'):
-        self.interpreter = '/usr/local/bin/dfrotz'
-    elif os.path.exists('/usr/bin/dfrotz'):
-        self.interpreter = '/usr/bin/dfrotz'
-    else:
-        import pyfrotz
-        package_dir = os.path.dirname(pyfrotz.__file__)
-        self.interpreter = os.path.join(package_dir, 'dfrotz')
-
-    self.frotz = subprocess.Popen([self.interpreter, self.data],
-                                 stdin=subprocess.PIPE,
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE)
-
 def patch_frotz():
-    if Frotz._frotz_read != patched_frotz_read:
-        Frotz._frotz_read = patched_frotz_read
-    if Frotz._get_frotz != patched_get_frotz:
-        Frotz._get_frotz = patched_get_frotz
+    if Frotz._frotz_read != patched_frotz_read:  # pylint: disable=protected-access,comparison-with-callable
+        Frotz._frotz_read = patched_frotz_read  # pylint: disable=protected-access

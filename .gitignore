@@ -221,6 +221,7 @@ clean.bat
 
 # Marker Peter
 TODO*.txt
+/notes/
 
 /runs/
 

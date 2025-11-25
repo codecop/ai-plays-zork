@@ -7,11 +7,11 @@ working_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, working_dir)
 
 
-from frotz.game import Game
-from util.log import Log
-from util.create_run import create_run
-from tools.room_change.create_tracker import create_tracker
-from tools.room_change.room_change_tracker import RoomChangeTracker
+from frotz.game import Game  # pylint: disable=wrong-import-position
+from util.log import Log  # pylint: disable=wrong-import-position
+from util.create_run import create_run  # pylint: disable=wrong-import-position
+from tools.room_change.create_tracker import create_tracker  # pylint: disable=wrong-import-position
+from tools.room_change.room_change_tracker import RoomChangeTracker  # pylint: disable=wrong-import-position
 
 
 class RemoteMainMcpServer:

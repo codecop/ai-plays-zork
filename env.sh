@@ -1,5 +1,29 @@
-1. set up python if there's no python in the path
-2. run `python --v` to make sure it's running
-3. if there's no .venv, then we create the environment via venv, and install dependencies from requirements.txt with pip
-4.  activate virtual environment
-5. do a pip list, so we know that the installation works
+#!/usr/bin/env bash
+set -euo pipefail
+
+sourced=0
+if [[ -n "${BASH_SOURCE[0]:-}" && "${BASH_SOURCE[0]}" != "${0}" ]]; then
+    sourced=1
+elif [[ -n "${ZSH_VERSION:-}" ]]; then
+    [[ "$ZSH_EVAL_CONTEXT" =~ :file$ ]] && sourced=1
+fi
+if [[ "$sourced" -eq 0 ]]; then
+    echo "This script must be sourced: source env.sh" >&2
+    exit 1
+fi
+
+if ! command -v python &>/dev/null; then
+    echo "python not found in PATH" >&2
+    exit 1
+fi
+python --version
+
+if [[ ! -d .venv ]]; then
+    python -m venv .venv
+    source .venv/bin/activate
+    pip install -r requirements.txt
+else
+    source .venv/bin/activate
+fi
+
+pip list

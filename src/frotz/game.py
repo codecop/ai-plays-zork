@@ -1,5 +1,6 @@
+import os.path
 import re
-from pyfrotz import Frotz
+import pyfrotz
 from frotz.frotz_patch import patch_frotz
 from util.file_utils import read_file
 
@@ -16,8 +17,29 @@ class Game:
         patch_frotz()
 
         self._base_folder = f"{working_dir}/{data_folder}"
-        self.wrapper = Frotz(f"{self._base_folder}/{game_file}", reformat_spacing=False)
+        interpreter = self._find_interpreter()
+        self.wrapper = pyfrotz.Frotz(
+            f"{self._base_folder}/{game_file}",
+            interpreter=interpreter,
+            reformat_spacing=False,
+        )
         self.has_quit = False
+
+    def _find_interpreter(self) -> str:
+        possible_interpreter_paths = [
+            os.path.join(os.path.expanduser("~/.pyfrotz"), "dfrotz"),  # default
+            os.path.join(os.path.expanduser("~/.pyfrotz"), "dfrotz.exe"),  # Windows
+            "/opt/homebrew/bin/dfrotz",
+            "/usr/local/bin/dfrotz",
+            "/usr/bin/dfrotz",
+            os.path.join(os.path.dirname(pyfrotz.__file__), "dfrotz"),
+        ]
+
+        for path in possible_interpreter_paths:
+            if os.path.exists(path):
+                return path
+
+        return "dfrotz"
 
     def get_game_play_notes(self) -> str:
         return read_file(f"{self._base_folder}/Zork Gameplay Notes.txt")
